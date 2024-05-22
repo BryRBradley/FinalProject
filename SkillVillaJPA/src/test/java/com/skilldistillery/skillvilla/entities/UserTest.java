@@ -1,20 +1,7 @@
 package com.skilldistillery.skillvilla.entities;
 
-<<<<<<< HEAD
-import static org.junit.jupiter.api.Assertions.*;
-
-import org.junit.jupiter.api.Test;
-
-class UserTest {
-
-	@Test
-	void test() {
-		fail("Not yet implemented");
-=======
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.fail;
-
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -57,7 +44,6 @@ class UserTest {
 		assertEquals("test", user.getUsername());
 		assertEquals(true, user.getEnabled());
 		
->>>>>>> 5d27fbe3e12171140be91eca3c444cbf43a8eb6b
 	}
 
 }
