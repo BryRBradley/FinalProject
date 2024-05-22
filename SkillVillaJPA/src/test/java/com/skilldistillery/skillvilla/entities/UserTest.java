@@ -2,7 +2,6 @@ package com.skilldistillery.skillvilla.entities;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -32,6 +31,7 @@ class UserTest {
 	@BeforeEach
 	 void setUp() throws Exception {
 		 em = emf.createEntityManager();
+		 user = em.find(User.class, 1);
 	 }
 			
 	@AfterEach
@@ -44,7 +44,7 @@ class UserTest {
 	void test_user() {
 		assertNotNull(user);
 		assertEquals("test", user.getUsername());
-		assertEquals(true, user.getEnabled());
+		assertEquals(true, user.isEnabled());
 		
 	}
 

@@ -1,9 +1,7 @@
 package com.skilldistillery.skillvilla.entities;
 
-import java.time.LocalDate;
 import java.util.Objects;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -52,18 +50,14 @@ public class User {
 		this.password = password;
 	}
 
-	public boolean getEnabled() {
+
+	public boolean isEnabled() {
 		return enabled;
 	}
 
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
-	
-	
-
-
-
 
 	public String getRole() {
 		return role;
