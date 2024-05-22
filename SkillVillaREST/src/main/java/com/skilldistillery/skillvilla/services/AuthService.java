@@ -7,5 +7,5 @@ import com.skilldistillery.skillvilla.entities.User;
 public interface AuthService {
 	public User register(User user);
 
-	public Optional<User> getUserByUsername(String username);
+	public User getUserByUsername(String username);
 }

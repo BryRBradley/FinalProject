@@ -1,7 +1,5 @@
 package com.skilldistillery.skillvilla.services;
 
-import java.util.Optional;
-
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -22,21 +20,19 @@ public class AuthServiceImpl implements AuthService {
 
 	@Override
 	public User register(User user) {
-//		String encryptedPassword = encoder.encode(user.getPassword());
-//		user.setPassword(encryptedPassword);
-//		user.setRole(encryptedPassword);
-//
-//		user.setEnabled(true);
-//		user.setRole("standard");
-//		userRepo.saveAndFlush(user);
-//		return user;
-		return null;
+		String encryptedPassword = encoder.encode(user.getPassword());
+		user.setPassword(encryptedPassword);
+
+		user.setEnabled(true);
+		user.setRole("standard");
+		userRepo.saveAndFlush(user);
+		return user;
+		
 	}
 
 	@Override
-	public Optional<User> getUserByUsername(String username) {
-//		return userRepo.findByUsername(username);
-		return null;
+	public User getUserByUsername(String username) {
+		return userRepo.findByUsername(username);
 	}
 
 }
