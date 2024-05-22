@@ -15,7 +15,7 @@ import com.skilldistillery.skillvilla.services.AuthService;
 import jakarta.servlet.http.HttpServletResponse;
 
 @RestController
-@CrossOrigin({ "*", "http://localhost:4200" })
+@CrossOrigin({ "*", "http://localhost/" })
 public class AuthController {
 
 	private AuthService authService;
@@ -36,11 +36,11 @@ public class AuthController {
 	}
 
 	@GetMapping("authenticate")
-	public Optional<User> authenticate(Principal principal, HttpServletResponse res) {
+	public User authenticate(Principal principal, HttpServletResponse res) {
 		if (principal == null) { // no Authorization header sent
 			res.setStatus(401);
 			res.setHeader("WWW-Authenticate", "Basic");
-			return null;
+			
 		}
 		return authService.getUserByUsername(principal.getName());
 	}
