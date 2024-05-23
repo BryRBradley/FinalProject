@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { LoginComponent } from '../login/login.component';
 import { RegisterComponent } from '../register/register.component';
 import { RouterLink } from '@angular/router';
+import { CommunityComponent } from '../community/community.component';
 
 @Component({
   selector: 'app-navigation-bar',
@@ -11,7 +12,8 @@ import { RouterLink } from '@angular/router';
     RouterLink,
     CommonModule,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    CommunityComponent
   ],
   templateUrl: './navigation-bar.component.html',
   styleUrl: './navigation-bar.component.css'
