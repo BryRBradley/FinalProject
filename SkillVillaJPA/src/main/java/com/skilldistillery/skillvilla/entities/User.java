@@ -9,6 +9,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
 @Entity
@@ -21,6 +24,12 @@ public class User {
 	private String username;
 	
 	private String password;
+	
+	@Column(name = "first_name")
+	private String firstName;
+	
+	@Column(name = "last_name")
+	private String lastName;
 	
 	private String email;
 	
@@ -48,20 +57,21 @@ public class User {
 //	@ManyToMany(mappedBy="users")
 //	private List <Skill> skills;
 	
-//	@ManyToMany(mappedBy="communityMembers")
-//	private List <Community> communities;
-//	
-//	@ManyToMany(mappedBy="users")
-//	private List <CommunityEvent> communityEvents;
+	@ManyToMany(mappedBy="communityMembers")
+	private List <Community> communities;
+	
+	@ManyToMany(mappedBy="users")
+	private List <CommunityEvent> communityEvents;
 	
 	@OneToMany(mappedBy="user")
 	private List<Post> posts;
 	
-//	@ManyToOne
-//	@JoinColumn(name="location_id")
-//	private Location location;
+	@ManyToOne
+	@JoinColumn(name="location_id")
+	private Location location;
 	
-	
+	@OneToMany(mappedBy="user")
+	private List<CommunityEvent> postedEvent;
 	
 	
 	
@@ -140,15 +150,14 @@ public class User {
 		this.imageUrl = imageUrl;
 	}
 	
-//	
-//
-//	public List<CommunityEvent> getComEvents() {
-//		return comEvents;
-//	}
-//
-//	public void setComEvents(List<CommunityEvent> comEvents) {
-//		this.comEvents = comEvents;
-//	}
+	
+	public List<CommunityEvent> getComEvents() {
+		return comEvents;
+	}
+
+	public void setComEvents(List<CommunityEvent> comEvents) {
+		this.comEvents = comEvents;
+	}
 
 	public List<Comment> getComments() {
 		return comments;
@@ -165,22 +174,22 @@ public class User {
 //	public void setSkills(List<Skill> skills) {
 //		this.skills = skills;
 //	}
-//
-//	public List<Community> getCommunities() {
-//		return communities;
-//	}
-//
-//	public void setCommunities(List<Community> communities) {
-//		this.communities = communities;
-//	}
-//
-//	public List<CommunityEvent> getCommunityEvents() {
-//		return communityEvents;
-//	}
-//
-//	public void setCommunityEvents(List<CommunityEvent> communityEvents) {
-//		this.communityEvents = communityEvents;
-//	}
+
+	public List<Community> getCommunities() {
+		return communities;
+	}
+
+	public void setCommunities(List<Community> communities) {
+		this.communities = communities;
+	}
+
+	public List<CommunityEvent> getCommunityEvents() {
+		return communityEvents;
+	}
+
+	public void setCommunityEvents(List<CommunityEvent> communityEvents) {
+		this.communityEvents = communityEvents;
+	}
 
 	public List<Post> getPosts() {
 		return posts;
@@ -190,13 +199,37 @@ public class User {
 		this.posts = posts;
 	}
 
-//	public Location getLocation() {
-//		return location;
-//	}
-//
-//	public void setLocation(Location location) {
-//		this.location = location;
-//	}
+	public Location getLocation() {
+		return location;
+	}
+
+	public void setLocation(Location location) {
+		this.location = location;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public List<CommunityEvent> getPostedEvent() {
+		return postedEvent;
+	}
+
+	public void setPostedEvent(List<CommunityEvent> postedEvent) {
+		this.postedEvent = postedEvent;
+	}
 
 	@Override
 	public int hashCode() {

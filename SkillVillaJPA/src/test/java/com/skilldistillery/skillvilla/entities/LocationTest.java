@@ -63,5 +63,22 @@ class LocationTest {
 		assertTrue(location.getPosts().size() > 0);
 		assertTrue(location.getPosts().size() >= 1);
 	}
+	
+	@Test
+	void location_MTO_user() {
+		assertNotNull(location);
+		assertNotNull(location.getUsers());
+		assertTrue(location.getUsers().size() > 0);
+		assertTrue(location.getPosts().size() >= 1);
+	}
+	
+	@Test
+	void location_OTM_communityEvent() {
+		assertNotNull(location);
+		assertNotNull(location.getCommunityEvents());
+		assertTrue(location.getCommunityEvents().size() > 0);
+		assertTrue(location.getCommunityEvents().size() >= 1);
 
+	}
+	
 }
