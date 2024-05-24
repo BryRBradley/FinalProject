@@ -36,6 +36,7 @@ public class Community {
 	@Column(name="image_url")
 	private String imageUrl;
 	
+	
 	@Column(name="created_at")
 	private LocalDateTime createdAt;
 	
