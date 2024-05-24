@@ -1,7 +1,6 @@
 package com.skilldistillery.skillvilla.entities;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Objects;
 
 import jakarta.persistence.Column;
@@ -11,8 +10,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 
 @Entity
 public class Post {
@@ -37,11 +34,11 @@ public class Post {
 //	@ManyToOne
 //	@JoinColumn(name="posts_id")
 //	private PostCategory postCat;
-//	
-//	@ManyToOne
-//	@JoinColumn(name="community_id")
-//	private Community community;
-//	
+	
+	@ManyToOne
+	@JoinColumn(name="community_id")
+	private Community community;
+	
 //	@ManyToOne
 //	@JoinColumn(name="user_id")
 //	private User user;
@@ -115,15 +112,15 @@ public class Post {
 //	public void setPostCat(PostCategory postCat) {
 //		this.postCat = postCat;
 //	}
-//
-//	public Community getCommunity() {
-//		return community;
-//	}
-//
-//	public void setCommunity(Community community) {
-//		this.community = community;
-//	}
-//
+
+	public Community getCommunity() {
+		return community;
+	}
+
+	public void setCommunity(Community community) {
+		this.community = community;
+	}
+
 //	public User getUser() {
 //		return user;
 //	}
@@ -155,12 +152,15 @@ public class Post {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		Post other = (Post) obj;
 		return id == other.id;
 	}

@@ -2,6 +2,7 @@ package com.skilldistillery.skillvilla.entities;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -17,7 +18,7 @@ class LocationTest {
 
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private User user;
+	private Location location;
 	
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception{
@@ -31,21 +32,28 @@ class LocationTest {
 	@BeforeEach
 	 void setUp() throws Exception {
 		 em = emf.createEntityManager();  
-		 user = em.find(User.class, 1);
+		 location = em.find(Location.class, 1);
 	 }
 			
 	@AfterEach
 	 void tearDown() throws Exception {
 		em.close();
+		location = null;
 	}
 	
 	
-//	@Test
-//	void test_user() {
-//		assertNotNull(user);
-//		assertEquals("test", user.getUsername());
-//		assertEquals(true, user.isEnabled());
-//		
-//	}
+	@Test
+	void location_basic_mapping() {
+		assertNotNull(location);
+		assertEquals("Vienna", location.getCity());
+	}
+	
+	@Test
+	void location_MTO_communities() {
+		assertNotNull(location);
+		assertNotNull(location.getCommunities());
+		assertTrue(location.getCommunities().size() > 0);
+		//assertTrue(location.getCommunities().size() > 1);
+	}
 
 }

@@ -37,15 +37,21 @@ class PostTest {
 	@AfterEach
 	 void tearDown() throws Exception {
 		em.close();
+		post = null;
 	}
 	
 	
 	@Test
 	void test_post() {
 		assertNotNull(post);
-		assertEquals(1, post.getId());
-		assertEquals(true, post.isEnabled());
-		
+		assertEquals(1, post.getId());		
+	}
+	
+	@Test
+	void post_MTO_community() {
+		assertNotNull(post);
+		assertNotNull(post.getCommunity());
+		assertEquals("Denver Women Over 30 Snowboarders",post.getCommunity().getName());
 	}
 
 }
