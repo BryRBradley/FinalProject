@@ -13,11 +13,11 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
-class PostCategory {
+class PostCategoryTest {
 
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private User user;
+	private PostCategory postCat;
 	
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception{
@@ -31,7 +31,7 @@ class PostCategory {
 	@BeforeEach
 	 void setUp() throws Exception {
 		 em = emf.createEntityManager();  
-		 user = em.find(User.class, 1);
+		 postCat = em.find(PostCategory.class, 1);
 	 }
 			
 	@AfterEach
@@ -40,12 +40,11 @@ class PostCategory {
 	}
 	
 	
-//	@Test
-//	void test_user() {
-//		assertNotNull(user);
-//		assertEquals("test", user.getUsername());
-//		assertEquals(true, user.isEnabled());
-//		
-//	}
+	@Test
+	void test_post_category() {
+		assertNotNull(postCat);
+		assertEquals("Culinary", postCat.getName());
+		
+	}
 
 }

@@ -1,7 +1,6 @@
 package com.skilldistillery.skillvilla.entities;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -13,11 +12,11 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
-class SkillCategory {
+class SkillCategoryTest {
 
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private User user;
+	private SkillCategory skillCat;
 	
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception{
@@ -31,7 +30,7 @@ class SkillCategory {
 	@BeforeEach
 	 void setUp() throws Exception {
 		 em = emf.createEntityManager();  
-		 user = em.find(User.class, 1);
+		 skillCat = em.find(SkillCategory.class, 1);
 	 }
 			
 	@AfterEach
@@ -40,12 +39,11 @@ class SkillCategory {
 	}
 	
 	
-//	@Test
-//	void test_user() {
-//		assertNotNull(user);
-//		assertEquals("test", user.getUsername());
-//		assertEquals(true, user.isEnabled());
-//		
-//	}
+	@Test
+	void test_user() {
+		assertNotNull(skillCat);
+		assertEquals("Automotive", skillCat.getName());
+	}  
+
 
 }
