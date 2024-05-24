@@ -1,5 +1,6 @@
 package com.skilldistillery.skillvilla.entities;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 import jakarta.persistence.Entity;
@@ -18,11 +19,22 @@ public class User {
 	
 	private String password;
 	
+	private String email;
+	
+	private String imageUrl;
+
 	private boolean enabled;
 	
 	private String role;
+	
+	private LocalDateTime createdAt;
 
-
+	private LocalDateTime updatedAt;
+	
+	private String description; 
+	
+//  private String loacationId
+	
 	
 	public User() {}
 
@@ -66,6 +78,50 @@ public class User {
 	public void setRole(String role) {
 		this.role = role;
 	}
+	
+	
+
+	public LocalDateTime getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(LocalDateTime createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public LocalDateTime getUpdatedAt() {
+		return updatedAt;
+	}
+
+	public void setUpdatedAt(LocalDateTime updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	
+	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
 
 	@Override
 	public int hashCode() {
@@ -86,8 +142,9 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", password=" + password + ", enabled=" + enabled
-				+ ", role=" + role + "]";
+		return "User [id=" + id + ", username=" + username + ", password=" + password + ", email=" + email
+				+ ", imageUrl=" + imageUrl + ", enabled=" + enabled + ", role=" + role + ", createdAt=" + createdAt
+				+ ", updatedAt=" + updatedAt + ", description=" + description + "]";
 	}
 	
 
