@@ -1,11 +1,13 @@
 package com.skilldistillery.skillvilla.entities;
 
+import java.util.List;
 import java.util.Objects;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -17,6 +19,9 @@ public class PostCategory {
 	private int id;
 	
 	private String name;
+	
+	@OneToMany(mappedBy="post_category")
+	private List<Post> posts;
 	
 	PostCategory(){
 		
@@ -36,6 +41,16 @@ public class PostCategory {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	
+
+	public List<Post> getPosts() {
+		return posts;
+	}
+
+	public void setPosts(List<Post> posts) {
+		this.posts = posts;
 	}
 
 	@Override

@@ -2,6 +2,7 @@ package com.skilldistillery.skillvilla.entities;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -46,4 +47,10 @@ class SkillTest {
 		assertEquals("Baking", skill.getName());
 	}
 
+	@Test
+	void test_has_category() {
+		assertNotNull(skill);
+		assertEquals("Baking", skill.getName());
+		assertEquals(2, skill.getSkillCat());
+	}
 }
