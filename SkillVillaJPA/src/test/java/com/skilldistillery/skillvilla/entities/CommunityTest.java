@@ -2,6 +2,7 @@ package com.skilldistillery.skillvilla.entities;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -17,7 +18,7 @@ class CommunityTest {
 
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private User user;
+	private Community community;
 	
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception{
@@ -31,7 +32,7 @@ class CommunityTest {
 	@BeforeEach
 	 void setUp() throws Exception {
 		 em = emf.createEntityManager();  
-		 user = em.find(User.class, 1);
+		 community = em.find(Community.class, 1);
 	 }
 			
 	@AfterEach
@@ -40,12 +41,16 @@ class CommunityTest {
 	}
 	
 	
+	@Test
+	void test_community() {
+		assertNotNull(community);
+		assertEquals(1, community.getId());	
+	}
+	
 //	@Test
-//	void test_user() {
-//		assertNotNull(user);
-//		assertEquals("test", user.getUsername());
-//		assertEquals(true, user.isEnabled());
-//		
+//	void test_community_has_Users() {
+//		assertNotNull(community);
+//		assertEquals("Denver Women Over 30 Snowboarders", community.getName());
 //	}
 
 }

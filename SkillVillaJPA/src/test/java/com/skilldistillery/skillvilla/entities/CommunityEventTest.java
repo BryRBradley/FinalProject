@@ -13,7 +13,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
-class CommunityEvent {
+class CommunityEventTest {
 
 	private static EntityManagerFactory emf;
 	private EntityManager em;
@@ -40,12 +40,12 @@ class CommunityEvent {
 	}
 	
 	
-//	@Test
-//	void test_user() {
-//		assertNotNull(user);
-//		assertEquals("test", user.getUsername());
-//		assertEquals(true, user.isEnabled());
-//		
-//	}
+	@Test
+	void test_user() {
+		assertNotNull(user);
+		assertEquals("test", user.getUsername());
+		assertEquals(true, user.isEnabled());
+		
+	}
 
 }

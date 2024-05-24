@@ -1,11 +1,13 @@
 package com.skilldistillery.skillvilla.entities;
 
+import java.util.List;
 import java.util.Objects;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -17,6 +19,9 @@ public class SkillCategory {
 	private int id;
 	
 	private String name;
+	
+	@OneToMany(mappedBy="skill_category")
+	private List<Skill> skills;
 	
 	private SkillCategory(){
 		
@@ -38,6 +43,16 @@ public class SkillCategory {
 		this.name = name;
 	}
 	
+	
+	
+
+	public List<Skill> getSkills() {
+		return skills;
+	}
+
+	public void setSkills(List<Skill> skills) {
+		this.skills = skills;
+	}
 
 	@Override
 	public int hashCode() {
