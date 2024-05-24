@@ -2,6 +2,7 @@ package com.skilldistillery.skillvilla.entities;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -53,5 +54,33 @@ class PostTest {
 		assertNotNull(post.getCommunity());
 		assertEquals("Denver Women Over 30 Snowboarders",post.getCommunity().getName());
 	}
+	
+	@Test
+	void post_MTO_postCategory() {
+		assertNotNull(post);
+		assertNotNull(post.getPostCategory());
+		assertEquals("Culinary", post.getPostCategory().getName());
+	}
 
+	@Test
+	void post_MTO_location() {
+		assertNotNull(post);
+		assertNotNull(post.getLocation());
+		assertEquals("Vienna", post.getLocation().getCity());
+	}
+	
+	@Test
+	void post_MTO_user(){
+		assertNotNull(post);
+		assertNotNull(post.getUser());
+		assertEquals("test", post.getUser().getUsername());
+	}
+	
+	@Test
+	void post_OTM_comment() {
+		assertNotNull(post);
+		assertNotNull(post.getComments());
+		assertTrue(post.getComments().size() > 0);
+		assertTrue(post.getComments().size() >= 1);
+	}
 }

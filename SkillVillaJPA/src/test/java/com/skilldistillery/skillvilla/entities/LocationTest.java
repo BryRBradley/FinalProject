@@ -53,7 +53,15 @@ class LocationTest {
 		assertNotNull(location);
 		assertNotNull(location.getCommunities());
 		assertTrue(location.getCommunities().size() > 0);
-		//assertTrue(location.getCommunities().size() > 1);
+		assertTrue(location.getCommunities().size() >= 1);
+	}
+	
+	@Test
+	void location_MTO_post() {
+		assertNotNull(location);
+		assertNotNull(location.getPosts());
+		assertTrue(location.getPosts().size() > 0);
+		assertTrue(location.getPosts().size() >= 1);
 	}
 
 }

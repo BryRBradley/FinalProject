@@ -26,10 +26,10 @@ public class Comment {
 	@Column(name="created_at")
 	private LocalDateTime createdAt;
 	
-// 	@ManyToOne
-// 	@JoinColumn (name = "post_id")
-// 	private Post post;
-// 	
+ 	@ManyToOne
+ 	@JoinColumn (name = "post_id")
+ 	private Post post;
+ 	
 // 	@ManyToOne
 // 	@JoinColumn (name = "user_id")
 // 	private User user;
@@ -39,18 +39,14 @@ public class Comment {
 		
 	}
 
-//	public Post getPost() {
-//		return post;
-//	}
-//
-//
-//
-//	public void setPost(Post post) {
-//		this.post = post;
-//	}
-//
-//
-//
+	public Post getPost() {
+		return post;
+	}
+
+	public void setPost(Post post) {
+		this.post = post;
+	}
+
 //	public User getUser() {
 //		return user;
 //	}
@@ -98,12 +94,15 @@ public class Comment {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		Comment other = (Comment) obj;
 		return id == other.id;
 	}

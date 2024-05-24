@@ -47,12 +47,12 @@ class CommentTest {
 		
 	}
 	
-//	@Test
-//	void test_Comment_Has_Post () {
-//		assertNotNull(comment);
-//		assertNotNull(comment.getPost());
-//		
-//	}
+	@Test
+	void test_Comment_Has_Post () {
+		assertNotNull(comment);
+		assertNotNull(comment.getPost());
+		assertEquals("Everyone join the denver womans snowboarding community!", comment.getPost().getDescription());
+	}
 //	
 //	@Test
 //	void test_Comment_Has_User () {

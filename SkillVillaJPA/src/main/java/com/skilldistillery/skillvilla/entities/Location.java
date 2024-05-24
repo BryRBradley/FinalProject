@@ -27,9 +27,9 @@ public class Location {
 	@OneToMany(mappedBy="location")
 	private List<Community> communities;
 	
-//	@OneToMany(mappedBy="location")
-//	private List<Post> posts;
-//	
+	@OneToMany(mappedBy="location")
+	private List<Post> posts;
+	
 //	@OneToMany(mappedBy="location")
 //	private List<CommunityEvent> communityEvents;
 //	
@@ -92,6 +92,14 @@ public class Location {
 
 	public void setCommunities(List<Community> communities) {
 		this.communities = communities;
+	}
+
+	public List<Post> getPosts() {
+		return posts;
+	}
+
+	public void setPosts(List<Post> posts) {
+		this.posts = posts;
 	}
 
 	@Override

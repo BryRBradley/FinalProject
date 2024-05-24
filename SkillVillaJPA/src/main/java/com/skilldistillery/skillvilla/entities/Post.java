@@ -1,6 +1,7 @@
 package com.skilldistillery.skillvilla.entities;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
 import jakarta.persistence.Column;
@@ -10,6 +11,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class Post {
@@ -31,24 +34,24 @@ public class Post {
 	@Column(name="image_url")
 	private String imageUrl;
 	
-//	@ManyToOne
-//	@JoinColumn(name="posts_id")
-//	private PostCategory postCat;
+	@ManyToOne
+	@JoinColumn(name="post_category_id")
+	private PostCategory postCategory;
 	
 	@ManyToOne
 	@JoinColumn(name="community_id")
 	private Community community;
 	
-//	@ManyToOne
-//	@JoinColumn(name="user_id")
-//	private User user;
-//	
-//	@OneToOne
-//	@JoinColumn(name="post")
-//	private Location location;
-//	
-//	@OneToMany(mappedBy="post")
-//	private List <Comment> comments;
+	@ManyToOne
+	@JoinColumn(name="user_id")
+	private User user;
+	
+	@OneToOne
+	@JoinColumn(name="location_id")
+	private Location location;
+	
+	@OneToMany(mappedBy="post")
+	private List <Comment> comments;
 	
 	
 	
@@ -105,13 +108,6 @@ public class Post {
 		this.imageUrl = imageUrl;
 	}
 
-//	public PostCategory getPostCat() {
-//		return postCat;
-//	}
-//
-//	public void setPostCat(PostCategory postCat) {
-//		this.postCat = postCat;
-//	}
 
 	public Community getCommunity() {
 		return community;
@@ -121,29 +117,37 @@ public class Post {
 		this.community = community;
 	}
 
-//	public User getUser() {
-//		return user;
-//	}
-//
-//	public void setUser(User user) {
-//		this.user = user;
-//	}
-//
-//	public Location getLocation() {
-//		return location;
-//	}
-//
-//	public void setLocation(Location location) {
-//		this.location = location;
-//	}
-//
-//	public List<Comment> getComments() {
-//		return comments;
-//	}
+	public User getUser() {
+		return user;
+	}
 
-//	public void setComments(List<Comment> comments) {
-//		this.comments = comments;
-//	}
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Location getLocation() {
+		return location;
+	}
+
+	public void setLocation(Location location) {
+		this.location = location;
+	}
+
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
+
+	public PostCategory getPostCategory() {
+		return postCategory;
+	}
+
+	public void setPostCategory(PostCategory postCategory) {
+		this.postCategory = postCategory;
+	}
 
 	@Override
 	public int hashCode() {
