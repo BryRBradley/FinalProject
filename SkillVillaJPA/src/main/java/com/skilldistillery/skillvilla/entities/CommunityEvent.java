@@ -56,12 +56,20 @@ public class CommunityEvent {
 	@JoinColumn(name = "user_id")
 	private User user;
 	
-//	@ManyToOne
-//	@JoinColumn(name = "location_id")
-//	private Location location;
+	@ManyToOne
+	@JoinColumn(name = "location_id")
+	private Location location;
 	
 	
 	
+	public Location getLocation() {
+		return location;
+	}
+
+	public void setLocation(Location location) {
+		this.location = location;
+	}
+
 	public CommunityEvent() {
 		
 	}

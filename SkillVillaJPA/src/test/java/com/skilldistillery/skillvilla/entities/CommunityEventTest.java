@@ -54,5 +54,12 @@ class CommunityEventTest {
 		assertNotNull(event.getCommunity());
 		assertEquals("Denver Women Over 30 Snowboarders", event.getCommunity().getName());
 	}
+	
+	@Test
+	void event_MTO_location() {
+		assertNotNull(event);
+		assertNotNull(event.getLocation());
+		assertEquals("Vienna", event.getLocation().getCity());
+	}
 
 }
