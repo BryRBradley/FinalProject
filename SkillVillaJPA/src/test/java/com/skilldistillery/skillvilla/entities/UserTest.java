@@ -2,6 +2,7 @@ package com.skilldistillery.skillvilla.entities;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -55,4 +56,21 @@ class UserTest {
 		//assertEquals(true, user.get);
 		
 	}
+	
+	@Test
+	void user_OTM_post() {
+		assertNotNull(user);
+		assertNotNull(user.getPosts());
+		assertTrue(user.getPosts().size() > 0);
+		assertTrue(user.getPosts().size() >= 1);
+	}
+	
+	@Test
+	void user_OTM_comments() {
+		assertNotNull(user);
+		assertNotNull(user.getComments());
+		assertTrue(user.getComments().size() > 0);
+		assertTrue(user.getComments().size() >= 1);
+		}
+	
 }

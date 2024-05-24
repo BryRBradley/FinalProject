@@ -1,7 +1,6 @@
 package com.skilldistillery.skillvilla.entities;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Objects;
 
 import jakarta.persistence.Column;
@@ -10,11 +9,11 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "community_event")
 public class CommunityEvent {
 
 	@Id
@@ -45,10 +44,10 @@ public class CommunityEvent {
 	@Column(name="discord_url")
 	private String discordUrl;
 	
-//	@ManyToOne
-//	@JoinColumn(name = "community_id")
-//	private Community community;
-//	
+	@ManyToOne
+	@JoinColumn(name = "community_id")
+	private Community community;
+	
 //	 @ManyToMany
 //	 @JoinTable(name="user_has_community_event", joinColumns = @JoinColumn(name="community_event_id"), inverseJoinColumns = @JoinColumn(name="user_id"))
 //	 private List <User> users;
@@ -148,6 +147,22 @@ public class CommunityEvent {
 	}
 
 	
+	public Community getCommunity() {
+		return community;
+	}
+
+	public void setCommunity(Community community) {
+		this.community = community;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -155,12 +170,15 @@ public class CommunityEvent {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		CommunityEvent other = (CommunityEvent) obj;
 		return id == other.id;
 	}

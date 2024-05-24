@@ -34,24 +34,24 @@ public class Post {
 	@Column(name="image_url")
 	private String imageUrl;
 	
-//	@ManyToOne
-//	@JoinColumn(name="posts_id")
-//	private PostCategory postCat;
-//	
-//	@ManyToOne
-//	@JoinColumn(name="community_id")
-//	private Community community;
-//	
-//	@ManyToOne
-//	@JoinColumn(name="user_id")
-//	private User user;
-//	
-//	@OneToOne
-//	@JoinColumn(name="post")
-//	private Location location;
-//	
-//	@OneToMany(mappedBy="post")
-//	private List <Comment> comments;
+	@ManyToOne
+	@JoinColumn(name="post_category_id")
+	private PostCategory postCategory;
+	
+	@ManyToOne
+	@JoinColumn(name="community_id")
+	private Community community;
+	
+	@ManyToOne
+	@JoinColumn(name="user_id")
+	private User user;
+	
+	@OneToOne
+	@JoinColumn(name="location_id")
+	private Location location;
+	
+	@OneToMany(mappedBy="post")
+	private List <Comment> comments;
 	
 	
 	
@@ -108,45 +108,46 @@ public class Post {
 		this.imageUrl = imageUrl;
 	}
 
-//	public PostCategory getPostCat() {
-//		return postCat;
-//	}
-//
-//	public void setPostCat(PostCategory postCat) {
-//		this.postCat = postCat;
-//	}
-//
-//	public Community getCommunity() {
-//		return community;
-//	}
-//
-//	public void setCommunity(Community community) {
-//		this.community = community;
-//	}
-//
-//	public User getUser() {
-//		return user;
-//	}
-//
-//	public void setUser(User user) {
-//		this.user = user;
-//	}
-//
-//	public Location getLocation() {
-//		return location;
-//	}
-//
-//	public void setLocation(Location location) {
-//		this.location = location;
-//	}
-//
-//	public List<Comment> getComments() {
-//		return comments;
-//	}
 
-//	public void setComments(List<Comment> comments) {
-//		this.comments = comments;
-//	}
+	public Community getCommunity() {
+		return community;
+	}
+
+	public void setCommunity(Community community) {
+		this.community = community;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Location getLocation() {
+		return location;
+	}
+
+	public void setLocation(Location location) {
+		this.location = location;
+	}
+
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
+
+	public PostCategory getPostCategory() {
+		return postCategory;
+	}
+
+	public void setPostCategory(PostCategory postCategory) {
+		this.postCategory = postCategory;
+	}
 
 	@Override
 	public int hashCode() {
@@ -155,12 +156,15 @@ public class Post {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		Post other = (Post) obj;
 		return id == other.id;
 	}

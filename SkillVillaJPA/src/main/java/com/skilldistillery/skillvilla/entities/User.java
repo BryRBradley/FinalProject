@@ -9,10 +9,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
 @Entity
@@ -46,8 +42,8 @@ public class User {
 	private List <CommunityEvent> comEvents;
 
 	
-//	@OneToMany(mappedBy="user")
-//	private List <Comment> comments;
+	@OneToMany(mappedBy="user")
+	private List <Comment> comments;
 	
 //	@ManyToMany(mappedBy="users")
 //	private List <Skill> skills;
@@ -57,10 +53,10 @@ public class User {
 //	
 //	@ManyToMany(mappedBy="users")
 //	private List <CommunityEvent> communityEvents;
-//	
-//	@OneToMany(mappedBy="user")
-//	private List<Post> posts;
-//	
+	
+	@OneToMany(mappedBy="user")
+	private List<Post> posts;
+	
 //	@ManyToOne
 //	@JoinColumn(name="location_id")
 //	private Location location;
@@ -153,15 +149,15 @@ public class User {
 //	public void setComEvents(List<CommunityEvent> comEvents) {
 //		this.comEvents = comEvents;
 //	}
-//
-//	public List<Comment> getComments() {
-//		return comments;
-//	}
-//
-//	public void setComments(List<Comment> comments) {
-//		this.comments = comments;
-//	}
-//
+
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
+
 //	public List<Skill> getSkills() {
 //		return skills;
 //	}
@@ -185,15 +181,15 @@ public class User {
 //	public void setCommunityEvents(List<CommunityEvent> communityEvents) {
 //		this.communityEvents = communityEvents;
 //	}
-//
-//	public List<Post> getPosts() {
-//		return posts;
-//	}
-//
-//	public void setPosts(List<Post> posts) {
-//		this.posts = posts;
-//	}
-//
+
+	public List<Post> getPosts() {
+		return posts;
+	}
+
+	public void setPosts(List<Post> posts) {
+		this.posts = posts;
+	}
+
 //	public Location getLocation() {
 //		return location;
 //	}
@@ -209,12 +205,15 @@ public class User {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		User other = (User) obj;
 		return id == other.id;
 	}

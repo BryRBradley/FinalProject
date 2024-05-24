@@ -19,38 +19,69 @@ class CommunityTest {
 	private static EntityManagerFactory emf;
 	private EntityManager em;
 	private Community community;
-	
+
 	@BeforeAll
-	static void setUpBeforeClass() throws Exception{
+	static void setUpBeforeClass() throws Exception {
 		emf = Persistence.createEntityManagerFactory("SkillVillaJPA");
 	}
+
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
 		emf.close();
 	}
-	
+
 	@BeforeEach
-	 void setUp() throws Exception {
-		 em = emf.createEntityManager();  
-		 community = em.find(Community.class, 1);
-	 }
-			
+	void setUp() throws Exception {
+		em = emf.createEntityManager();
+		community = em.find(Community.class, 1);
+	}
+
 	@AfterEach
-	 void tearDown() throws Exception {
+	void tearDown() throws Exception {
 		em.close();
 	}
-	
-	
+
 	@Test
 	void test_community() {
 		assertNotNull(community);
-		assertEquals(1, community.getId());	
+		assertEquals(1, community.getId());
+	}
+
+	@Test
+	void community_MTM_users() {
+		assertNotNull(community);
+		assertNotNull(community.getCommunityMembers());
+		assertTrue(community.getCommunityMembers().size() > 0);
+	}
+
+	@Test
+	void community_MTO_location() {
+		assertNotNull(community);
+		assertNotNull(community.getLocation());
+		assertEquals("Vienna", community.getLocation().getCity());
+	}
+
+	@Test
+	void community_OTM_post() {
+		assertNotNull(community);
+		assertNotNull(community.getPosts());
+		assertTrue(community.getPosts().size() > 0);
+		//assertTrue(community.getPosts().size() > 1);
 	}
 	
-//	@Test
-//	void test_community_has_Users() {
-//		assertNotNull(community);
-//		assertEquals("Denver Women Over 30 Snowboarders", community.getName());
-//	}
-
+	@Test
+	void community_MTM_skill() {
+		assertNotNull(community);
+		assertNotNull(community.getSkills());
+		assertTrue(community.getSkills().size() > 0);
+		assertTrue(community.getSkills().size() >= 1);
+	}
+	
+	@Test
+	void community_OTM_communityEvent() {
+		assertNotNull(community);
+		assertNotNull(community.getCommunityEvents());
+		assertTrue(community.getCommunityEvents().size() > 0); 
+		assertTrue(community.getCommunityEvents().size() >= 1); 
+	}
 }

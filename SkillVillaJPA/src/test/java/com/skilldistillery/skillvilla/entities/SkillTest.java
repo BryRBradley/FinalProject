@@ -37,21 +37,28 @@ class SkillTest {
 			
 	@AfterEach
 	 void tearDown() throws Exception {
-		skill = null;
 		em.close();
+		skill = null;
 	}
 	
 	
 	@Test
-	void test_user() {
+	void skill_basic_mapping() {
 		assertNotNull(skill);
 		assertEquals("Baking", skill.getName());
 	}
 
 	@Test
-	void test_skill_has_user() {
+	void skill_MTO_skillCategory() {
 		assertNotNull(skill);
-		assertEquals("Baking", skill.getName());
-	//	assertTrue(skill.);
+		assertEquals("Culinary", skill.getCategory().getName());
+	}
+	
+	@Test
+	void skill_MTM_community() {
+		assertNotNull(skill);
+		assertNotNull(skill.getCommunities());
+		assertTrue(skill.getCommunities().size() > 0);
+		assertTrue(skill.getCommunities().size() >= 1);
 	}
 }

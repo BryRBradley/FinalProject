@@ -17,7 +17,7 @@ class CommunityEventTest {
 
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private User user;
+	private CommunityEvent event;
 	
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception{
@@ -31,21 +31,28 @@ class CommunityEventTest {
 	@BeforeEach
 	 void setUp() throws Exception {
 		 em = emf.createEntityManager();  
-		 user = em.find(User.class, 1);
+		 event = em.find(CommunityEvent.class, 1);
 	 }
 			
 	@AfterEach
 	 void tearDown() throws Exception {
 		em.close();
+		event = null;
 	}
 	
 	
 	@Test
-	void test_user() {
-		assertNotNull(user);
-		assertEquals("test", user.getUsername());
-		assertEquals(true, user.isEnabled());
-		
+	void event_basic_mapping() {
+		assertNotNull(event);
+		assertNotNull(event.getTitle());
+		assertEquals("Bowling class with Pro Ted Kaminsky", event.getTitle());
+	}
+	
+	@Test
+	void event_MTO_community() {
+		assertNotNull(event);
+		assertNotNull(event.getCommunity());
+		assertEquals("Denver Women Over 30 Snowboarders", event.getCommunity().getName());
 	}
 
 }
