@@ -9,6 +9,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
 @Entity
@@ -48,18 +51,18 @@ public class User {
 //	@ManyToMany(mappedBy="users")
 //	private List <Skill> skills;
 	
-//	@ManyToMany(mappedBy="communityMembers")
-//	private List <Community> communities;
-//	
+	@ManyToMany(mappedBy="communityMembers")
+	private List <Community> communities;
+	
 //	@ManyToMany(mappedBy="users")
 //	private List <CommunityEvent> communityEvents;
 	
 	@OneToMany(mappedBy="user")
 	private List<Post> posts;
 	
-//	@ManyToOne
-//	@JoinColumn(name="location_id")
-//	private Location location;
+	@ManyToOne
+	@JoinColumn(name="location_id")
+	private Location location;
 	
 	
 	
@@ -165,15 +168,15 @@ public class User {
 //	public void setSkills(List<Skill> skills) {
 //		this.skills = skills;
 //	}
-//
-//	public List<Community> getCommunities() {
-//		return communities;
-//	}
-//
-//	public void setCommunities(List<Community> communities) {
-//		this.communities = communities;
-//	}
-//
+
+	public List<Community> getCommunities() {
+		return communities;
+	}
+
+	public void setCommunities(List<Community> communities) {
+		this.communities = communities;
+	}
+
 //	public List<CommunityEvent> getCommunityEvents() {
 //		return communityEvents;
 //	}
@@ -190,13 +193,13 @@ public class User {
 		this.posts = posts;
 	}
 
-//	public Location getLocation() {
-//		return location;
-//	}
-//
-//	public void setLocation(Location location) {
-//		this.location = location;
-//	}
+	public Location getLocation() {
+		return location;
+	}
+
+	public void setLocation(Location location) {
+		this.location = location;
+	}
 
 	@Override
 	public int hashCode() {

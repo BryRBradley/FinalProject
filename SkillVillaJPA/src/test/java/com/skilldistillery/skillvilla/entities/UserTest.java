@@ -73,4 +73,19 @@ class UserTest {
 		assertTrue(user.getComments().size() >= 1);
 		}
 	
+	@Test
+	void user_MTO_location() {
+		assertNotNull(user);
+		assertNotNull(user.getLocation());
+		assertEquals("Vienna", user.getLocation().getCity());
+	}
+	
+	@Test
+	void usert_MTM_communitymembers() {
+		assertNotNull(user);
+		assertNotNull(user.getCommunities());
+		assertTrue(user.getCommunities().size() > 0);
+		assertTrue(user.getCommunities().size() >= 1);
+	}
+	
 }
