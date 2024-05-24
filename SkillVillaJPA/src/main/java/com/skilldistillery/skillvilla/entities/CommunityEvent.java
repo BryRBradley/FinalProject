@@ -1,13 +1,17 @@
 package com.skilldistillery.skillvilla.entities;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 
 @Entity
@@ -19,23 +23,45 @@ public class CommunityEvent {
 	
 	private String title;
 	
+	@Column(name="start_date_time")
 	private LocalDateTime startDateTime;
-
+	
+	@Column(name="end_date_time")
 	private LocalDateTime endDateTime;
 	
 	private String description;
 	
+	@Column(name="image_url")
 	private String imageUrl;
 	
 	private boolean enabled;
 	
+	@Column(name="updated_at")
 	private LocalDateTime updatedAt;
 	
+	@Column(name="created_at")
 	private LocalDateTime createdAt;
 	
+	@Column(name="discord_url")
 	private String discordUrl;
 	
-
+//	@ManyToOne
+//	@JoinColumn(name = "community_id")
+//	private Community community;
+//	
+//	 @ManyToMany
+//	 @JoinTable(name="user_has_community_event", joinColumns = @JoinColumn(name="community_event_id"), inverseJoinColumns = @JoinColumn(name="user_id"))
+//	 private List <User> users;
+//	
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	private User user;
+	
+//	@ManyToOne
+//	@JoinColumn(name = "location_id")
+//	private Location location;
+	
+	
 	
 	public CommunityEvent() {
 		

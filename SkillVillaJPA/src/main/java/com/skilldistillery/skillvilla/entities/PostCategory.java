@@ -20,8 +20,8 @@ public class PostCategory {
 	
 	private String name;
 	
-	@OneToMany(mappedBy="post_category")
-	private List<Post> posts;
+//	@OneToMany(mappedBy="postCat")
+//	private List<Post> posts;
 	
 	PostCategory(){
 		
@@ -45,13 +45,13 @@ public class PostCategory {
 	
 	
 
-	public List<Post> getPosts() {
-		return posts;
-	}
-
-	public void setPosts(List<Post> posts) {
-		this.posts = posts;
-	}
+//	public List<Post> getPosts() {
+//		return posts;
+//	}
+//
+//	public void setPosts(List<Post> posts) {
+//		this.posts = posts;
+//	}
 
 	@Override
 	public int hashCode() {

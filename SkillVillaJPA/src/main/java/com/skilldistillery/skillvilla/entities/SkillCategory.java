@@ -20,8 +20,8 @@ public class SkillCategory {
 	
 	private String name;
 	
-	@OneToMany(mappedBy="skill_category")
-	private List<Skill> skills;
+//	@OneToMany(mappedBy="skillCat")
+//	private List<Skill> skills;
 	
 	private SkillCategory(){
 		
@@ -46,13 +46,13 @@ public class SkillCategory {
 	
 	
 
-	public List<Skill> getSkills() {
-		return skills;
-	}
-
-	public void setSkills(List<Skill> skills) {
-		this.skills = skills;
-	}
+//	public List<Skill> getSkills() {
+//		return skills;
+//	}
+//
+//	public void setSkills(List<Skill> skills) {
+//		this.skills = skills;
+//	}
 
 	@Override
 	public int hashCode() {

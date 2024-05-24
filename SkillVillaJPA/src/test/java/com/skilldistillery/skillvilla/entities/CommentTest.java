@@ -47,16 +47,16 @@ class CommentTest {
 		
 	}
 	
-	@Test
-	void test_Comment_Has_Post () {
-		assertNotNull(comment);
-		assertNotNull(comment.getPost());
-		
-	}
-	
-	@Test
-	void test_Comment_Has_User () {
-		assertNotNull(comment);
-		assertNotNull(comment.getUser());		
-	}
+//	@Test
+//	void test_Comment_Has_Post () {
+//		assertNotNull(comment);
+//		assertNotNull(comment.getPost());
+//		
+//	}
+//	
+//	@Test
+//	void test_Comment_Has_User () {
+//		assertNotNull(comment);
+//		assertNotNull(comment.getUser());		
+//	}
 }

@@ -46,27 +46,24 @@ public class User {
 	private List <CommunityEvent> comEvents;
 
 	
-	@OneToMany(mappedBy="user")
-	private List <Comment> comments;
+//	@OneToMany(mappedBy="user")
+//	private List <Comment> comments;
 	
-	@ManyToMany(mappedBy="users")
-	@JoinTable(name="user_has_skill", joinColumns = @JoinColumn(name="user_id"), inverseJoinColumns = @JoinColumn(name="skill_id"))
-	private List <Skill> skills;
+//	@ManyToMany(mappedBy="users")
+//	private List <Skill> skills;
 	
-	@ManyToMany(mappedBy="users")
-	@JoinTable(name="user_has_community", joinColumns = @JoinColumn(name="user_id"), inverseJoinColumns = @JoinColumn(name="community_id"))
-	private List <Community> communities;
-	
-	@ManyToMany(mappedBy="users")
-	@JoinTable(name="user_has_community_event", joinColumns = @JoinColumn(name="user_id"), inverseJoinColumns = @JoinColumn(name="community_event_id"))
-	private List <CommunityEvent> communityEvents;
-	
-	@OneToMany(mappedBy="user")
-	private List<Post> posts;
-	
-	@ManyToOne
-	@JoinColumn(name="location_id")
-	private Location location;
+//	@ManyToMany(mappedBy="communityMembers")
+//	private List <Community> communities;
+//	
+//	@ManyToMany(mappedBy="users")
+//	private List <CommunityEvent> communityEvents;
+//	
+//	@OneToMany(mappedBy="user")
+//	private List<Post> posts;
+//	
+//	@ManyToOne
+//	@JoinColumn(name="location_id")
+//	private Location location;
 	
 	
 	
@@ -147,63 +144,63 @@ public class User {
 		this.imageUrl = imageUrl;
 	}
 	
-	
-
-	public List<CommunityEvent> getComEvents() {
-		return comEvents;
-	}
-
-	public void setComEvents(List<CommunityEvent> comEvents) {
-		this.comEvents = comEvents;
-	}
-
-	public List<Comment> getComments() {
-		return comments;
-	}
-
-	public void setComments(List<Comment> comments) {
-		this.comments = comments;
-	}
-
-	public List<Skill> getSkills() {
-		return skills;
-	}
-
-	public void setSkills(List<Skill> skills) {
-		this.skills = skills;
-	}
-
-	public List<Community> getCommunities() {
-		return communities;
-	}
-
-	public void setCommunities(List<Community> communities) {
-		this.communities = communities;
-	}
-
-	public List<CommunityEvent> getCommunityEvents() {
-		return communityEvents;
-	}
-
-	public void setCommunityEvents(List<CommunityEvent> communityEvents) {
-		this.communityEvents = communityEvents;
-	}
-
-	public List<Post> getPosts() {
-		return posts;
-	}
-
-	public void setPosts(List<Post> posts) {
-		this.posts = posts;
-	}
-
-	public Location getLocation() {
-		return location;
-	}
-
-	public void setLocation(Location location) {
-		this.location = location;
-	}
+//	
+//
+//	public List<CommunityEvent> getComEvents() {
+//		return comEvents;
+//	}
+//
+//	public void setComEvents(List<CommunityEvent> comEvents) {
+//		this.comEvents = comEvents;
+//	}
+//
+//	public List<Comment> getComments() {
+//		return comments;
+//	}
+//
+//	public void setComments(List<Comment> comments) {
+//		this.comments = comments;
+//	}
+//
+//	public List<Skill> getSkills() {
+//		return skills;
+//	}
+//
+//	public void setSkills(List<Skill> skills) {
+//		this.skills = skills;
+//	}
+//
+//	public List<Community> getCommunities() {
+//		return communities;
+//	}
+//
+//	public void setCommunities(List<Community> communities) {
+//		this.communities = communities;
+//	}
+//
+//	public List<CommunityEvent> getCommunityEvents() {
+//		return communityEvents;
+//	}
+//
+//	public void setCommunityEvents(List<CommunityEvent> communityEvents) {
+//		this.communityEvents = communityEvents;
+//	}
+//
+//	public List<Post> getPosts() {
+//		return posts;
+//	}
+//
+//	public void setPosts(List<Post> posts) {
+//		this.posts = posts;
+//	}
+//
+//	public Location getLocation() {
+//		return location;
+//	}
+//
+//	public void setLocation(Location location) {
+//		this.location = location;
+//	}
 
 	@Override
 	public int hashCode() {
