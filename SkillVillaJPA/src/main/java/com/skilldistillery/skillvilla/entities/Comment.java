@@ -3,10 +3,13 @@ package com.skilldistillery.skillvilla.entities;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Comment {
@@ -15,22 +18,47 @@ public class Comment {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
+	@Column(name="updated_at")
 	private LocalDateTime updatedAt;
 	
 	private String message;
 	
+	@Column(name="created_at")
 	private LocalDateTime createdAt;
-
-// 	private int userId;
-
-// private int postId;
 	
-// private inReplytoId;
-	
+ 	@ManyToOne
+ 	@JoinColumn (name = "post_id")
+ 	private Post post;
+ 	
+ 	@ManyToOne
+ 	@JoinColumn (name = "user_id")
+ 	private User user;
+ 	
+ 	
 	public Comment () {
 		
 	}
-	
+
+	public Post getPost() {
+		return post;
+	}
+
+
+
+	public void setPost(Post post) {
+		this.post = post;
+	}
+
+
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 	public int getId() {
 		return id;
 	}

@@ -17,7 +17,7 @@ class CommentTest {
 
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private User user;
+	private  Comment comment;
 	
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception{
@@ -31,21 +31,32 @@ class CommentTest {
 	@BeforeEach
 	 void setUp() throws Exception {
 		 em = emf.createEntityManager();  
-		 user = em.find(User.class, 1);
+		 comment = em.find(Comment.class, 1);
 	 }
 			
 	@AfterEach
 	 void tearDown() throws Exception {
 		em.close();
+		comment= null;
 	}
 	
+	@Test
+	void test_Comment() {
+		assertNotNull(comment);
+		assertEquals("Cant Wait!", comment.getMessage());
+		
+	}
 	
-//	@Test
-//	void test_user() {
-//		assertNotNull(user);
-//		assertEquals("test", user.getUsername());
-//		assertEquals(true, user.isEnabled());
-//		
-//	}
-
+	@Test
+	void test_Comment_Has_Post () {
+		assertNotNull(comment);
+		assertNotNull(comment.getPost());
+		
+	}
+	
+	@Test
+	void test_Comment_Has_User () {
+		assertNotNull(comment);
+		assertNotNull(comment.getUser());		
+	}
 }
