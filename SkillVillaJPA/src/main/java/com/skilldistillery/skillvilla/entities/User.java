@@ -1,12 +1,15 @@
 package com.skilldistillery.skillvilla.entities;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 
 @Entity
 public class User {
@@ -21,17 +24,20 @@ public class User {
 	
 	private String email;
 	
+	@Column(name="image_url")
 	private String imageUrl;
 
 	private boolean enabled;
 	
 	private String role;
 	
+	@Column(name="created_at")
 	private LocalDateTime createdAt;
 
+	@Column(name="updated_at")
 	private LocalDateTime updatedAt;
 	
-	private String description; 
+	
 	
 //  private String loacationId
 	
@@ -79,8 +85,6 @@ public class User {
 		this.role = role;
 	}
 	
-	
-
 	public LocalDateTime getCreatedAt() {
 		return createdAt;
 	}
@@ -97,16 +101,6 @@ public class User {
 		this.updatedAt = updatedAt;
 	}
 
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	
-	
 	public String getEmail() {
 		return email;
 	}
@@ -144,7 +138,7 @@ public class User {
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", password=" + password + ", email=" + email
 				+ ", imageUrl=" + imageUrl + ", enabled=" + enabled + ", role=" + role + ", createdAt=" + createdAt
-				+ ", updatedAt=" + updatedAt + ", description=" + description + "]";
+				+ ", updatedAt=" + updatedAt;
 	}
 	
 

@@ -40,12 +40,12 @@ class UserTest {
 	}
 	
 	
-//	@Test
-//	void test_user() {
-//		assertNotNull(user);
-//		assertEquals("test", user.getUsername());
-//		assertEquals(true, user.isEnabled());
-//		
-//	}
+	@Test
+	void test_user() {
+		assertNotNull(user);
+		assertEquals("test", user.getUsername());
+		assertEquals(true, user.isEnabled());
+		
+	}
 
 }

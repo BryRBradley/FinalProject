@@ -17,7 +17,7 @@ class PostTest {
 
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private User user;
+	private Post post;
 	
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception{
@@ -31,7 +31,7 @@ class PostTest {
 	@BeforeEach
 	 void setUp() throws Exception {
 		 em = emf.createEntityManager();  
-		 user = em.find(User.class, 1);
+		 post = em.find(Post.class, 1);
 	 }
 			
 	@AfterEach
@@ -40,12 +40,12 @@ class PostTest {
 	}
 	
 	
-//	@Test
-//	void test_user() {
-//		assertNotNull(user);
-//		assertEquals("test", user.getUsername());
-//		assertEquals(true, user.isEnabled());
-//		
-//	}
+	@Test
+	void test_post() {
+		assertNotNull(post);
+		assertEquals(1, post.getId());
+		assertEquals(true, post.isEnabled());
+		
+	}
 
 }

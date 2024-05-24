@@ -6,8 +6,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name="skill_category")
 public class SkillCategory {
 	
 	@Id
@@ -16,7 +18,7 @@ public class SkillCategory {
 	
 	private String name;
 	
-	SkillCategory(){
+	private SkillCategory(){
 		
 	}
 
@@ -27,7 +29,7 @@ public class SkillCategory {
 	public void setId(int id) {
 		this.id = id;
 	}
-
+  
 	public String getName() {
 		return name;
 	}
@@ -35,6 +37,7 @@ public class SkillCategory {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
 
 	@Override
 	public int hashCode() {

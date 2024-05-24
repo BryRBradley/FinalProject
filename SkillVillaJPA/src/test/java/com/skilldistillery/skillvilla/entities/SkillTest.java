@@ -17,7 +17,7 @@ class SkillTest {
 
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private User user;
+	private Skill skill;
 	
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception{
@@ -31,7 +31,7 @@ class SkillTest {
 	@BeforeEach
 	 void setUp() throws Exception {
 		 em = emf.createEntityManager();  
-		 user = em.find(User.class, 1);
+		 skill = em.find(Skill.class, 1);
 	 }
 			
 	@AfterEach
@@ -40,12 +40,10 @@ class SkillTest {
 	}
 	
 	
-//	@Test
-//	void test_user() {
-//		assertNotNull(user);
-//		assertEquals("test", user.getUsername());
-//		assertEquals(true, user.isEnabled());
-//		
-//	}
+	@Test
+	void test_user() {
+		assertNotNull(skill);
+		assertEquals("Baking", skill.getName());
+	}
 
 }
