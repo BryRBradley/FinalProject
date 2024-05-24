@@ -42,8 +42,8 @@ public class User {
 	private List <CommunityEvent> comEvents;
 
 	
-//	@OneToMany(mappedBy="user")
-//	private List <Comment> comments;
+	@OneToMany(mappedBy="user")
+	private List <Comment> comments;
 	
 //	@ManyToMany(mappedBy="users")
 //	private List <Skill> skills;
@@ -149,15 +149,15 @@ public class User {
 //	public void setComEvents(List<CommunityEvent> comEvents) {
 //		this.comEvents = comEvents;
 //	}
-//
-//	public List<Comment> getComments() {
-//		return comments;
-//	}
-//
-//	public void setComments(List<Comment> comments) {
-//		this.comments = comments;
-//	}
-//
+
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
+
 //	public List<Skill> getSkills() {
 //		return skills;
 //	}

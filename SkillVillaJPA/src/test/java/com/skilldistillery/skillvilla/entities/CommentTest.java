@@ -53,10 +53,11 @@ class CommentTest {
 		assertNotNull(comment.getPost());
 		assertEquals("Everyone join the denver womans snowboarding community!", comment.getPost().getDescription());
 	}
-//	
-//	@Test
-//	void test_Comment_Has_User () {
-//		assertNotNull(comment);
-//		assertNotNull(comment.getUser());		
-//	}
+	
+	@Test
+	void test_Comment_Has_User () {
+		assertNotNull(comment);
+		assertNotNull(comment.getUser());
+		assertEquals("test", comment.getUser().getUsername());
+	}
 }

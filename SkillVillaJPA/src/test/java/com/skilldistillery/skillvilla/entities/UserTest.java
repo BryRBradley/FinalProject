@@ -64,4 +64,13 @@ class UserTest {
 		assertTrue(user.getPosts().size() > 0);
 		assertTrue(user.getPosts().size() >= 1);
 	}
+	
+	@Test
+	void user_OTM_comments() {
+		assertNotNull(user);
+		assertNotNull(user.getComments());
+		assertTrue(user.getComments().size() > 0);
+		assertTrue(user.getComments().size() >= 1);
+		}
+	
 }
