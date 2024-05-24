@@ -11,5 +11,6 @@ export const routes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
     { path: 'community', component: CommunityComponent },
+    { path: 'community/:communityId', component: CommunityComponent },
     { path: '**', component: NotFoundComponent }
 ];
