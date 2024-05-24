@@ -14,14 +14,18 @@
 </div>
 
 
-<div *ngIf="selected">
+<div id="communityPage" *ngIf="selected">
 
+    <div class="head">
+        <div class="img-container">
+            <img [src]="selected.imageUrl" alt="">
+        </div>
+        <div>
+            <h1>{{selected.name}}</h1>
+
+        </div>
+    </div>
     <div >
-        <h1>{{selected.name}}</h1>
-
-
-
-
 
     </div>
 
