@@ -34,24 +34,24 @@ public class Post {
 	@Column(name="image_url")
 	private String imageUrl;
 	
-	@ManyToOne
-	@JoinColumn(name="post_category_id")
-	private PostCategory postCat;
-	
-	@ManyToOne
-	@JoinColumn(name="community_id")
-	private Community community;
-	
-	@ManyToOne
-	@JoinColumn(name="user_id")
-	private User user;
-	
-	@OneToOne
-	@JoinColumn(name="post")
-	private Location location;
-	
-	@OneToMany(mappedBy="post")
-	private List <Comment> comments;
+//	@ManyToOne
+//	@JoinColumn(name="posts_id")
+//	private PostCategory postCat;
+//	
+//	@ManyToOne
+//	@JoinColumn(name="community_id")
+//	private Community community;
+//	
+//	@ManyToOne
+//	@JoinColumn(name="user_id")
+//	private User user;
+//	
+//	@OneToOne
+//	@JoinColumn(name="post")
+//	private Location location;
+//	
+//	@OneToMany(mappedBy="post")
+//	private List <Comment> comments;
 	
 	
 	
@@ -108,45 +108,45 @@ public class Post {
 		this.imageUrl = imageUrl;
 	}
 
-	public PostCategory getPostCat() {
-		return postCat;
-	}
+//	public PostCategory getPostCat() {
+//		return postCat;
+//	}
+//
+//	public void setPostCat(PostCategory postCat) {
+//		this.postCat = postCat;
+//	}
+//
+//	public Community getCommunity() {
+//		return community;
+//	}
+//
+//	public void setCommunity(Community community) {
+//		this.community = community;
+//	}
+//
+//	public User getUser() {
+//		return user;
+//	}
+//
+//	public void setUser(User user) {
+//		this.user = user;
+//	}
+//
+//	public Location getLocation() {
+//		return location;
+//	}
+//
+//	public void setLocation(Location location) {
+//		this.location = location;
+//	}
+//
+//	public List<Comment> getComments() {
+//		return comments;
+//	}
 
-	public void setPostCat(PostCategory postCat) {
-		this.postCat = postCat;
-	}
-
-	public Community getCommunity() {
-		return community;
-	}
-
-	public void setCommunity(Community community) {
-		this.community = community;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	public Location getLocation() {
-		return location;
-	}
-
-	public void setLocation(Location location) {
-		this.location = location;
-	}
-
-	public List<Comment> getComments() {
-		return comments;
-	}
-
-	public void setComments(List<Comment> comments) {
-		this.comments = comments;
-	}
+//	public void setComments(List<Comment> comments) {
+//		this.comments = comments;
+//	}
 
 	@Override
 	public int hashCode() {

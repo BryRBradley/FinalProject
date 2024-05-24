@@ -23,17 +23,17 @@ public class Skill {
 
 	private String description;
 	
-	@ManyToMany(mappedBy="skills")
-	@JoinTable(name="user_has_skill", joinColumns = @JoinColumn(name="user_id"), inverseJoinColumns = @JoinColumn(name="skill_id"))
-	private List <User> users;
+//	@ManyToMany
+//	@JoinTable(name="user_has_skill", joinColumns = @JoinColumn(name="user_id"), inverseJoinColumns = @JoinColumn(name="skill_id"))
+//	private List <User> users;
 	
-	@ManyToMany(mappedBy="skills")
-	@JoinTable(name="community_has_skill", joinColumns = @JoinColumn(name="community_id"), inverseJoinColumns = @JoinColumn(name="skill_id"))
-	private List <Community> communities;
-	
-	@ManyToOne
-	@JoinColumn(name="skill_category")
-	private SkillCategory skillCat;
+//	@ManyToMany
+//	@JoinTable(name="community_has_skill", joinColumns = @JoinColumn(name="community_id"), inverseJoinColumns = @JoinColumn(name="skill_id"))
+//	private List <Community> communities;
+//	
+//	@ManyToOne
+//	@JoinColumn(name="skill")
+//	private SkillCategory skillCat;
 	
  // private int categoryId;
 	
@@ -67,29 +67,29 @@ public class Skill {
 	
 	
 
-	public List<User> getUsers() {
-		return users;
-	}
+//	public List<User> getUsers() {
+//		return users;
+//	}
+//
+//	public void setUsers(List<User> users) {
+//		this.users = users;
+//	}
 
-	public void setUsers(List<User> users) {
-		this.users = users;
-	}
-
-	public List<Community> getCommunities() {
-		return communities;
-	}
-
-	public void setCommunities(List<Community> communities) {
-		this.communities = communities;
-	}
-
-	public SkillCategory getSkillCat() {
-		return skillCat;
-	}
-
-	public void setSkillCat(SkillCategory skillCat) {
-		this.skillCat = skillCat;
-	}
+//	public List<Community> getCommunities() {
+//		return communities;
+//	}
+//
+//	public void setCommunities(List<Community> communities) {
+//		this.communities = communities;
+//	}
+//
+//	public SkillCategory getSkillCat() {
+//		return skillCat;
+//	}
+//
+//	public void setSkillCat(SkillCategory skillCat) {
+//		this.skillCat = skillCat;
+//	}
 
 	@Override
 	public int hashCode() {

@@ -39,22 +39,22 @@ public class Community {
 	@Column(name="created_at")
 	private LocalDateTime createdAt;
 	
-	@ManyToMany(mappedBy = "user") 
-	@JoinTable (name="user_has_communty", joinColumns = @JoinColumn(name= "user_id"), inverseJoinColumns= @JoinColumn(name="community_id"))
-	private List<User> user;
-
-	@OneToMany(mappedBy="community")
-	private List<CommunityEvent> communityEvents;
-	
-	@ManyToOne
-	@JoinColumn (name= "location")
-	private Location location; 
-	
-	@ManyToMany(mappedBy = "skill") 
-	private List<Skill> skills;
-	
-	@OneToMany(mappedBy="community")
-	private List<Post> posts;
+//	@ManyToMany
+//	@JoinTable (name="user_has_communty", joinColumns = @JoinColumn(name= "community_id"), inverseJoinColumns= @JoinColumn(name="user_id"))
+//	private List<User> communityMembers;
+//
+//	@OneToMany(mappedBy="community")
+//	private List<CommunityEvent> communityEvents;
+//	
+//	@ManyToOne
+//	@JoinColumn (name= "location")
+//	private Location location; 
+//	
+//	@ManyToMany(mappedBy = "communities") 
+//	private List<Skill> skills;
+//	
+//	@OneToMany(mappedBy="community")
+//	private List<Post> posts;
 	
 	public Community() {
 		
@@ -126,45 +126,45 @@ public class Community {
 
 	
 	
-	public List<User> getUser() {
-		return user;
-	}
-
-	public void setUser(List<User> user) {
-		this.user = user;
-	}
-
-	public List<CommunityEvent> getCommunityEvents() {
-		return communityEvents;
-	}
-
-	public void setCommunityEvents(List<CommunityEvent> communityEvents) {
-		this.communityEvents = communityEvents;
-	}
-
-	public Location getLocation() {
-		return location;
-	}
-
-	public void setLocation(Location location) {
-		this.location = location;
-	}
-
-	public List<Skill> getSkills() {
-		return skills;
-	}
-
-	public void setSkills(List<Skill> skills) {
-		this.skills = skills;
-	}
-
-	public List<Post> getPosts() {
-		return posts;
-	}
-
-	public void setPosts(List<Post> posts) {
-		this.posts = posts;
-	}
+//	public List<User> getUser() {
+//		return communityMembers;
+//	}
+//
+//	public void setUser(List<User> user) {
+//		this.communityMembers = user;
+//	}
+//
+//	public List<CommunityEvent> getCommunityEvents() {
+//		return communityEvents;
+//	}
+//
+//	public void setCommunityEvents(List<CommunityEvent> communityEvents) {
+//		this.communityEvents = communityEvents;
+//	}
+//
+//	public Location getLocation() {
+//		return location;
+//	}
+//
+//	public void setLocation(Location location) {
+//		this.location = location;
+//	}
+//
+//	public List<Skill> getSkills() {
+//		return skills;
+//	}
+//
+//	public void setSkills(List<Skill> skills) {
+//		this.skills = skills;
+//	}
+//
+//	public List<Post> getPosts() {
+//		return posts;
+//	}
+//
+//	public void setPosts(List<Post> posts) {
+//		this.posts = posts;
+//	}
 
 	@Override
 	public int hashCode() {

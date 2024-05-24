@@ -47,5 +47,12 @@ class UserTest {
 		assertEquals(true, user.isEnabled());
 		
 	}
-
+	
+	@Test
+	void test_user_has_community_event() {
+		assertNotNull(user);
+		assertEquals("test", user.getUsername());
+		//assertEquals(true, user.get);
+		
+	}
 }

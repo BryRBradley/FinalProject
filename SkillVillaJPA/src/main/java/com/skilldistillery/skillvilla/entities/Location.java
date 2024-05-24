@@ -1,11 +1,16 @@
 package com.skilldistillery.skillvilla.entities;
 
+import java.util.List;
 import java.util.Objects;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Location {
@@ -21,6 +26,24 @@ public class Location {
 	private String state;
 	
 	private int zipcode;
+	
+//	@OneToMany(mappedBy="location")
+//	private List<Community> communities;
+//	
+//	@OneToMany(mappedBy="location")
+//	private List<Post> posts;
+//	
+//	@OneToMany(mappedBy="location")
+//	private List<CommunityEvent> communityEvents;
+//	
+//	@OneToMany(mappedBy="location")
+//	private List<User> users;
+	
+	
+	
+	
+	
+	
 	
 	Location(){
 		

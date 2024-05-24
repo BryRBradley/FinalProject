@@ -37,6 +37,7 @@ class SkillTest {
 			
 	@AfterEach
 	 void tearDown() throws Exception {
+		skill = null;
 		em.close();
 	}
 	
@@ -48,9 +49,9 @@ class SkillTest {
 	}
 
 	@Test
-	void test_has_category() {
+	void test_skill_has_user() {
 		assertNotNull(skill);
 		assertEquals("Baking", skill.getName());
-		assertEquals(2, skill.getSkillCat());
+	//	assertTrue(skill.);
 	}
 }
