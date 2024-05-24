@@ -87,5 +87,19 @@ class UserTest {
 		assertTrue(user.getCommunities().size() > 0);
 		assertTrue(user.getCommunities().size() >= 1);
 	}
+	@Test
+	void user_MTM_communityEvents() {
+		assertNotNull(user);
+		assertNotNull(user.getCommunityEvents());
+		assertTrue(user.getCommunityEvents().size() > 0);
+		assertTrue(user.getCommunityEvents().size() >= 1);
+	}
 	
+	@Test
+	void user_OTM_communityEvent() {
+		assertNotNull(user);
+		assertNotNull(user.getPostedEvent());
+		assertTrue(user.getPostedEvent().size() > 0);
+		assertTrue(user.getPostedEvent().size() >= 1);
+	}
 }

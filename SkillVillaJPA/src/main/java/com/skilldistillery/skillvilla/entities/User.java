@@ -25,6 +25,12 @@ public class User {
 	
 	private String password;
 	
+	@Column(name = "first_name")
+	private String firstName;
+	
+	@Column(name = "last_name")
+	private String lastName;
+	
 	private String email;
 	
 	@Column(name="image_url")
@@ -54,8 +60,8 @@ public class User {
 	@ManyToMany(mappedBy="communityMembers")
 	private List <Community> communities;
 	
-//	@ManyToMany(mappedBy="users")
-//	private List <CommunityEvent> communityEvents;
+	@ManyToMany(mappedBy="users")
+	private List <CommunityEvent> communityEvents;
 	
 	@OneToMany(mappedBy="user")
 	private List<Post> posts;
@@ -64,7 +70,8 @@ public class User {
 	@JoinColumn(name="location_id")
 	private Location location;
 	
-	
+	@OneToMany(mappedBy="user")
+	private List<CommunityEvent> postedEvent;
 	
 	
 	
@@ -143,15 +150,14 @@ public class User {
 		this.imageUrl = imageUrl;
 	}
 	
-//	
-//
-//	public List<CommunityEvent> getComEvents() {
-//		return comEvents;
-//	}
-//
-//	public void setComEvents(List<CommunityEvent> comEvents) {
-//		this.comEvents = comEvents;
-//	}
+	
+	public List<CommunityEvent> getComEvents() {
+		return comEvents;
+	}
+
+	public void setComEvents(List<CommunityEvent> comEvents) {
+		this.comEvents = comEvents;
+	}
 
 	public List<Comment> getComments() {
 		return comments;
@@ -177,13 +183,13 @@ public class User {
 		this.communities = communities;
 	}
 
-//	public List<CommunityEvent> getCommunityEvents() {
-//		return communityEvents;
-//	}
-//
-//	public void setCommunityEvents(List<CommunityEvent> communityEvents) {
-//		this.communityEvents = communityEvents;
-//	}
+	public List<CommunityEvent> getCommunityEvents() {
+		return communityEvents;
+	}
+
+	public void setCommunityEvents(List<CommunityEvent> communityEvents) {
+		this.communityEvents = communityEvents;
+	}
 
 	public List<Post> getPosts() {
 		return posts;
@@ -199,6 +205,30 @@ public class User {
 
 	public void setLocation(Location location) {
 		this.location = location;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public List<CommunityEvent> getPostedEvent() {
+		return postedEvent;
+	}
+
+	public void setPostedEvent(List<CommunityEvent> postedEvent) {
+		this.postedEvent = postedEvent;
 	}
 
 	@Override
