@@ -20,8 +20,8 @@ public class PostCategory {
 	
 	private String name;
 	
-//	@OneToMany(mappedBy="postCat")
-//	private List<Post> posts;
+	@OneToMany(mappedBy="postCategory")
+	private List<Post> posts;
 	
 	PostCategory(){
 		
@@ -45,13 +45,13 @@ public class PostCategory {
 	
 	
 
-//	public List<Post> getPosts() {
-//		return posts;
-//	}
-//
-//	public void setPosts(List<Post> posts) {
-//		this.posts = posts;
-//	}
+	public List<Post> getPosts() {
+		return posts;
+	}
+
+	public void setPosts(List<Post> posts) {
+		this.posts = posts;
+	}
 
 	@Override
 	public int hashCode() {
@@ -60,12 +60,15 @@ public class PostCategory {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		PostCategory other = (PostCategory) obj;
 		return id == other.id;
 	}

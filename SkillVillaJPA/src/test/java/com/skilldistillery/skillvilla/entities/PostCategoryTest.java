@@ -2,6 +2,7 @@ package com.skilldistillery.skillvilla.entities;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -37,6 +38,7 @@ class PostCategoryTest {
 	@AfterEach
 	 void tearDown() throws Exception {
 		em.close();
+		postCat = null;
 	}
 	
 	
@@ -45,6 +47,14 @@ class PostCategoryTest {
 		assertNotNull(postCat);
 		assertEquals("Culinary", postCat.getName());
 		
+	}
+	
+	@Test
+	void category_OTM_post() {
+		assertNotNull(postCat);
+		assertNotNull(postCat.getPosts());
+		assertTrue(postCat.getPosts().size() > 0);
+		assertTrue(postCat.getPosts().size() >= 1);
 	}
 
 }

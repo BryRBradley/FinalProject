@@ -36,6 +36,7 @@ class SkillCategoryTest {
 	@AfterEach
 	 void tearDown() throws Exception {
 		em.close();
+		skillCat = null;
 	}
 	
 	
@@ -44,6 +45,15 @@ class SkillCategoryTest {
 		assertNotNull(skillCat);
 		assertEquals("Automotive", skillCat.getName());
 	}  
-
+	
+	@Test 
+	void sCategory_OTM_skill(){
+		skillCat = em.find(SkillCategory.class, 2);
+		assertNotNull(skillCat);
+		assertNotNull(skillCat.getSkills());
+		assertTrue(skillCat.getSkills().size() > 0);
+		//assertTrue(skillCat.getSkills().size() > 1);
+		
+	}
 
 }
