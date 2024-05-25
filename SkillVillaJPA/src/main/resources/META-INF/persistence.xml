@@ -16,6 +16,8 @@
 		<class>com.skilldistillery.skillvilla.entities.Skill</class>
 		<class>com.skilldistillery.skillvilla.entities.SkillCategory</class>
 		<class>com.skilldistillery.skillvilla.entities.User</class>
+		<class>com.skilldistillery.skillvilla.entities.UserSkill</class>
+		<class>com.skilldistillery.skillvilla.entities.UserSkillId</class>
 
 		<properties>
 			<property name="jakarta.persistence.jdbc.url"

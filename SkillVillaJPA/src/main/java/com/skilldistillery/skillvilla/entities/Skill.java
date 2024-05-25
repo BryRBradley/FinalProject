@@ -11,6 +11,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Skill {
@@ -30,6 +31,9 @@ public class Skill {
 	@ManyToMany
 	@JoinTable (name="community_has_skill", joinColumns = @JoinColumn(name= "skill_id"), inverseJoinColumns= @JoinColumn(name="community_id"))
 	private List<Community> communities;
+	
+	@OneToMany(mappedBy = "skill")
+	private List<UserSkill> users;
 	
 	//-----------------------------------------------------------------------------------------------------
 	
@@ -78,6 +82,14 @@ public class Skill {
 
 	public void setCommunities(List<Community> communities) {
 		this.communities = communities;
+	}
+
+	public List<UserSkill> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<UserSkill> users) {
+		this.users = users;
 	}
 
 	@Override

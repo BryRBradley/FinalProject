@@ -102,4 +102,14 @@ class UserTest {
 		assertTrue(user.getPostedEvent().size() > 0);
 		assertTrue(user.getPostedEvent().size() >= 1);
 	}
+	
+	@Test
+	void user_OTM_userSkill() {
+		assertNotNull(user);
+		assertNotNull(user.getSkills());
+		assertTrue(user.getSkills().size() > 0);
+		assertTrue(user.getSkills().size() >= 1);
+		assertEquals("Expert", user.getSkills().get(0).getLevel());
+	}
+
 }

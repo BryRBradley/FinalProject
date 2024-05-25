@@ -2,7 +2,6 @@ package com.skilldistillery.skillvilla.entities;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -14,11 +13,11 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
-class SkillTest {
+class UserSkillTest {
 
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private Skill skill;
+	private  UserSkill userSkill;
 	
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception{
@@ -32,42 +31,32 @@ class SkillTest {
 	@BeforeEach
 	 void setUp() throws Exception {
 		 em = emf.createEntityManager();  
-		 skill = em.find(Skill.class, 1);
+		 userSkill = em.find(UserSkill.class, new UserSkillId(1,1));
 	 }
 			
 	@AfterEach
 	 void tearDown() throws Exception {
 		em.close();
-		skill = null;
+		userSkill= null;
 	}
 	
+	@Test
+	void userSkil_basic_test() {
+		assertNotNull(userSkill);
+		assertEquals("Expert", userSkill.getLevel());
+	}
 	
 	@Test
-	void skill_basic_mapping() {
-		assertNotNull(skill);
-		assertEquals("Baking", skill.getName());
+	void userSkill_MTO_user() {
+		assertNotNull(userSkill);
+		assertNotNull(userSkill.getUser());
+		assertEquals("test", userSkill.getUser().getUsername());
 	}
 
 	@Test
-	void skill_MTO_skillCategory() {
-		assertNotNull(skill);
-		assertEquals("Culinary", skill.getCategory().getName());
-	}
-	
-	@Test
-	void skill_MTM_community() {
-		assertNotNull(skill);
-		assertNotNull(skill.getCommunities());
-		assertTrue(skill.getCommunities().size() > 0);
-		assertTrue(skill.getCommunities().size() >= 1);
-	}
-	
-	@Test
-	void skill_MTM_userSkill() {
-		assertNotNull(skill);
-		assertNotNull(skill.getUsers());
-		assertTrue(skill.getUsers().size() > 0);
-		assertTrue(skill.getUsers().size() >= 1);
-		assertEquals("Expert", skill.getUsers().get(0).getLevel());
+	void skill() {
+		assertNotNull(userSkill);
+		assertNotNull(userSkill.getSkill());
+		assertEquals("Baking", userSkill.getSkill().getName());
 	}
 }

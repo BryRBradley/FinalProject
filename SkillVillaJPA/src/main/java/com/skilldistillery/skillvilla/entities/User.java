@@ -54,9 +54,6 @@ public class User {
 	@OneToMany(mappedBy="user")
 	private List <Comment> comments;
 	
-//	@ManyToMany(mappedBy="users")
-//	private List <Skill> skills;
-	
 	@ManyToMany(mappedBy="communityMembers")
 	private List <Community> communities;
 	
@@ -73,10 +70,23 @@ public class User {
 	@OneToMany(mappedBy="user")
 	private List<CommunityEvent> postedEvent;
 	
+	@OneToMany(mappedBy = "user")
+	private List<UserSkill> skills;
 	
+	//---------------------------------------------------------------------------
 	
+	public List<UserSkill> getSkills() {
+		return skills;
+	}
+
+	public void setSkills(List<UserSkill> skills) {
+		this.skills = skills;
+	}
+
 	public User() {}
 
+	//---------------------------------------------------------------------------
+	
 	public int getId() {
 		return id;
 	}
@@ -166,14 +176,6 @@ public class User {
 	public void setComments(List<Comment> comments) {
 		this.comments = comments;
 	}
-
-//	public List<Skill> getSkills() {
-//		return skills;
-//	}
-//
-//	public void setSkills(List<Skill> skills) {
-//		this.skills = skills;
-//	}
 
 	public List<Community> getCommunities() {
 		return communities;
