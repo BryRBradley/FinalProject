@@ -1,9 +1,11 @@
+import { User } from './models/user';
 import { Routes } from '@angular/router';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { HomeComponent } from './components/home/home.component';
 import { CommunityComponent } from './components/community/community.component';
+import { UserComponent } from './components/user/user.component';
 
 export const routes: Routes = [
     { path: '', pathMatch: 'full', redirectTo: 'home' },
@@ -12,5 +14,7 @@ export const routes: Routes = [
     { path: 'register', component: RegisterComponent },
     { path: 'community', component: CommunityComponent },
     { path: 'community/:communityId', component: CommunityComponent },
+    { path: 'user', component: UserComponent },
+    { path: 'user/:userId', component: UserComponent },
     { path: '**', component: NotFoundComponent }
 ];

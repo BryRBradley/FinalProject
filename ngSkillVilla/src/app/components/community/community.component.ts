@@ -2,12 +2,14 @@ import { Community } from './../../models/community';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CommunityService } from '../../services/community.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-community',
   standalone: true,
   imports: [
-    CommonModule,
+    CommonModule, FormsModule
   ],
   templateUrl: './community.component.html',
   styleUrl: './community.component.css'
@@ -26,12 +28,12 @@ export class CommunityComponent implements OnInit {
     new Community(8, 'community 8', 'The start of commun 8', 'https://gwrench.com/wp-content/uploads/2023/03/AutomotiveVista.jpeg', '')
 
   ]
-
+  newCommunity: Community = new Community();
   selected: Community | null = null;
-
+  editCommunity: Community | null = null;
   //---------------------------------------------------------------------
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute) {
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, private commService : CommunityService) {
 
   }
 
@@ -66,12 +68,54 @@ export class CommunityComponent implements OnInit {
     this.router.navigateByUrl(url);
   }
 
-  showCommunity(communityId:number){
-    // this.communityService.showCommunity(communityId).subscribe({
-    //   next: (community) => {
-    //     this.selected = community;
-    //   },
-    //   error: () => { }
-    // })
+  // showCommunity(communityId:number){
+  //   this.commService.showCommunity(communityId).subscribe({
+  //     next: (community) => {
+  //       this.selected = community;
+  //     },
+  //     error: () => { }
+  //   })
+  // }
+
+  reload() {
+    this.commService.index().subscribe({
+      next: (dbSkillVilla: Community[]) => {
+        console.log(dbSkillVilla)
+        this.communities = dbSkillVilla
+      },
+      error: (err) => {
+        console.log("something went wrong with reload()")
+      }
+    })
   }
+
+  addCommunity(community : Community){
+    this.commService.create(community).subscribe({
+      next: (community) => {
+        this.reload();
+        this.newCommunity = new Community();
+      }
+    })
+  }
+  
+  updateCommunity(community : Community){
+    this.commService.update(community, community.id).subscribe({
+      next: (community) => {
+        this.reload();
+        this.selected = null;
+        this.editCommunity = null;
+      },
+      error: () => {}
+    });
+  }
+
+  deleteCommunity(id: number) {
+    this.commService.destroy(id).subscribe({
+      next: () => {
+      this.reload();
+      },
+      error: () => {}
+    });
+  }
+
 }
