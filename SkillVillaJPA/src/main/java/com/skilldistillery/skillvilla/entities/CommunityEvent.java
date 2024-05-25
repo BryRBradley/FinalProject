@@ -13,10 +13,13 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "community_event")
 public class CommunityEvent {
 
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
@@ -45,24 +48,32 @@ public class CommunityEvent {
 	@Column(name="discord_url")
 	private String discordUrl;
 	
-//	@ManyToOne
-//	@JoinColumn(name = "community_id")
-//	private Community community;
-//	
-//	 @ManyToMany
-//	 @JoinTable(name="user_has_community_event", joinColumns = @JoinColumn(name="community_event_id"), inverseJoinColumns = @JoinColumn(name="user_id"))
-//	 private List <User> users;
-//	
+	@ManyToOne
+	@JoinColumn(name = "community_id")
+	private Community community;
+	
+	 @ManyToMany
+	 @JoinTable(name="user_has_community_event", joinColumns = @JoinColumn(name="community_event_id"), inverseJoinColumns = @JoinColumn(name="user_id"))
+	 private List <User> users;
+	
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
 	
-//	@ManyToOne
-//	@JoinColumn(name = "location_id")
-//	private Location location;
+	@ManyToOne
+	@JoinColumn(name = "location_id")
+	private Location location;
 	
 	
 	
+	public Location getLocation() {
+		return location;
+	}
+
+	public void setLocation(Location location) {
+		this.location = location;
+	}
+
 	public CommunityEvent() {
 		
 	}
@@ -148,6 +159,30 @@ public class CommunityEvent {
 	}
 
 	
+	public Community getCommunity() {
+		return community;
+	}
+
+	public void setCommunity(Community community) {
+		this.community = community;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public List<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<User> users) {
+		this.users = users;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -155,12 +190,15 @@ public class CommunityEvent {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		CommunityEvent other = (CommunityEvent) obj;
 		return id == other.id;
 	}

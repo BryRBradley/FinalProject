@@ -23,23 +23,22 @@ public class Skill {
 
 	private String description;
 	
-//	@ManyToMany
-//	@JoinTable(name="user_has_skill", joinColumns = @JoinColumn(name="user_id"), inverseJoinColumns = @JoinColumn(name="skill_id"))
-//	private List <User> users;
+	@ManyToOne
+	@JoinColumn(name = "category_id")
+	private SkillCategory category;
 	
-//	@ManyToMany
-//	@JoinTable(name="community_has_skill", joinColumns = @JoinColumn(name="community_id"), inverseJoinColumns = @JoinColumn(name="skill_id"))
-//	private List <Community> communities;
-//	
-//	@ManyToOne
-//	@JoinColumn(name="skill")
-//	private SkillCategory skillCat;
+	@ManyToMany
+	@JoinTable (name="community_has_skill", joinColumns = @JoinColumn(name= "skill_id"), inverseJoinColumns= @JoinColumn(name="community_id"))
+	private List<Community> communities;
 	
- // private int categoryId;
+	//-----------------------------------------------------------------------------------------------------
 	
-	Skill (){
-		
+	public Skill() {
+		super();
 	}
+	
+	//-----------------------------------------------------------------------------------------------------
+
 
 	public int getId() {
 		return id;
@@ -64,32 +63,22 @@ public class Skill {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
-	
 
-//	public List<User> getUsers() {
-//		return users;
-//	}
-//
-//	public void setUsers(List<User> users) {
-//		this.users = users;
-//	}
+	public SkillCategory getCategory() {
+		return category;
+	}
 
-//	public List<Community> getCommunities() {
-//		return communities;
-//	}
-//
-//	public void setCommunities(List<Community> communities) {
-//		this.communities = communities;
-//	}
-//
-//	public SkillCategory getSkillCat() {
-//		return skillCat;
-//	}
-//
-//	public void setSkillCat(SkillCategory skillCat) {
-//		this.skillCat = skillCat;
-//	}
+	public void setCategory(SkillCategory category) {
+		this.category = category;
+	}
+
+	public List<Community> getCommunities() {
+		return communities;
+	}
+
+	public void setCommunities(List<Community> communities) {
+		this.communities = communities;
+	}
 
 	@Override
 	public int hashCode() {
@@ -98,12 +87,15 @@ public class Skill {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		Skill other = (Skill) obj;
 		return id == other.id;
 	}
@@ -111,6 +103,7 @@ public class Skill {
 	@Override
 	public String toString() {
 		return "Skill [id=" + id + ", name=" + name + ", description=" + description + "]";
-	};
+	}
+
 	
 }

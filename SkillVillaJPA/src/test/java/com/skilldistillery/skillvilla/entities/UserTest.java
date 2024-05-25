@@ -2,6 +2,7 @@ package com.skilldistillery.skillvilla.entities;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -54,5 +55,51 @@ class UserTest {
 		assertEquals("test", user.getUsername());
 		//assertEquals(true, user.get);
 		
+	}
+	
+	@Test
+	void user_OTM_post() {
+		assertNotNull(user);
+		assertNotNull(user.getPosts());
+		assertTrue(user.getPosts().size() > 0);
+		assertTrue(user.getPosts().size() >= 1);
+	}
+	
+	@Test
+	void user_OTM_comments() {
+		assertNotNull(user);
+		assertNotNull(user.getComments());
+		assertTrue(user.getComments().size() > 0);
+		assertTrue(user.getComments().size() >= 1);
+		}
+	
+	@Test
+	void user_MTO_location() {
+		assertNotNull(user);
+		assertNotNull(user.getLocation());
+		assertEquals("Vienna", user.getLocation().getCity());
+	}
+	
+	@Test
+	void usert_MTM_communitymembers() {
+		assertNotNull(user);
+		assertNotNull(user.getCommunities());
+		assertTrue(user.getCommunities().size() > 0);
+		assertTrue(user.getCommunities().size() >= 1);
+	}
+	@Test
+	void user_MTM_communityEvents() {
+		assertNotNull(user);
+		assertNotNull(user.getCommunityEvents());
+		assertTrue(user.getCommunityEvents().size() > 0);
+		assertTrue(user.getCommunityEvents().size() >= 1);
+	}
+	
+	@Test
+	void user_OTM_communityEvent() {
+		assertNotNull(user);
+		assertNotNull(user.getPostedEvent());
+		assertTrue(user.getPostedEvent().size() > 0);
+		assertTrue(user.getPostedEvent().size() >= 1);
 	}
 }

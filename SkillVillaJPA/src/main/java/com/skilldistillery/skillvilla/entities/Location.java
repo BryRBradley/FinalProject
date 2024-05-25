@@ -7,9 +7,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 
 @Entity
@@ -27,22 +24,17 @@ public class Location {
 	
 	private int zipcode;
 	
-//	@OneToMany(mappedBy="location")
-//	private List<Community> communities;
-//	
-//	@OneToMany(mappedBy="location")
-//	private List<Post> posts;
-//	
-//	@OneToMany(mappedBy="location")
-//	private List<CommunityEvent> communityEvents;
-//	
-//	@OneToMany(mappedBy="location")
-//	private List<User> users;
+	@OneToMany(mappedBy="location")
+	private List<Community> communities;
 	
+	@OneToMany(mappedBy="location")
+	private List<Post> posts;
 	
+	@OneToMany(mappedBy="location")
+	private List<CommunityEvent> communityEvents;
 	
-	
-	
+	@OneToMany(mappedBy="location")
+	private List<User> users;
 	
 	
 	Location(){
@@ -89,6 +81,38 @@ public class Location {
 		this.zipcode = zipcode;
 	}
 
+	public List<Community> getCommunities() {
+		return communities;
+	}
+
+	public void setCommunities(List<Community> communities) {
+		this.communities = communities;
+	}
+
+	public List<Post> getPosts() {
+		return posts;
+	}
+
+	public void setPosts(List<Post> posts) {
+		this.posts = posts;
+	}
+
+	public List<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<User> users) {
+		this.users = users;
+	}
+
+	public List<CommunityEvent> getCommunityEvents() {
+		return communityEvents;
+	}
+
+	public void setCommunityEvents(List<CommunityEvent> communityEvents) {
+		this.communityEvents = communityEvents;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -96,12 +120,15 @@ public class Location {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		Location other = (Location) obj;
 		return id == other.id;
 	}
