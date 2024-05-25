@@ -40,6 +40,7 @@ public class Community {
 	@Column(name="created_at")
 	private LocalDateTime createdAt;
 	
+<<<<<<< HEAD
 //	@ManyToMany
 //	@JoinTable (name="user_has_communty", joinColumns = @JoinColumn(name= "community_id"), inverseJoinColumns= @JoinColumn(name="user_id"))
 //	private List<User> communityMembers;
@@ -56,6 +57,27 @@ public class Community {
 //	
 //	@OneToMany(mappedBy="community")
 //	private List<Post> posts;
+=======
+	
+	@ManyToMany
+	@JoinTable (name="user_has_community", joinColumns = @JoinColumn(name= "community_id"), inverseJoinColumns= @JoinColumn(name="user_id"))
+	private List<User> communityMembers;
+
+	@OneToMany(mappedBy="community")
+	private List<CommunityEvent> communityEvents;
+
+	@ManyToOne
+	@JoinColumn (name= "location_id")
+	private Location location; 
+	
+	@ManyToMany(mappedBy = "communities") 
+	private List<Skill> skills;
+	
+	@OneToMany(mappedBy="community")
+	private List<Post> posts;
+	
+	//------------------------------------------------------------------
+>>>>>>> da6af59a64c8467303f492fd793e41e0c5127088
 	
 	public Community() {
 		
