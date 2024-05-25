@@ -49,12 +49,19 @@ public class CommunityController {
 		
 		return community;
 	}
+	
+	
+	
+	
+	
+	
+	
 
 //	@PostMapping("communities")
 //	public Community create(@RequestBody Community community) {
 //		return commService.create(community);
 //	}
-//	
+	
 //	@PutMapping("communities/{id}")
 //	public Community update(@PathVariable("id") int id, @RequestBody Community community) {
 //		return commService.update(community, id);

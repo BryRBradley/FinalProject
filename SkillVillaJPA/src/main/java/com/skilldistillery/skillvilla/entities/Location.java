@@ -42,6 +42,7 @@ public class Location {
 	@OneToMany(mappedBy="location")
 	private List<User> users;
 	
+	//----------------------------------------------------------------
 	
 	Location(){
 		

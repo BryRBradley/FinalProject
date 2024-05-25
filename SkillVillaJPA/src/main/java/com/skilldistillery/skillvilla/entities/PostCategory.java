@@ -26,6 +26,8 @@ public class PostCategory {
 	@OneToMany(mappedBy="postCategory")
 	private List<Post> posts;
 	
+	//-----------------------------------------------------------------
+	
 	PostCategory(){
 		
 	}

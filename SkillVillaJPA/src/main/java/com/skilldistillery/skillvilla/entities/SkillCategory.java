@@ -26,6 +26,8 @@ public class SkillCategory {
 	@OneToMany(mappedBy="category")
 	private List<Skill> skills;
 	
+	//-------------------------------------------------------------------
+	
 	private SkillCategory(){
 		
 	}

@@ -10,7 +10,7 @@ public interface PostService {
 	
 	Post show(int postId, int communityId);
 	
-	Post create(Post post);
+	Post create(String string, int communityId, Post post);
 	
 	Post update(int id, Post post);
 	

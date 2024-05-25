@@ -4,6 +4,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -24,9 +27,11 @@ public class Post {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
+	@CreationTimestamp
 	@Column(name="created_at")
 	private LocalDateTime createdAt;
 
+	@UpdateTimestamp
 	@Column(name="updated_at")
 	private LocalDateTime updatedAt;
 	
@@ -59,7 +64,7 @@ public class Post {
 	@OneToMany(mappedBy="post")
 	private List <Comment> comments;
 	
-	
+	//-----------------------------------------------------------------
 	
 	public Post () {	
 	}
