@@ -1,4 +1,4 @@
-<p>community works!</p>
+
 
 
 <div class="communities-container " *ngIf="!selected">
@@ -22,6 +22,10 @@
         </div>
         <div>
             <h1>{{selected.name}}</h1>
+            <p>{{selected.description}}
+                <br>
+            {{selected.discordUrl}} </p>
+            
 
         </div>
     </div>
