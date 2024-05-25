@@ -40,6 +40,8 @@ public class Community {
 	@Column(name="created_at")
 	private LocalDateTime createdAt;
 	
+
+
 	
 	@ManyToMany
 	@JoinTable (name="user_has_community", joinColumns = @JoinColumn(name= "community_id"), inverseJoinColumns= @JoinColumn(name="user_id"))
@@ -64,8 +66,6 @@ public class Community {
 		
 	}
 	
-	//------------------------------------------------------------------
-
 	public int getId() {
 		return id;
 	}
@@ -165,7 +165,7 @@ public class Community {
 	}
 
 	public List<Post> getPosts() {
-		return this.posts;
+		return posts;
 	}
 
 	public void setPosts(List<Post> posts) {
@@ -179,15 +179,12 @@ public class Community {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj) {
+		if (this == obj)
 			return true;
-		}
-		if (obj == null) {
+		if (obj == null)
 			return false;
-		}
-		if (getClass() != obj.getClass()) {
+		if (getClass() != obj.getClass())
 			return false;
-		}
 		Community other = (Community) obj;
 		return id == other.id;
 	}

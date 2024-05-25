@@ -31,7 +31,7 @@ class CommunityTest {
 	}
 
 	@BeforeEach
-	void setUp() throws Exception {
+	void setUp() throws Exception {  
 		em = emf.createEntityManager();
 		community = em.find(Community.class, 1);
 	}

@@ -1,0 +1,42 @@
+<p>community works!</p>
+
+
+<div class="communities-container " *ngIf="!selected">
+    <div class="community-card" *ngFor="let community of communities" (click)="displayCommunity(community)">
+        <div class="img-container">
+            <img [src]="community.imageUrl">
+        </div>
+        <h5>{{community.name}}</h5>
+        <p>{{community.description}}</p>
+        <p class="mt-auto">Houston, Tx</p>
+
+    </div>
+</div>
+
+
+<div id="communityPage" *ngIf="selected">
+
+    <div class="head">
+        <div class="img-container">
+            <img [src]="selected.imageUrl" alt="">
+        </div>
+        <div>
+            <h1>{{selected.name}}</h1>
+
+        </div>
+    </div>
+    <div >
+
+    </div>
+
+
+
+
+
+
+
+
+
+    
+    <button (click)="selected = null">Back</button>
+</div>
