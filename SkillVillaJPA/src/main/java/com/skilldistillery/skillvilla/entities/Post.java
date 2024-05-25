@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -45,6 +46,7 @@ public class Post {
 	@JoinColumn(name="community_id")
 	private Community community;
 	
+	@JsonIgnoreProperties({"password"})
 	@ManyToOne
 	@JoinColumn(name="user_id")
 	private User user;

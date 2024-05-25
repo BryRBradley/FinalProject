@@ -8,7 +8,7 @@ public interface PostService {
 
 	List<Post> findAll();
 	
-	Post show(int id);
+	Post show(int postId, int communityId);
 	
 	Post create(Post post);
 	

@@ -23,8 +23,8 @@ public class PostServiceImpl implements PostService{
 	}
 
 	@Override
-	public Post show(int id) {
-		return postRepo.findById(id);
+	public Post show(int postId, int CommunityId) {
+		return postRepo.findByIdAndCommunityId(postId, CommunityId);
 	}
 
 	@Override
