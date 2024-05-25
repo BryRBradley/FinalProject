@@ -1,5 +1,6 @@
 package com.skilldistillery.skillvilla.Controllers;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -14,6 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.skilldistillery.skillvilla.entities.Community;
 import com.skilldistillery.skillvilla.services.CommunityService;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
 @RestController
 @CrossOrigin({ "*", "http://localhost/" })
 public class CommunityController {
@@ -26,7 +30,7 @@ public class CommunityController {
 	}
 
 	@GetMapping("communities")
-	public List<Community> findAll(){
+	public List<Community> findAll(HttpServletRequest req, HttpServletResponse res, Principal principal){
 		return commService.findAll();
 	}
 
