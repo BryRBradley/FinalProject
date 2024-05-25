@@ -40,6 +40,7 @@ public class Post {
 	@JoinColumn(name="post_category_id")
 	private PostCategory postCategory;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="community_id")
 	private Community community;
