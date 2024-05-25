@@ -36,6 +36,7 @@ public class SecurityConfig {
           
             .requestMatchers(HttpMethod.OPTIONS, "/api/**").permitAll() // For CORS, the preflight request
             .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()     // will hit the OPTIONS on the route
+            .requestMatchers(HttpMethod.GET, "/api/communities").permitAll()
             .requestMatchers("/api/**").authenticated() // Requests for our REST API must be authorized.
             .anyRequest().permitAll());                 // All other requests are allowed without authentication.
 

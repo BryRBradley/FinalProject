@@ -2,9 +2,12 @@ package com.skilldistillery.skillvilla.services;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.skilldistillery.skillvilla.Repositories.CommunityRepository;
 import com.skilldistillery.skillvilla.entities.Community;
 
+@Service
 public class CommunityServiceImpl implements CommunityService{
 	
 	private CommunityRepository commRepo;

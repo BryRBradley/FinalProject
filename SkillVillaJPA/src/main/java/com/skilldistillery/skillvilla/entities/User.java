@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -46,30 +48,36 @@ public class User {
 	@Column(name="updated_at")
 	private LocalDateTime updatedAt;
 	
-	
+	@JsonIgnore
 	@OneToMany(mappedBy="user")
 	private List <CommunityEvent> comEvents;
 
-	
+	@JsonIgnore
 	@OneToMany(mappedBy="user")
 	private List <Comment> comments;
 	
+	@JsonIgnore
 	@ManyToMany(mappedBy="communityMembers")
 	private List <Community> communities;
 	
+	@JsonIgnore
 	@ManyToMany(mappedBy="users")
 	private List <CommunityEvent> communityEvents;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="user")
 	private List<Post> posts;
+	
 	
 	@ManyToOne
 	@JoinColumn(name="location_id")
 	private Location location;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="user")
 	private List<CommunityEvent> postedEvent;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "user")
 	private List<UserSkill> skills;
 	

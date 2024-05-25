@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -42,11 +44,12 @@ public class Community {
 	
 
 
-	
+	@JsonIgnore
 	@ManyToMany
 	@JoinTable (name="user_has_community", joinColumns = @JoinColumn(name= "community_id"), inverseJoinColumns= @JoinColumn(name="user_id"))
 	private List<User> communityMembers;
 
+	@JsonIgnore
 	@OneToMany(mappedBy="community")
 	private List<CommunityEvent> communityEvents;
 
@@ -179,12 +182,15 @@ public class Community {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		Community other = (Community) obj;
 		return id == other.id;
 	}
