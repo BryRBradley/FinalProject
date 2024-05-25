@@ -50,7 +50,7 @@ export class CommunityComponent implements OnInit {
             } else (
               console.log(this.selected)
               
-              //this.showComunity(CommunityId)
+              
             )
           }
         }

@@ -73,7 +73,7 @@ public class CommunityEvent {
 	public void setLocation(Location location) {
 		this.location = location;
 	}
-
+ 
 	public CommunityEvent() {
 		
 	}
