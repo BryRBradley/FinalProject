@@ -1,6 +1,7 @@
 package com.skilldistillery.skillvilla.Controllers;
 
 import java.security.Principal;
+import java.util.List;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,7 +31,21 @@ private PostService postService;
 	this.postService = postService;
 }
 
-
+	@GetMapping("communities/{communityId}/posts")
+	public List<Post> index(
+			HttpServletRequest req, 
+			HttpServletResponse res,
+			@PathVariable("communityId") int communityId
+			){
+		
+		List<Post> posts = postService.index(communityId);
+		
+		if (posts.isEmpty()) {
+			res.setStatus(204);
+		}
+		
+		return posts;
+	}
 
 	@GetMapping("communities/{communityId}/posts/{postId}")
 	public Post show(
@@ -49,7 +64,7 @@ private PostService postService;
 		return post;
 	}
 
-	@PostMapping("communities/{communityId}")
+	@PostMapping("communities/{communityId}/posts")
 	public Post create(
 			HttpServletRequest req, 
 			HttpServletResponse res, 
