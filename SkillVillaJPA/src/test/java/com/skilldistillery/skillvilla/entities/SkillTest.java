@@ -61,4 +61,13 @@ class SkillTest {
 		assertTrue(skill.getCommunities().size() > 0);
 		assertTrue(skill.getCommunities().size() >= 1);
 	}
+	
+	@Test
+	void skill_MTM_userSkill() {
+		assertNotNull(skill);
+		assertNotNull(skill.getUsers());
+		assertTrue(skill.getUsers().size() > 0);
+		assertTrue(skill.getUsers().size() >= 1);
+		assertEquals("Expert", skill.getUsers().get(0).getLevel());
+	}
 }

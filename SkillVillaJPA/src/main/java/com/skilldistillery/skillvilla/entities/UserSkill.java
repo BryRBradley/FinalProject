@@ -20,7 +20,7 @@ public class UserSkill {
 	
 	@ManyToOne
 	@JoinColumn(name = "user_id")
-	@MapsId(value = "userID")
+	@MapsId(value = "userId")
 	private User user;
 	
 	@ManyToOne
