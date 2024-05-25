@@ -19,6 +19,7 @@ import jakarta.persistence.Table;
 @Table(name = "community_event")
 public class CommunityEvent {
 
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;

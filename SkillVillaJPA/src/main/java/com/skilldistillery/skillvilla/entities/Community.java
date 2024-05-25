@@ -40,6 +40,7 @@ public class Community {
 	@Column(name="created_at")
 	private LocalDateTime createdAt;
 	
+	
 	@ManyToMany
 	@JoinTable (name="user_has_community", joinColumns = @JoinColumn(name= "community_id"), inverseJoinColumns= @JoinColumn(name="user_id"))
 	private List<User> communityMembers;
