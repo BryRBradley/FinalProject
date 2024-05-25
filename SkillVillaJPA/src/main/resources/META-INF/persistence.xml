@@ -7,7 +7,15 @@
 
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
-
+		<class>com.skilldistillery.skillvilla.entities.Comment</class>
+		<class>com.skilldistillery.skillvilla.entities.Community</class>
+		<class>com.skilldistillery.skillvilla.entities.CommunityEvent</class>
+		<class>com.skilldistillery.skillvilla.entities.Location</class>
+		<class>com.skilldistillery.skillvilla.entities.Post</class>
+		<class>com.skilldistillery.skillvilla.entities.PostCategory</class>
+		<class>com.skilldistillery.skillvilla.entities.Skill</class>
+		<class>com.skilldistillery.skillvilla.entities.SkillCategory</class>
+		<class>com.skilldistillery.skillvilla.entities.User</class>
 
 		<properties>
 			<property name="jakarta.persistence.jdbc.url"

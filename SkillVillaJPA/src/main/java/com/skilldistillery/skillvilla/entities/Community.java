@@ -36,8 +36,10 @@ public class Community {
 	@Column(name="image_url")
 	private String imageUrl;
 	
+	
 	@Column(name="created_at")
 	private LocalDateTime createdAt;
+	
 	
 	@ManyToMany
 	@JoinTable (name="user_has_community", joinColumns = @JoinColumn(name= "community_id"), inverseJoinColumns= @JoinColumn(name="user_id"))

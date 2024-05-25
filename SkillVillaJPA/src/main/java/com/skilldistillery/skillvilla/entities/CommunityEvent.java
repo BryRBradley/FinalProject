@@ -1,6 +1,7 @@
 package com.skilldistillery.skillvilla.entities;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
 import jakarta.persistence.Column;
@@ -9,6 +10,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -16,6 +19,7 @@ import jakarta.persistence.Table;
 @Table(name = "community_event")
 public class CommunityEvent {
 
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
@@ -48,20 +52,28 @@ public class CommunityEvent {
 	@JoinColumn(name = "community_id")
 	private Community community;
 	
-//	 @ManyToMany
-//	 @JoinTable(name="user_has_community_event", joinColumns = @JoinColumn(name="community_event_id"), inverseJoinColumns = @JoinColumn(name="user_id"))
-//	 private List <User> users;
-//	
+	 @ManyToMany
+	 @JoinTable(name="user_has_community_event", joinColumns = @JoinColumn(name="community_event_id"), inverseJoinColumns = @JoinColumn(name="user_id"))
+	 private List <User> users;
+	
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
 	
-//	@ManyToOne
-//	@JoinColumn(name = "location_id")
-//	private Location location;
+	@ManyToOne
+	@JoinColumn(name = "location_id")
+	private Location location;
 	
 	
 	
+	public Location getLocation() {
+		return location;
+	}
+
+	public void setLocation(Location location) {
+		this.location = location;
+	}
+
 	public CommunityEvent() {
 		
 	}
@@ -161,6 +173,14 @@ public class CommunityEvent {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public List<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<User> users) {
+		this.users = users;
 	}
 
 	@Override
