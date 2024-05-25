@@ -2,9 +2,12 @@ package com.skilldistillery.skillvilla.services;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.skilldistillery.skillvilla.Repositories.UserRepository;
 import com.skilldistillery.skillvilla.entities.User;
 
+@Service
 public class UserServiceImpl implements UserService{
 	
 	private UserRepository userRepo;

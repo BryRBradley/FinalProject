@@ -3,6 +3,8 @@ package com.skilldistillery.skillvilla.entities;
 import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -24,18 +26,23 @@ public class Location {
 	
 	private int zipcode;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="location")
 	private List<Community> communities;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="location")
 	private List<Post> posts;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="location")
 	private List<CommunityEvent> communityEvents;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="location")
 	private List<User> users;
 	
+	//----------------------------------------------------------------
 	
 	Location(){
 		

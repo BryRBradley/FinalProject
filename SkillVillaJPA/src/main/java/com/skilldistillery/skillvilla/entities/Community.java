@@ -4,6 +4,11 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,52 +25,52 @@ public class Community {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	private String name;
-	
-	@Column(name="updated_at")
-	private LocalDateTime updatedAt;
-	
+
 	private boolean enabled;
-	
+
 	private String description;
-	
-	@Column(name="discord_url")
+
+	@Column(name = "discord_url")
 	private String discordUrl;
-	
-	@Column(name="image_url")
+
+	@Column(name = "image_url")
 	private String imageUrl;
-	
-	
-	@Column(name="created_at")
+
+	@CreationTimestamp
+	@Column(name = "created_at")
 	private LocalDateTime createdAt;
-	
 
+	@UpdateTimestamp
+	@Column(name = "updated_at")
+	private LocalDateTime updatedAt;
 
-	
+	@JsonIgnore
 	@ManyToMany
-	@JoinTable (name="user_has_community", joinColumns = @JoinColumn(name= "community_id"), inverseJoinColumns= @JoinColumn(name="user_id"))
+	@JoinTable(name = "user_has_community", joinColumns = @JoinColumn(name = "community_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
 	private List<User> communityMembers;
 
-	@OneToMany(mappedBy="community")
+	@JsonIgnore
+	@OneToMany(mappedBy = "community")
 	private List<CommunityEvent> communityEvents;
 
 	@ManyToOne
-	@JoinColumn (name= "location_id")
-	private Location location; 
-	
-	@ManyToMany(mappedBy = "communities") 
+	@JoinColumn(name = "location_id")
+	private Location location;
+
+	@ManyToMany(mappedBy = "communities")
 	private List<Skill> skills;
-	
-	@OneToMany(mappedBy="community")
+
+	@OneToMany(mappedBy = "community")
 	private List<Post> posts;
-	
-	//------------------------------------------------------------------
-	
+
+	// ------------------------------------------------------------------
+
 	public Community() {
-		
+
 	}
-	
+
 	public int getId() {
 		return id;
 	}
@@ -130,8 +135,6 @@ public class Community {
 		this.createdAt = createdAt;
 	}
 
-	
-	
 	public List<User> getCommunityMembers() {
 		return communityMembers;
 	}
@@ -179,12 +182,15 @@ public class Community {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		Community other = (Community) obj;
 		return id == other.id;
 	}
@@ -196,5 +202,4 @@ public class Community {
 				+ ", createdAt=" + createdAt + "]";
 	}
 
-	
 }

@@ -3,6 +3,8 @@ package com.skilldistillery.skillvilla.entities;
 import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,8 +22,11 @@ public class SkillCategory {
 	
 	private String name;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="category")
 	private List<Skill> skills;
+	
+	//-------------------------------------------------------------------
 	
 	private SkillCategory(){
 		
@@ -45,7 +50,7 @@ public class SkillCategory {
 	
 	
 	
-
+	
 	public List<Skill> getSkills() {
 		return skills;
 	}
@@ -61,12 +66,15 @@ public class SkillCategory {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		SkillCategory other = (SkillCategory) obj;
 		return id == other.id;
 	}
