@@ -19,7 +19,14 @@ import com.skilldistillery.skillvilla.services.PostService;
 public class PostController {
 	
 private PostService postService;
+
 	
+	
+	public PostController(PostService postService) {
+	super();
+	this.postService = postService;
+}
+
 	@GetMapping("posts")
 	public List<Post> findAll(){
 		return postService.findAll();

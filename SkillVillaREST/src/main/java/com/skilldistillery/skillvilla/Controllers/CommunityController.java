@@ -20,6 +20,11 @@ public class CommunityController {
 	
 	private CommunityService commService;
 	
+	public CommunityController(CommunityService commService) {
+		super();
+		this.commService = commService;
+	}
+
 	@GetMapping("communities")
 	public List<Community> findAll(){
 		return commService.findAll();

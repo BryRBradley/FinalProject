@@ -2,9 +2,12 @@ package com.skilldistillery.skillvilla.services;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.skilldistillery.skillvilla.Repositories.PostRepository;
 import com.skilldistillery.skillvilla.entities.Post;
 
+@Service
 public class PostServiceImpl implements PostService{
 
 	private PostRepository postRepo;
