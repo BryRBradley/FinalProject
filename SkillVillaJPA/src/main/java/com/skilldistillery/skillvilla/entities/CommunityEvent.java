@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -19,53 +21,51 @@ import jakarta.persistence.Table;
 @Table(name = "community_event")
 public class CommunityEvent {
 
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	private String title;
-	
-	@Column(name="start_date_time")
+
+	@Column(name = "start_date_time")
 	private LocalDateTime startDateTime;
-	
-	@Column(name="end_date_time")
+
+	@Column(name = "end_date_time")
 	private LocalDateTime endDateTime;
-	
+
 	private String description;
-	
-	@Column(name="image_url")
+
+	@Column(name = "image_url")
 	private String imageUrl;
-	
+
 	private boolean enabled;
-	
-	@Column(name="updated_at")
+
+	@Column(name = "updated_at")
 	private LocalDateTime updatedAt;
-	
-	@Column(name="created_at")
+
+	@Column(name = "created_at")
 	private LocalDateTime createdAt;
-	
-	@Column(name="discord_url")
+
+	@Column(name = "discord_url")
 	private String discordUrl;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "community_id")
 	private Community community;
-	
-	 @ManyToMany
-	 @JoinTable(name="user_has_community_event", joinColumns = @JoinColumn(name="community_event_id"), inverseJoinColumns = @JoinColumn(name="user_id"))
-	 private List <User> users;
-	
+
+	@JsonIgnore
+	@ManyToMany
+	@JoinTable(name = "user_has_community_event", joinColumns = @JoinColumn(name = "community_event_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
+	private List<User> users;
+
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "location_id")
 	private Location location;
-	
-	
-	
+
 	public Location getLocation() {
 		return location;
 	}
@@ -73,11 +73,11 @@ public class CommunityEvent {
 	public void setLocation(Location location) {
 		this.location = location;
 	}
- 
+
 	public CommunityEvent() {
-		
+
 	}
-	
+
 	public int getId() {
 		return id;
 	}
@@ -158,7 +158,6 @@ public class CommunityEvent {
 		this.discordUrl = discordUrl;
 	}
 
-	
 	public Community getCommunity() {
 		return community;
 	}
@@ -202,7 +201,6 @@ public class CommunityEvent {
 		CommunityEvent other = (CommunityEvent) obj;
 		return id == other.id;
 	}
-	
 
 	@Override
 	public String toString() {
@@ -210,6 +208,5 @@ public class CommunityEvent {
 				+ endDateTime + ", description=" + description + ", imageUrl=" + imageUrl + ", enabled=" + enabled
 				+ ", updatedAt=" + updatedAt + ", createdAt=" + createdAt + ", discordUrl=" + discordUrl + "]";
 	}
-	
-	
+
 }

@@ -9,19 +9,29 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.skillvilla.entities.Community;
 import com.skilldistillery.skillvilla.services.CommunityService;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
 @RestController
+@RequestMapping("api")
 @CrossOrigin({ "*", "http://localhost/" })
 public class CommunityController {
 	
 	private CommunityService commService;
 	
+	public CommunityController(CommunityService commService) {
+		super();
+		this.commService = commService;
+	}
+
 	@GetMapping("communities")
-	public List<Community> findAll(){
+	public List<Community> findAll(HttpServletRequest req, HttpServletResponse res){
 		return commService.findAll();
 	}
 

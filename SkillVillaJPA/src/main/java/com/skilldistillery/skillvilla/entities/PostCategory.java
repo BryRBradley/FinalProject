@@ -3,6 +3,8 @@ package com.skilldistillery.skillvilla.entities;
 import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,6 +22,7 @@ public class PostCategory {
 	
 	private String name;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="postCategory")
 	private List<Post> posts;
 	

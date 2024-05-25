@@ -3,6 +3,8 @@ package com.skilldistillery.skillvilla.entities;
 import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -28,10 +30,12 @@ public class Skill {
 	@JoinColumn(name = "category_id")
 	private SkillCategory category;
 	
+	@JsonIgnore
 	@ManyToMany
 	@JoinTable (name="community_has_skill", joinColumns = @JoinColumn(name= "skill_id"), inverseJoinColumns= @JoinColumn(name="community_id"))
 	private List<Community> communities;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "skill")
 	private List<UserSkill> users;
 	
