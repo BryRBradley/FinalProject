@@ -6,7 +6,7 @@ import com.skilldistillery.skillvilla.entities.Post;
 
 public interface PostService {
 
-	List<Post> findAll();
+	
 	
 	Post show(int postId, int communityId);
 	
@@ -15,4 +15,6 @@ public interface PostService {
 	Post update(int id, Post post);
 	
 	void delete(int id);
+
+	List<Post> index(int communityId);
 }

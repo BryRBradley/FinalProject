@@ -25,8 +25,8 @@ public class PostServiceImpl implements PostService{
 	}
 
 	@Override
-	public List<Post> findAll() {
-		return postRepo.findAll();
+	public List<Post> index(int comunityId) {
+		return postRepo.findAllByCommunityId(comunityId);
 	}
 
 	@Override
