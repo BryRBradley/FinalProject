@@ -1,53 +1,49 @@
 import { HttpClient } from '@angular/common/http';
-import { User } from './../models/user';
 import { Injectable } from '@angular/core';
 import { AuthService } from './auth.service';
+import { Skill } from '../models/skill';
 import { Observable, catchError, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class SkillService {
 
-  users: User[] = []
-  
+  skills: Skill[] = []
+
   private baseUrl = 'http://localhost:8085/'; // adjust port to match server
-  private url = this.baseUrl + 'api/users';
-
-
-
+  private url = this.baseUrl + 'api/skills';
+  
   constructor(private http: HttpClient, private authService: AuthService) { }
 
-  index(): Observable<User[]> {
-    return this.http.get<User[]>(this.url, this.getHttpOptions()).pipe(
+  index(): Observable<Skill[]> {
+    return this.http.get<Skill[]>(this.url, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(
-          () => new Error('userService.index(): error retrieving user: ' + err)
+          () => new Error('skillService.index(): error retrieving Skill: ' + err)
         );
       })
     );
   }
 
-
-
-  create(users: User): Observable<User> {
-    return this.http.post<User>(this.url, users, this.getHttpOptions()).pipe(
-      catchError((err: any) => {
+  create(skills: Skill): Observable<Skill> {
+    return this.http.post<Skill>(this.url, skills, this.getHttpOptions()).pipe(
+      catchError((err: any) =>{
         console.log(err);
         return throwError(
-          () => new Error('userService.create(): error retrieving user: ' + err)
+          () => new Error('skillService.create(): error creating skill' + err)
         );
       })
     );
   }
 
-  update(users: User, id:number): Observable<User> {
-    return this.http.put<User>(this.url + "/" + id, users, this.getHttpOptions()).pipe(
+  update(skills: Skill, id: number): Observable<Skill>{
+    return this.http.put<Skill>(this.url + "/" + id, skills, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(
-          () => new Error('users.create(): error retrieving user: ' + err)
+          () => new Error('skillService.update(): error updating skill: ' + err)
         );
       })
     );
@@ -58,7 +54,7 @@ export class UserService {
       catchError((error: any) => {
         console.log(error);
         return throwError(
-          () => new Error('userService.delete(): error deleting user' + error)
+          () => new Error('skillService.delete(): error deleting skill' + error)
         );
       })
     );
@@ -74,4 +70,11 @@ export class UserService {
     };
     return options;
   }
+
+
+
+
+
+
+
 }

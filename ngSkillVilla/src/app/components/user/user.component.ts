@@ -87,7 +87,7 @@ export class UserComponent {
     });
   }
 
-  deleteUser(id: number) {
+  delete(id: number) {
     this.userService.destroy(id).subscribe({
       next: () => {
       this.reload();
