@@ -3,6 +3,9 @@ package com.skilldistillery.skillvilla.entities;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -62,11 +65,13 @@ public class Comment {
 	public void setId(int id) {
 		this.id = id;
 	}
-
+	
+	@CreationTimestamp
 	public LocalDateTime getUpdatedAt() {
 		return updatedAt;
 	}
 
+	@UpdateTimestamp
 	public void setUpdatedAt(LocalDateTime updatedAt) {
 		this.updatedAt = updatedAt;
 	}
