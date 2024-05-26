@@ -4,6 +4,7 @@ import { LoginComponent } from '../login/login.component';
 import { RegisterComponent } from '../register/register.component';
 import { RouterLink } from '@angular/router';
 import { CommunityComponent } from '../community/community.component';
+import { ProfileComponent } from '../profile/profile.component';
 
 @Component({
   selector: 'app-navigation-bar',
@@ -13,7 +14,8 @@ import { CommunityComponent } from '../community/community.component';
     CommonModule,
     LoginComponent,
     RegisterComponent,
-    CommunityComponent
+    CommunityComponent,
+    ProfileComponent
   ],
   templateUrl: './navigation-bar.component.html',
   styleUrl: './navigation-bar.component.css'

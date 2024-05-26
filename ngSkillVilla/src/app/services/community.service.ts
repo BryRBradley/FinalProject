@@ -10,7 +10,7 @@ import { Observable, catchError, throwError } from 'rxjs';
 export class CommunityService {
 
   
-    communities: Community[] = []
+    communities: Community[] = [];
   
     private baseUrl = 'http://localhost:8085/'; // adjust port to match server
     private url = this.baseUrl + 'api/communities';
@@ -24,7 +24,7 @@ export class CommunityService {
         catchError((err: any) => {
           console.log(err);
           return throwError(
-            () => new Error('commService.index(): error retrieving Community: ' + err)
+            () => new Error('commService.index(): error retrieving communities: ' + err)
           );
         })
       );
@@ -38,7 +38,7 @@ export class CommunityService {
         catchError((err: any) => {
           console.log(err);
           return throwError(
-            () => new Error('commService.create(): error retrieving todo: ' + err)
+            () => new Error('commService.create(): error creating community: ' + err)
           );
         })
       );
@@ -49,7 +49,7 @@ export class CommunityService {
         catchError((err: any) => {
           console.log(err);
           return throwError(
-            () => new Error('communities.create(): error retrieving community: ' + err)
+            () => new Error('communities.update(): error updating community: ' + err)
           );
         })
       );

@@ -85,6 +85,9 @@ export class PostComponent {
       next: (post) => {
         this.reload();
         this.newPost = new Post();
+      },
+      error: (err) => {
+        console.log("something went wrong adding post")
       }
     })
   }
@@ -96,7 +99,8 @@ export class PostComponent {
         this.selected = null;
         this.editPost = null;
       },
-      error: () => {}
+      error: (err) => {
+        console.log("something went wrong updating post")}
     });
   }
 
