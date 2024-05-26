@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.skilldistillery.skillvilla.entities.Comment;
 import com.skilldistillery.skillvilla.entities.Post;
+import com.skilldistillery.skillvilla.services.CommentService;
 import com.skilldistillery.skillvilla.services.PostService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -21,62 +23,51 @@ import jakarta.servlet.http.HttpServletResponse;
 @RequestMapping("api")
 @CrossOrigin({ "*", "http://localhost/" })
 public class PostController {
-	
-private PostService postService;
 
-	
-	
-	public PostController(PostService postService) {
-	super();
-	this.postService = postService;
-}
+	private PostService postService;
+	private CommentService commentService;
+
+	public PostController(PostService postService,CommentService commentService) {
+		super();
+		this.postService = postService;
+		this.commentService = commentService;
+	}
 
 	@GetMapping("communities/{communityId}/posts")
-	public List<Post> index(
-			HttpServletRequest req, 
-			HttpServletResponse res,
-			@PathVariable("communityId") int communityId
-			){
-		
+	public List<Post> index(HttpServletRequest req, HttpServletResponse res,
+			@PathVariable("communityId") int communityId) {
+
 		List<Post> posts = postService.index(communityId);
-		
+
 		if (posts.isEmpty()) {
 			res.setStatus(204);
 		}
-		
+
 		return posts;
 	}
 
 	@GetMapping("communities/{communityId}/posts/{postId}")
-	public Post show(
-			HttpServletRequest req, 
-			HttpServletResponse res,
-			@PathVariable("communityId") int communityId, 
+	public Post show(HttpServletRequest req, HttpServletResponse res, @PathVariable("communityId") int communityId,
 			@PathVariable("communityId") int postId) {
-		
-		
+
 		Post post = postService.show(postId, communityId);
-		
+
 		if (post == null) {
 			res.setStatus(404);
 		}
-		
+
 		return post;
 	}
 
 	@PostMapping("communities/{communityId}/posts")
-	public Post create(
-			HttpServletRequest req, 
-			HttpServletResponse res, 
-			Principal principal,
-			@PathVariable("communityId") int communityId,
-			@RequestBody Post post) {
+	public Post createPost(HttpServletRequest req, HttpServletResponse res, Principal principal,
+			@PathVariable("communityId") int communityId, @RequestBody Post post) {
 		System.out.println("conroller" + post);
 		Post newPost = null;
-		
+
 		try {
 			newPost = postService.create(principal.getName(), communityId, post);
-			
+
 			if (newPost != null) {
 				res.setStatus(201);
 				res.setHeader("location", req.getRequestURL().append("/posts/").append(newPost.getId()).toString());
@@ -88,10 +79,33 @@ private PostService postService;
 		}
 
 		return newPost;
+
+	}
+
+	@PostMapping("communities/{communityId}/posts/{postId}")
+	public Comment createCommentOnPost(HttpServletRequest req, HttpServletResponse res, Principal principal,
+			@PathVariable("communityId") int communityId, @PathVariable("postId") int postId,
+			@RequestBody Comment comment) {
 		
+		Comment newComment = null;
+
+		try {
+			newComment = commentService.createOnPost(principal.getName(), communityId, postId, comment);
+
+			if (newComment != null) {
+				res.setStatus(201);
+				res.setHeader("location", req.getRequestURL().append("/posts/comments/").append(newComment.getId()).toString());
+			} else {
+				res.setStatus(401);
+			}
+		} catch (Exception e) {
+			res.setStatus(400);
+		}
+
+		return newComment;
 		
 	}
-	
+
 //	@PutMapping("posts/{id}")
 //	public Post update(@PathVariable("id") int id, @RequestBody Post post) {
 //		return postService.update(id, post);
