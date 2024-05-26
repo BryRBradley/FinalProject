@@ -70,9 +70,35 @@ ngOnInit(): void {
       next: (skill) => {
         this.reload();
         this.newSkill = new Skill();
-      }
+      },
+      error: (err) => {
+        console.log("something went wrong adding skill")}
     })
   }
 
+  updateSkill(skill : Skill) {
+    this.skillService.update(skill, skill.id).subscribe({
+      next: (skill) => {
+        this.reload();
+        this.selected = null;
+        this.editSkill = null;
+      },
+      error: (err) => {
+        console.log("something went wrong updating skill")}
+    });
+  }
+
+  setUpdatedSkill() {
+    this.editSkill = Object.assign({}, this.selected);
+  }
+
+  delete(id: number) {
+    this.skillService.destroy(id).subscribe({
+      next: () => {
+        this.reload();
+      },
+      error: () => {}
+    });
+  }
 
 }

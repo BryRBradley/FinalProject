@@ -4,7 +4,11 @@ import { LoginComponent } from '../login/login.component';
 import { RegisterComponent } from '../register/register.component';
 import { Router, RouterLink } from '@angular/router';
 import { CommunityComponent } from '../community/community.component';
+<<<<<<< HEAD
+import { ProfileComponent } from '../profile/profile.component';
+=======
 import { AuthService } from '../../services/auth.service';
+>>>>>>> f1b62df0a2d201841e484c0ec822ca974df58264
 
 @Component({
   selector: 'app-navigation-bar',
@@ -14,7 +18,8 @@ import { AuthService } from '../../services/auth.service';
     CommonModule,
     LoginComponent,
     RegisterComponent,
-    CommunityComponent
+    CommunityComponent,
+    ProfileComponent
   ],
   templateUrl: './navigation-bar.component.html',
   styleUrl: './navigation-bar.component.css'

@@ -5,7 +5,7 @@ export class Category {
 
     constructor(
         id: number = 0,
-        name: string
+        name: string = ""
     ) {
         this.id = id;
         this.name = name;

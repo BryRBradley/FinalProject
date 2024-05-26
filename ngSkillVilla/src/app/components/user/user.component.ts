@@ -72,7 +72,9 @@ export class UserComponent {
       next: (user) => {
         this.reload();
         this.newUser = new User();
-      }
+      },
+      error: (err) => {
+        console.log("something went wrong adding user")}
     })
   }
   
@@ -83,11 +85,16 @@ export class UserComponent {
         this.selected = null;
         this.editUser = null;
       },
-      error: () => {}
+      error: (err) => {
+        console.log("something went wrong updating user")}
     });
   }
 
-  delete(id: number) {
+  setUpdatedUser() {
+    this.editUser = Object.assign({}, this.selected);
+  }
+
+  deleteUser(id: number) {
     this.userService.destroy(id).subscribe({
       next: () => {
       this.reload();
