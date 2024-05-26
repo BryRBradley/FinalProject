@@ -65,7 +65,6 @@ export class PostService {
     );
   }
 
-
   getHttpOptions() {
     let options = {
       headers: {
