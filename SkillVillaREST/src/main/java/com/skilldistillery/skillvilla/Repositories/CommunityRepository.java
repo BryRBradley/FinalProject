@@ -7,5 +7,5 @@ import com.skilldistillery.skillvilla.entities.Community;
 
 public interface CommunityRepository extends JpaRepository<Community, Integer> {
 
-	Community findById(int id);
+	
 }

@@ -43,7 +43,8 @@ public class PostServiceImpl implements PostService{
 		User user = userRepo.findByUsername(username);
 		
 		if (user != null) {
-			post.setCommunity(commRepo.findById(communityId));
+			
+			post.setCommunity(commRepo.findById(communityId).get());
 			post.setUser(user);
 			System.out.println(post);
 			return postRepo.saveAndFlush(post);

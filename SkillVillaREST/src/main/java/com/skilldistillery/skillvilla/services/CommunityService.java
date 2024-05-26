@@ -10,12 +10,14 @@ public interface CommunityService {
 	
 	Community show(int id);
 
-	Community create(Community community);
-
-	Community update(Community community, int id);
-	
 	void delete(int id);
 
 	Community create(String name, Community community);
+
+	Community update(String username, int communityId, Community community);
+
+	
+
+	
 
 }
