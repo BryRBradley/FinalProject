@@ -2,8 +2,9 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { LoginComponent } from '../login/login.component';
 import { RegisterComponent } from '../register/register.component';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { CommunityComponent } from '../community/community.component';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-navigation-bar',
@@ -19,5 +20,11 @@ import { CommunityComponent } from '../community/community.component';
   styleUrl: './navigation-bar.component.css'
 })
 export class NavigationBarComponent {
+  
+  constructor(private authService: AuthService, private router:Router){};
 
+  logout(): void {
+    this.authService.logout();
+    this.router.navigateByUrl('login')
+  }
 }
