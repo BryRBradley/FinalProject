@@ -37,20 +37,23 @@ public class CommunityServiceImpl implements CommunityService {
 
 		Optional<Community> communityOptional = commRepo.findById(communityId);
 		Community managedCommunity = null;
-
-		if (commRepo.existsByIdAndUserUsername(communityId, username)) {
+		
+		//need to add user specific
+		if (commRepo.existsById(communityId)) {
+			
 			if (communityOptional.isPresent()) {
-				managedCommunity = communityOptional.get();
-
-				if (!community.getName().isBlank()) {managedCommunity.setName(community.getName());};
 				
-				if (!community.getDescription().isBlank()) {managedCommunity.setDescription(community.getDescription());};
+				managedCommunity = communityOptional.get();
+				
+				if (community.getName() != null && !community.getName().isBlank()) {
+					managedCommunity.setName(community.getName());};
+				
+				if (community.getDescription() != null && !community.getDescription().isBlank()) {
+					managedCommunity.setDescription(community.getDescription());};
 				
 				if(community.getLocation() != null) {managedCommunity.setLocation(community.getLocation());}
 				
-				managedCommunity.setDiscordUrl(community.getDiscordUrl());
-				
-				managedCommunity.setImageUrl(community.getImageUrl());
+				if(community.getImageUrl() != null) {managedCommunity.setDiscordUrl(community.getDiscordUrl());}
 				
 				commRepo.saveAndFlush(managedCommunity);
 			}

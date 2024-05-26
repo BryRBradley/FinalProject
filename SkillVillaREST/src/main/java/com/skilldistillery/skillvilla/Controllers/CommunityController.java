@@ -80,7 +80,7 @@ public class CommunityController {
 
 	@PutMapping("communities/{communityId}")
 	public Community update(HttpServletRequest req, HttpServletResponse res, Principal principal,
-			@PathVariable("id") int communityId, @RequestBody Community community) {
+			@PathVariable("communityId") int communityId, @RequestBody Community community) {
 		
 		Community updated = null;
 
