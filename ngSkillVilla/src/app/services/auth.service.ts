@@ -3,18 +3,14 @@ import { Injectable } from '@angular/core';
 import { tap, catchError, throwError, Observable } from 'rxjs';
 import { User } from '../models/user';
 import { Buffer } from "buffer";
-import { environment } from '../../environments/environment.development';
-
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   // Set port number to server's port
-  private baseUrl = environment.baseUrl;
+  private baseUrl = 'http://localhost:8085/';
   private url = this.baseUrl;
-
   constructor(private http: HttpClient) { }
-
   register(user: User): Observable<User> {
     // Create POST request to register a new account
     return this.http.post<User>(this.url + 'register', user).pipe(
@@ -26,7 +22,6 @@ export class AuthService {
       })
     );
   }
-
   login(username: string, password: string): Observable<User> {
     // Make credentials
     const credentials = this.generateBasicAuthCredentials(username, password);
@@ -37,7 +32,6 @@ export class AuthService {
         'X-Requested-With': 'XMLHttpRequest',
       }),
     };
-
     // Create GET request to authenticate credentials
     return this.http.get<User>(this.url + 'authenticate', httpOptions).pipe(
       tap((newUser) => {
@@ -54,11 +48,9 @@ export class AuthService {
       })
     );
   }
-
   logout(): void {
     localStorage.removeItem('credentials');
   }
-
   getLoggedInUser(): Observable<User> {
     if (!this.checkLogin()) {
       return throwError(() => {
@@ -82,22 +74,16 @@ export class AuthService {
         })
       );
   }
-
   checkLogin(): boolean {
     if (localStorage.getItem('credentials')) {
       return true;
     }
     return false;
   }
-
   generateBasicAuthCredentials(username: string, password: string): string {
     return Buffer.from(`${username}:${password}`).toString('base64');
   }
-
   getCredentials(): string | null {
     return localStorage.getItem('credentials');
   }
-
-  
-
 }
