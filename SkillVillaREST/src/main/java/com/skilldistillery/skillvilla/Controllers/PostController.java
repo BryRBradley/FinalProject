@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,7 +28,7 @@ public class PostController {
 	private PostService postService;
 	private CommentService commentService;
 
-	public PostController(PostService postService,CommentService commentService) {
+	public PostController(PostService postService, CommentService commentService) {
 		super();
 		this.postService = postService;
 		this.commentService = commentService;
@@ -48,7 +49,7 @@ public class PostController {
 
 	@GetMapping("communities/{communityId}/posts/{postId}")
 	public Post show(HttpServletRequest req, HttpServletResponse res, @PathVariable("communityId") int communityId,
-			@PathVariable("communityId") int postId) {
+			@PathVariable("postId") int postId) {
 
 		Post post = postService.show(postId, communityId);
 
@@ -86,7 +87,7 @@ public class PostController {
 	public Comment createCommentOnPost(HttpServletRequest req, HttpServletResponse res, Principal principal,
 			@PathVariable("communityId") int communityId, @PathVariable("postId") int postId,
 			@RequestBody Comment comment) {
-		
+
 		Comment newComment = null;
 
 		try {
@@ -94,7 +95,8 @@ public class PostController {
 
 			if (newComment != null) {
 				res.setStatus(201);
-				res.setHeader("location", req.getRequestURL().append("/posts/comments/").append(newComment.getId()).toString());
+				res.setHeader("location",
+						req.getRequestURL().append("/posts/comments/").append(newComment.getId()).toString());
 			} else {
 				res.setStatus(401);
 			}
@@ -103,14 +105,27 @@ public class PostController {
 		}
 
 		return newComment;
-		
+
 	}
 
-//	@PutMapping("posts/{id}")
-//	public Post update(@PathVariable("id") int id, @RequestBody Post post) {
-//		return postService.update(id, post);
-//	}
-//	
+	@PutMapping("communities/{communityId}/posts/{postId}")
+	public Post update(HttpServletRequest req, HttpServletResponse res, Principal principal, @PathVariable("postId") int postId,
+			@RequestBody Post post) {
+		Post updated = null;
+		
+		try {
+			updated = postService.update(principal.getName(), postId, post);
+			if (updated == null) {
+				res.setStatus(404);
+			}
+		} catch (Exception e) {
+			res.setStatus(400);
+		}
+		
+		
+		return updated;
+	}
+
 //	@DeleteMapping("posts/{id}")
 //	public void delete(@PathVariable("id") int id) {
 //		postService.delete(id);

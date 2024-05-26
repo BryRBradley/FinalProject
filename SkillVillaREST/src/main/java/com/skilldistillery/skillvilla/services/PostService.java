@@ -12,7 +12,7 @@ public interface PostService {
 	
 	Post create(String string, int communityId, Post post);
 	
-	Post update(int id, Post post);
+	Post update(String userName, int postId, Post post);
 	
 	void delete(int id);
 
