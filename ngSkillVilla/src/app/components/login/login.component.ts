@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
   login(user:User):void{
     this.authService.login(user.username, user.password).subscribe({
       next:(user)=>{
-        this.router.navigateByUrl('/todo')
+        this.router.navigateByUrl('/home');
       },
       error:(error)=>{
         console.log("login Failed -- registerComp login()")
