@@ -5,16 +5,20 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.skillvilla.Repositories.CommunityRepository;
+import com.skilldistillery.skillvilla.Repositories.UserRepository;
 import com.skilldistillery.skillvilla.entities.Community;
+import com.skilldistillery.skillvilla.entities.User;
 
 @Service
-public class CommunityServiceImpl implements CommunityService{
-	
+public class CommunityServiceImpl implements CommunityService {
+
 	private CommunityRepository commRepo;
-	
-	public CommunityServiceImpl(CommunityRepository commRepo) {
+	private UserRepository userRepo;
+
+	public CommunityServiceImpl(CommunityRepository commRepo,UserRepository userRepo) {
 		super();
 		this.commRepo = commRepo;
+		this.userRepo = userRepo;
 	}
 
 	@Override
@@ -47,13 +51,23 @@ public class CommunityServiceImpl implements CommunityService{
 
 	@Override
 	public void delete(int id) {
-		if( commRepo.existsById(id)) {
+		if (commRepo.existsById(id)) {
 			commRepo.deleteById(id);
 		}
 	}
+
+	@Override
+	public Community create(String username, Community community) {
+
+		User user = userRepo.findByUsername(username);
+
+		if (user != null) {
+			//community.setUser(user);
+			return commRepo.saveAndFlush(community);
+		}
+
+		return null;
 	
-	
-	
-	
+	}
 
 }

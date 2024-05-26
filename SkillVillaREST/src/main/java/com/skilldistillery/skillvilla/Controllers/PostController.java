@@ -94,7 +94,7 @@ public class PostController {
 
 			if (newComment != null) {
 				res.setStatus(201);
-				res.setHeader("location", req.getRequestURL().append("/").append(newComment.getId()).toString());
+				res.setHeader("location", req.getRequestURL().append("/posts/comments/").append(newComment.getId()).toString());
 			} else {
 				res.setStatus(401);
 			}
