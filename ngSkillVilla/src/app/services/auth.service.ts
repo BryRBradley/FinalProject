@@ -7,10 +7,17 @@ import { Buffer } from "buffer";
   providedIn: 'root',
 })
 export class AuthService {
+
   // Set port number to server's port
+  
   private baseUrl = 'http://localhost:8085/';
   private url = this.baseUrl;
+
+  loggedInUser: User | null = null;
   constructor(private http: HttpClient) { }
+
+
+
   register(user: User): Observable<User> {
     // Create POST request to register a new account
     return this.http.post<User>(this.url + 'register', user).pipe(
@@ -75,6 +82,9 @@ export class AuthService {
         })
       );
   }
+
+  
+
   checkLogin(): boolean {
     if (localStorage.getItem('credentials')) {
       return true;
@@ -87,4 +97,6 @@ export class AuthService {
   getCredentials(): string | null {
     return localStorage.getItem('credentials');
   }
+
+
 }

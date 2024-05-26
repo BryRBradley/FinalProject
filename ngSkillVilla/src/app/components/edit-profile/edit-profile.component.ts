@@ -1,19 +1,19 @@
 import { Component } from '@angular/core';
 import { User } from '../../models/user';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UserService } from '../../services/user.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { UserService } from '../../services/user.service';
+import { ProfileComponent } from '../profile/profile.component';
 
 @Component({
-  selector: 'app-user',
+  selector: 'app-edit-profile',
   standalone: true,
-  imports: [CommonModule, FormsModule],
-  templateUrl: './user.component.html',
-  styleUrl: './user.component.css'
+  imports: [CommonModule, FormsModule, ProfileComponent],
+  templateUrl: './edit-profile.component.html',
+  styleUrl: './edit-profile.component.css'
 })
-export class UserComponent {
-
+export class EditProfileComponent {
   users: User[] = [];
   newUser: User = new User();
   selected: User | null = null;
@@ -61,24 +61,14 @@ export class UserComponent {
         console.log(dbSkillVilla)
         this.users = dbSkillVilla
       },
-      error: (err) => {
-        console.log("something went wrong with reload()")
+      error: () => {
+        console.log("something went wrong with reload()");
       }
     })
   }
 
-  addUser(user : User){
-    this.userService.create(user).subscribe({
-      next: (user) => {
-        this.reload();
-        this.newUser = new User();
-      },
-      error: (err) => {
-        console.log("something went wrong adding user")}
-    })
-  }
   
-  updateUser(user : User){
+  updateUserProfile(user : User){
     this.userService.update(user, user.id).subscribe({
       next: (user) => {
         this.reload();
@@ -90,11 +80,11 @@ export class UserComponent {
     });
   }
 
-  setUpdatedUser() {
+  setUpdatedUserProfile() {
     this.editUser = Object.assign({}, this.selected);
   }
 
-  deleteUser(id: number) {
+  deleteUserProfile(id: number) {
     this.userService.destroy(id).subscribe({
       next: () => {
       this.reload();
@@ -102,6 +92,4 @@ export class UserComponent {
       error: () => {}
     });
   }
-
-
 }
