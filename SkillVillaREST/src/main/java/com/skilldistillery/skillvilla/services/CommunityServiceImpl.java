@@ -1,6 +1,7 @@
 package com.skilldistillery.skillvilla.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -15,7 +16,7 @@ public class CommunityServiceImpl implements CommunityService {
 	private CommunityRepository commRepo;
 	private UserRepository userRepo;
 
-	public CommunityServiceImpl(CommunityRepository commRepo,UserRepository userRepo) {
+	public CommunityServiceImpl(CommunityRepository commRepo, UserRepository userRepo) {
 		super();
 		this.commRepo = commRepo;
 		this.userRepo = userRepo;
@@ -28,25 +29,35 @@ public class CommunityServiceImpl implements CommunityService {
 
 	@Override
 	public Community show(int id) {
-		return commRepo.findById(id);
+		return commRepo.findById(id).get();
 	}
 
 	@Override
-	public Community create(Community community) {
-		return commRepo.saveAndFlush(community);
-	}
+	public Community update(String username, int communityId, Community community) {
 
-	@Override
-	public Community update(Community community, int id) {
-		Community updatedComm = commRepo.findById(id);
-		updatedComm.setName(community.getName());
-		updatedComm.setCreatedAt(community.getCreatedAt());
-		updatedComm.setUpdatedAt(community.getUpdatedAt());
-		updatedComm.setEnabled(community.isEnabled());
-		updatedComm.setDescription(community.getDescription());
-		updatedComm.setDiscordUrl(community.getDiscordUrl());
-		updatedComm.setImageUrl(community.getImageUrl());
-		return commRepo.saveAndFlush(updatedComm);
+		Optional<Community> communityOptional = commRepo.findById(communityId);
+		Community managedCommunity = null;
+
+		if (commRepo.existsByIdAndUserUsername(communityId, username)) {
+			if (communityOptional.isPresent()) {
+				managedCommunity = communityOptional.get();
+
+				if (!community.getName().isBlank()) {managedCommunity.setName(community.getName());};
+				
+				if (!community.getDescription().isBlank()) {managedCommunity.setDescription(community.getDescription());};
+				
+				if(community.getLocation() != null) {managedCommunity.setLocation(community.getLocation());}
+				
+				managedCommunity.setDiscordUrl(community.getDiscordUrl());
+				
+				managedCommunity.setImageUrl(community.getImageUrl());
+				
+				commRepo.saveAndFlush(managedCommunity);
+			}
+		}
+
+		return managedCommunity;
+
 	}
 
 	@Override
@@ -62,12 +73,14 @@ public class CommunityServiceImpl implements CommunityService {
 		User user = userRepo.findByUsername(username);
 
 		if (user != null) {
-			//community.setUser(user);
+			// community.setUser(user);
 			return commRepo.saveAndFlush(community);
 		}
 
 		return null;
-	
+
 	}
+
+
 
 }

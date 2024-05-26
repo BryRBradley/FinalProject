@@ -22,43 +22,42 @@ import jakarta.servlet.http.HttpServletResponse;
 @RequestMapping("api")
 @CrossOrigin({ "*", "http://localhost/" })
 public class CommunityController {
-	
+
 	private CommunityService commService;
-	
+
 	public CommunityController(CommunityService commService) {
 		super();
 		this.commService = commService;
 	}
 
 	@GetMapping("communities")
-	public List<Community> findAll(HttpServletRequest req, HttpServletResponse res){
-		
+	public List<Community> findAll(HttpServletRequest req, HttpServletResponse res) {
+
 		List<Community> communities = commService.findAll();
-		
+
 		if (communities.isEmpty()) {
 			res.setStatus(204);
 		}
-		
+
 		return communities;
 	}
 
 	@GetMapping("communities/{communityId}")
 	public Community show(HttpServletRequest req, HttpServletResponse res, @PathVariable("communityId") int id) {
-		
+
 		Community community = commService.show(id);
-		
+
 		if (community == null) {
 			res.setStatus(404);
 		}
-		
+
 		return community;
 	}
-	
-	
+
 	@PostMapping("communities")
 	public Community createPost(HttpServletRequest req, HttpServletResponse res, Principal principal,
 			@RequestBody Community community) {
-		
+
 		Community newCommunity = null;
 
 		try {
@@ -66,7 +65,8 @@ public class CommunityController {
 
 			if (newCommunity != null) {
 				res.setStatus(201);
-				res.setHeader("location", req.getRequestURL().append("/posts/").append(newCommunity.getId()).toString());
+				res.setHeader("location",
+						req.getRequestURL().append("/posts/").append(newCommunity.getId()).toString());
 			} else {
 				res.setStatus(401);
 			}
@@ -77,13 +77,25 @@ public class CommunityController {
 		return newCommunity;
 
 	}
-	
-	
-	@PutMapping("communities/{id}")
-	public Community update(@PathVariable("id") int id, @RequestBody Community community) {
-		return commService.update(community, id);
-	}
-	
+
+	@PutMapping("communities/{communityId}")
+	public Community update(HttpServletRequest req, HttpServletResponse res, Principal principal,
+			@PathVariable("id") int communityId, @RequestBody Community community) {
+		
+		Community updated = null;
+
+		try {
+			updated = commService.update(principal.getName(), communityId, community);
+			if (updated == null) {
+				res.setStatus(404);
+			}
+		} catch (Exception e) {
+			res.setStatus(400);
+		}
+
+		return updated;
+}
+
 //	@DeleteMapping("communities/{id}")
 //	public void delete(@PathVariable("id") int id) {
 //		commService.delete(id);
