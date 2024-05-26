@@ -5,12 +5,15 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CommunityService } from '../../services/community.service';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
+import { PostComponent } from '../post/post.component';
 
 @Component({
   selector: 'app-community',
   standalone: true,
   imports: [
-    CommonModule, FormsModule
+    CommonModule, 
+    FormsModule,
+    PostComponent
   ],
   templateUrl: './community.component.html',
   styleUrl: './community.component.css'
