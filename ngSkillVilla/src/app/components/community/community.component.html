@@ -13,6 +13,32 @@
     </div>
 </div>
 
+<div *ngIf="editCommunity"> 
+
+    <form name="editForm">
+        <div class="form-floating">
+            <input class="form-control" type="text" name="name" [(ngModel)]="editCommunity.name">
+            <label for="name">Community Name: </label>
+        </div>
+        <div class="form-floating">
+            <input class="form-control" type="text" name="description" [(ngModel)]="editCommunity.description">
+            <label for="author">Description: </label>
+        </div>
+        <div class="form-floating">
+            <input class="form-control" type="text" name="discordUrl" [(ngModel)]="editCommunity.discordUrl">
+            <label for="discordUrl">Discord URL: </label>
+        </div>
+        <div class="form-floating">
+            <input class="form-control" type="text" name="imageUrl" [(ngModel)]="editCommunity.imageUrl">
+            <label for="imageUrl">Image URL: </label>
+        </div>
+        <br>
+        <button class="btn bg-primary" (click)="editCommunity = null">Cancel</button>
+        <button class="btn bg-success" (click)="updateCommunity(editCommunity)">Save</button>
+    </form>
+    
+    </div>
+
 <div id="communityPage" *ngIf="selected">
     <button (click)="displayCommunities()">Back</button>
     <div class="head">
@@ -23,7 +49,7 @@
             <h1>{{selected.name}}</h1>
             <p>{{selected.description}}</p>
             <p>{{selected.discordUrl}}</p>
-            <button class="btn btn-secondary" (click)="updateCommunity()">Edit Community</button>
+            <button class="btn btn-secondary" (click)="setEditCommunity()">Edit Community</button>
         </div>
     </div>
     <div>

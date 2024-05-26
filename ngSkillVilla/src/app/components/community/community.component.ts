@@ -88,12 +88,21 @@ export class CommunityComponent implements OnInit {
     };
   }
 
-  updateCommunity(): void {
-    this.editing = true;
-    this.creatingNew = false;
-    if (this.selected) {
-      this.formData = { ...this.selected };
-    }
+  updateCommunity(community: Community) {
+    this.commService.update(community, community.id).subscribe({
+      next: (community) => {
+        this.reload();
+        this.selected = null;
+        this.editCommunity = null;
+      },
+      error: (err) => {
+        console.log('Error updating community');
+      }
+    });
+  }
+
+  setEditCommunity(){
+    this.editCommunity = Object.assign({}, this.selected);
   }
 
   cancel(): void {
