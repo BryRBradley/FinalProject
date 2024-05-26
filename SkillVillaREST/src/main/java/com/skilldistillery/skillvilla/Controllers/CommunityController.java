@@ -1,10 +1,13 @@
 package com.skilldistillery.skillvilla.Controllers;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -50,6 +53,29 @@ public class CommunityController {
 		return community;
 	}
 	
+	
+	@PostMapping("communities")
+	public Community createPost(HttpServletRequest req, HttpServletResponse res, Principal principal,
+			@RequestBody Community community) {
+		
+		Community newCommunity = null;
+
+		try {
+			newCommunity = commService.create(principal.getName(), community);
+
+			if (newCommunity != null) {
+				res.setStatus(201);
+				res.setHeader("location", req.getRequestURL().append("/posts/").append(newCommunity.getId()).toString());
+			} else {
+				res.setStatus(401);
+			}
+		} catch (Exception e) {
+			res.setStatus(400);
+		}
+
+		return newCommunity;
+
+	}
 	
 	
 	

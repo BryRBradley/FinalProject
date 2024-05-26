@@ -16,4 +16,6 @@ public interface CommunityService {
 	
 	void delete(int id);
 
+	Community create(String name, Community community);
+
 }
