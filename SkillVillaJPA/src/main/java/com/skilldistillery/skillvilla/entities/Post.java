@@ -60,7 +60,7 @@ public class Post {
 	@JoinColumn(name="location_id")
 	private Location location;
 	
-	@JsonIgnore
+	@JsonIgnoreProperties({"post"})
 	@OneToMany(mappedBy="post")
 	private List <Comment> comments;
 	

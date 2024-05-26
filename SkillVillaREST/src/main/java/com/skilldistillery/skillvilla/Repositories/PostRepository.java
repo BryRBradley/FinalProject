@@ -17,5 +17,7 @@ public interface PostRepository extends JpaRepository<Post, Integer>{
 	Post findByIdAndCommunityId(int postId, int communityId);
 
 	List<Post> findAllByCommunityId(int comunityId);
+
+	char[] existsByIdAndCommunity_id(int postId, int communityId);
 	
 }

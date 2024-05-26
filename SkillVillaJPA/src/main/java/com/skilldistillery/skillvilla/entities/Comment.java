@@ -6,6 +6,8 @@ import java.util.Objects;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -21,14 +23,17 @@ public class Comment {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
+	@UpdateTimestamp
 	@Column(name="updated_at")
 	private LocalDateTime updatedAt;
 	
 	private String message;
 	
+	@CreationTimestamp
 	@Column(name="created_at")
 	private LocalDateTime createdAt;
 	
+	@JsonIgnoreProperties({"location","comments"})
  	@ManyToOne
  	@JoinColumn (name = "post_id")
  	private Post post;
