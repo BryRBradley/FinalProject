@@ -1,6 +1,7 @@
 package com.skilldistillery.skillvilla.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -31,7 +32,9 @@ public class PostServiceImpl implements PostService{
 
 	@Override
 	public Post show(int postId, int communityId) {
-		return postRepo.findByIdAndCommunityId(postId, communityId);
+		Post post = postRepo.findByIdAndCommunityId(postId, communityId);
+		
+		return post;
 	}
 
 	@Override
@@ -51,14 +54,25 @@ public class PostServiceImpl implements PostService{
 	}
 
 	@Override
-	public Post update(int id, Post post) {
-		Post updatedPost = postRepo.findById(id);
-		updatedPost.setDescription(post.getDescription());
-		updatedPost.setCreatedAt(post.getCreatedAt());
-		updatedPost.setUpdatedAt(post.getUpdatedAt());
-		updatedPost.setEnabled(post.isEnabled());
-		updatedPost.setImageUrl(post.getImageUrl());
-		return postRepo.saveAndFlush(updatedPost);
+	public Post update(String username ,int postId, Post post) {
+		Optional<Post> postOptional = postRepo.findById(postId);
+		Post managedPost = null;
+		
+		if (postRepo.existsByIdAndUserUsername( postId,username)) {
+			if (postOptional.isPresent()) {
+				managedPost = postOptional.get();
+				
+				if(!post.getDescription().isBlank()){ managedPost.setDescription(post.getDescription());};
+				if(post.getLocation() != null) {managedPost.setLocation(post.getLocation());};
+				if(!post.getImageUrl().isBlank() | post.getImageUrl().equals(" ")) {managedPost.setImageUrl(post.getImageUrl());}
+				if(post.getPostCategory() != null) { managedPost.setPostCategory(post.getPostCategory());};
+				if(post.getLocation() != null) {managedPost.setLocation(post.getLocation());}
+				managedPost.setEnabled(post.isEnabled());
+				postRepo.saveAndFlush(managedPost);
+			}
+		}
+		
+		return managedPost;
 	}
 
 	@Override
