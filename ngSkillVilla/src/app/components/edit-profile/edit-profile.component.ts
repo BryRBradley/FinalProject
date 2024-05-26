@@ -1,3 +1,4 @@
+import { AuthService } from './../../services/auth.service';
 import { Component } from '@angular/core';
 import { User } from '../../models/user';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -5,6 +6,7 @@ import { UserService } from '../../services/user.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ProfileComponent } from '../profile/profile.component';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-edit-profile',
@@ -18,32 +20,17 @@ export class EditProfileComponent {
   newUser: User = new User();
   selected: User | null = null;
   editUser: User | null = null;
+  loggedInUser: User | null = null;
   //---------------------------------------------------------------------
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute, private userService : UserService) {
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, private userService : UserService, private authService: AuthService) {
 
   }
 
   //---------------------------------------------------------------------
 
   ngOnInit(): void {
-    this.activatedRoute.paramMap.subscribe(
-      {
-        next: (params) => {
-          console.log(params.get("userId"))
-          let userIdStr = params.get("userId");
-          if (userIdStr) {
-            let userId = parseInt(userIdStr);
-            if (isNaN(userId)) {
-              this.router.navigateByUrl("invalid");
-            } else (
-              console.log(this.selected)
-              
-              
-            )
-          }
-        }
-      });
+    this.getLoggedInUser();
   }
 
   //---------------------------------------------------------------------
@@ -66,6 +53,18 @@ export class EditProfileComponent {
       }
     })
   }
+  
+  getLoggedInUser(): void{
+   this.authService.getLoggedInUser().subscribe({
+    next: (user : User) => {
+      this.editUser = user;
+      console.log(user);
+    },
+    error: (err) => {
+      console.log("something went wrong updating user")}
+   });
+  }
+
 
   
   updateUserProfile(user : User){

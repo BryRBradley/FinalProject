@@ -11,10 +11,10 @@
         </div>
 
         <div class="text-center mt-3">
-          <span class="bg-secondary p-1 px-4 rounded text-white">Pro</span>
+          <span class="bg-secondary p-1 px-4 rounded text-white">{{loggedInUser?.role}}</span>
           <h5 class="mt-2 mb-0">{{ loggedInUser?.username }}</h5>
-
-          <span>UI/UX Designer</span>
+          <br>
+          <span><strong>About Me</strong></span>
 
           <div class="px-4 mt-1">
             <p class="fonts">
@@ -25,25 +25,26 @@
             </p>
           </div>
 
-          <ul class="social-list">
+          <!-- <ul class="skill-list">
             <li><i class="fa fa-facebook"></i></li>
             <li><i class="fa fa-dribbble"></i></li>
             <li><i class="fa fa-instagram"></i></li>
             <li><i class="fa fa-linkedin"></i></li>
             <li><i class="fa fa-google"></i></li>
-          </ul>
+          </ul> -->
 
           <div class="buttons">
             <button class="btn btn-outline-primary px-4">Message</button>
             <button class="btn btn-primary px-4 ms-3">Contact</button>
           </div>
+          <br>
+            <div *ngIf="loggedInUser">
+            <button class="btn bg-success" (click)="getEditProfile(loggedInUser)">Edit Profile</button>
+            </div>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<div *ngIf="loggedInUser">
-<button class="btn bg-success" (click)="getEditProfile(loggedInUser)">Edit Profile</button>
-</div>
-<app-edit-profile></app-edit-profile>
+
