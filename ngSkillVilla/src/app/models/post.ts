@@ -11,7 +11,7 @@ export class Post {
     postCategory: PostCategory;
     createdAt: string;
     updatedAt: string;
-
+    communityId: number | undefined;
     constructor(
         id = 0,
         user = new User(),

@@ -1,20 +1,36 @@
-<body>
-    <div>
-        
+<div>
+    <h3>Create New Post</h3>
+    <form (ngSubmit)="addPost(newPost, currentCommunityId)">
+      <div class="form-group">
+        <label for="postDescription">Post</label>
+        <textarea id="postDescription" [(ngModel)]="newPost.description" name="description" class="form-control" required></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Create Post</button>
+    </form>
+  </div>
+  
+  <div class="post-container" *ngFor="let post of posts">
+    <div class="post-header">
+      <div class="post-user"><span>{{post.user.username}}</span></div>
+      <div class="post-timestamp">Created at: <span>{{post.createdAt}}</span></div>
     </div>
-    <div class="post-container" *ngFor="let post of posts">
-        <div class="post-header">
-            <div class="post-user"><span>{{post.user.username}} </span></div>
-            <div class="post-timestamp">Created at: <span id="createdAt">{{post.createdAt}}</span></div>
-        </div>
-        <div class="post-category">Category: <span id="postCategory">{{post.postCategory.name}}</span></div>
-        <div class="post-description" id="description">
-            
-        </div>
-        <div class="post-location">Location: <span id="location">{{post.location.city}}, {{post.location.state}}</span></div>
-        <div class="post-footer">
-            <div class="post-updated">Updated at: <span id="updatedAt">2024-05-25</span></div>
-        </div>
+    <div class="post-description">{{post.description}}</div>
+    <div class="post-footer">
+      <div class="post-updated">Updated at: <span>{{post.updatedAt}}</span></div>
+      <button (click)="setEditPost(post)" class="btn btn-secondary">Edit</button>
+      <button (click)="deletePost(post.id)" class="btn btn-danger">Delete</button>
     </div>
-</body>
-
+  </div>
+  
+  <div *ngIf="editPost">
+    <h3>Edit Post</h3>
+    <form (ngSubmit)="updatePost(editPost)">
+      <div class="form-group">
+        <label for="editPostDescription">Description</label>
+        <textarea id="editPostDescription" [(ngModel)]="editPost.description" name="description" class="form-control" required></textarea>
+      </div>
+      <button type="button" (click)="editPost = null" class="btn btn-secondary">Cancel</button>
+      <button type="submit" class="btn btn-primary">Save Changes</button>
+    </form>
+  </div>
+  

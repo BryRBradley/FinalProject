@@ -6,6 +6,7 @@ import { CommunityService } from '../../services/community.service';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { PostComponent } from '../post/post.component';
+import { PostService } from '../../services/post.service';
 
 @Component({
   selector: 'app-community',
@@ -20,24 +21,12 @@ import { PostComponent } from '../post/post.component';
 })
 export class CommunityComponent implements OnInit {
 
-  communities: Community[] = [
-    //   new Community(1, 'community 1', 'The start of commun 1', 'https://gwrench.com/wp-content/uploads/2023/03/AutomotiveVista.jpeg', ''),
-    //   new Community(2, 'community 2', 'The start of commun 2', 'https://gwrench.com/wp-content/uploads/2023/03/AutomotiveVista.jpeg', ''),
-    //   new Community(3, 'community 3', 'The start of commun 3', 'https://gwrench.com/wp-content/uploads/2023/03/AutomotiveVista.jpeg', ''),
-    //   new Community(4, 'community 4', 'The start of commun 4', 'https://gwrench.com/wp-content/uploads/2023/03/AutomotiveVista.jpeg', ''),
-    //   new Community(5, 'community 5', 'The start of commun 5', 'https://gwrench.com/wp-content/uploads/2023/03/AutomotiveVista.jpeg', ''),
-    //   new Community(6, 'community 6', 'The start of commun 6', 'https://gwrench.com/wp-content/uploads/2023/03/AutomotiveVista.jpeg', ''),
-    //   new Community(7, 'community 7', 'The start of commun 7', 'https://gwrench.com/wp-content/uploads/2023/03/AutomotiveVista.jpeg', ''),
-    //   new Community(8, 'community 8', 'The start of commun 8', 'https://gwrench.com/wp-content/uploads/2023/03/AutomotiveVista.jpeg', '')
-  ];
-
+  communities: Community[] = [];
   selected: Community | null = null;
   creatingNew = false;
   editing = false;
-
   newCommunity = new Community();
   editCommunity: Community | null = null;
-
   formData = {
     name: '',
     description: '',
@@ -48,7 +37,7 @@ export class CommunityComponent implements OnInit {
 
   //--------------------------------------------------------------------------------------------
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute, private commService: CommunityService,private authService: AuthService) { }
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, private commService: CommunityService,private authService: AuthService, private postService: PostService) { }
 
   //--------------------------------------------------------------------------------------------
 
@@ -71,7 +60,6 @@ export class CommunityComponent implements OnInit {
   //--------------------------------------------------------------------------------------------
 
   displayCommunity(community: Community): void {
-    //this.selected = community;
     let url: string = 'community/' + community.id
     this.router.navigateByUrl(url)
   }
@@ -110,42 +98,7 @@ export class CommunityComponent implements OnInit {
     this.editing = false;
     this.selected = null;
   }
-
-  // onSubmit(): void {
-  //   if (this.creatingNew) {
-  //     const newCommunity = new Community(
-  //       this.communities.length + 1,
-  //       this.formData.name,
-  //       this.formData.description,
-  //       this.formData.imageUrl,
-  //       this.formData.discordUrl,
-  //       this.formData.enabled ? 1 : 0,
-  //       this.formData.enabled ? this.selected!.updatedAt : undefined, // Pass updatedAt if enabled is true, otherwise undefined
-  //       this.formData.enabled ? (this.selected!.createdAt?.toString() || undefined) : undefined // Pass createdAt if enabled is true, otherwise undefined
-  //     );
-  //     this.communities.push(newCommunity);
-  //     this.creatingNew = false;
-  //   } else if (this.editing && this.selected) {
-  //     const index = this.communities.findIndex(c => c.id === this.selected!.id);
-  //     if (index !== -1) {
-  //       this.communities[index] = {
-  //         ...this.formData, id: this.selected!.id, enabled: true, locationId: this.selected!.locationId,
-  //         updatedAt: this.selected!.updatedAt,
-  //         createdAt: this.selected!.createdAt
-  //       };
-  //       this.editing = false;
-  //     }
-  //   }
-  //   this.selected = null;
-  //   this.formData = {
-  //     name: '',
-  //     description: '',
-  //     discordUrl: '',
-  //     imageUrl: '',
-  //     enabled: true
-  //   };
-  // }
-
+  
   //------------------------------------------------------------------
 
   reload() {

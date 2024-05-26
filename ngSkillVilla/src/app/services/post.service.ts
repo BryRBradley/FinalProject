@@ -1,3 +1,4 @@
+import { Community } from './../models/community';
 import { Injectable } from '@angular/core';
 import { Post } from '../models/post';
 import { HttpClient } from '@angular/common/http';
@@ -31,9 +32,9 @@ export class PostService {
 
 
 
-  create(posts: Post): Observable<Post> {
+  create(posts: Post, CommunityId: number): Observable<Post> {
 
-    return this.http.post<Post>(this.url, posts, this.getHttpOptions()).pipe(
+    return this.http.post<Post>(this.url + CommunityId, posts, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(
