@@ -5,9 +5,9 @@ export class Community {
     description: string;
     imageUrl: string;
     discordUrl: string;
-    locationId: number | undefined;
-    updatedAt: string | undefined;
-    createdAt: string | undefined;
+    locationId: Location | null;
+    // updatedAt: string | undefined;
+    // createdAt: string | undefined;
     enabled: boolean;
 
     constructor(
@@ -16,9 +16,9 @@ export class Community {
         description = '',
         imageUrl = '',
         discordUrl = '',
-        locationId = 0,
-        updatedAt = '',
-        createdAt = '',
+        locationId = null,
+        // updatedAt = '',
+        // createdAt = '',
         enabled = true
     ) {
         this.id = id;
@@ -27,8 +27,8 @@ export class Community {
         this.imageUrl = imageUrl;
         this.discordUrl = discordUrl;
         this.locationId = locationId;
-        this.updatedAt = updatedAt;
-        this.createdAt = createdAt;
+        // this.updatedAt = updatedAt;
+        // this.createdAt = createdAt;
         this.enabled = enabled;
     }
 
