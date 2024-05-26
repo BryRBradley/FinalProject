@@ -16,18 +16,20 @@ export class LoginComponent implements OnInit {
   //----------------------------------------------
   user: User = new User;
   //----------------------------------------------
-  constructor(private authService:AuthService, private router:Router) { }
+  constructor(private authService: AuthService, private router: Router) { }
   //----------------------------------------------
   ngOnInit(): void {
   }
   //----------------------------------------------
   login(user:User):void{
-    this.authService.login(user.username, user.password).subscribe({
+    console.log(user); 
+   //------------------------------------------------
+   this.authService.login(user.username, user.password).subscribe({
       next:(user)=>{
         this.router.navigateByUrl('/home');
       },
       error:(error)=>{
-        console.log("login Failed -- registerComp login()")
+        console.log("login Failed -- loginComp login()")
       }
     })
   }

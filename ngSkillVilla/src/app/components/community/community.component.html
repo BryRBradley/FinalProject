@@ -1,4 +1,4 @@
-<div class="create-community-row" *ngIf="!selected && !creatingNew">
+<div class="create-community-row" *ngIf="!selected && !creatingNew && checkLogin()">
     <button class="btn btn-primary create-community-button" (click)="showCreateForm()">Create New Community</button>
 </div>
 
@@ -13,7 +13,34 @@
     </div>
 </div>
 
+<div *ngIf="editCommunity"> 
+
+    <form name="editForm">
+        <div class="form-floating">
+            <input class="form-control" type="text" name="name" [(ngModel)]="editCommunity.name">
+            <label for="name">Community Name: </label>
+        </div>
+        <div class="form-floating">
+            <input class="form-control" type="text" name="description" [(ngModel)]="editCommunity.description">
+            <label for="author">Description: </label>
+        </div>
+        <div class="form-floating">
+            <input class="form-control" type="text" name="discordUrl" [(ngModel)]="editCommunity.discordUrl">
+            <label for="discordUrl">Discord URL: </label>
+        </div>
+        <div class="form-floating">
+            <input class="form-control" type="text" name="imageUrl" [(ngModel)]="editCommunity.imageUrl">
+            <label for="imageUrl">Image URL: </label>
+        </div>
+        <br>
+        <button class="btn bg-primary" (click)="editCommunity = null">Cancel</button>
+        <button class="btn bg-success" (click)="updateCommunity(editCommunity)">Save</button>
+    </form>
+    
+    </div>
+
 <div id="communityPage" *ngIf="selected">
+    <button (click)="displayCommunities()">Back</button>
     <div class="head">
         <div class="img-container">
             <img [src]="selected.imageUrl" alt="">
@@ -22,31 +49,34 @@
             <h1>{{selected.name}}</h1>
             <p>{{selected.description}}</p>
             <p>{{selected.discordUrl}}</p>
-            <button class="btn btn-secondary" (click)="editCommunity()">Edit Community</button>
+            <button class="btn btn-secondary" (click)="setEditCommunity()">Edit Community</button>
         </div>
     </div>
-    <button (click)="selected = null">Back</button>
+    <div>
+        <app-post></app-post>
+    </div>
 </div>
 
 <div *ngIf="creatingNew || editing">
-    <form (ngSubmit)="onSubmit()" #communityForm="ngForm">
+    <form #communityForm="ngForm">
         <h2>{{ editing ? 'Edit Community' : 'Create New Community' }}</h2>
         <div class="form-group">
             <label for="name">Community Name</label>
-            <input type="text" id="name" name="name" [(ngModel)]="formData.name" required>
+            <input type="text" id="name" name="name" [(ngModel)]="newCommunity.name" required>
         </div>
         <div class="form-group">
             <label for="description">Description</label>
-            <textarea id="description" name="description" [(ngModel)]="formData.description" required></textarea>
+            <textarea id="description" name="description" [(ngModel)]="newCommunity.description" required></textarea>
         </div>
         <div class="form-group">
             <label for="discordUrl">Discord URL</label>
-            <input type="url" id="discordUrl" name="discordUrl" [(ngModel)]="formData.discordUrl">
+            <input type="url" id="discordUrl" name="discordUrl" [(ngModel)]="newCommunity.discordUrl">
         </div>
         <div class="form-group">
             <label for="imageUrl">Image URL</label>
-            <input type="text" id="imageUrl" name="imageUrl" [(ngModel)]="formData.imageUrl">
+            <input type="text" id="imageUrl" name="imageUrl" [(ngModel)]="newCommunity.imageUrl">
         </div>
+        <button (click)="createCommmunity(newCommunity)">Create</button>
         <button type="submit" class="btn btn-success">{{ editing ? 'Save Changes' : 'Create Community' }}</button>
         <button type="button" class="btn btn-secondary" (click)="cancel()">Cancel</button>
     </form>

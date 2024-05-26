@@ -1,31 +1,37 @@
+import { Location } from './location';
+import { PostCategory} from './post-category';
+import { User } from './user';
 export class Post {
     id: number;
-    userId: number;
+    user: User;
     community_id: number;
     description: string;
     enabled: boolean;
-    locationId: number;
+    location: Location;
+    postCategory: PostCategory;
     createdAt: string;
-    UpdatedAt: string;
+    updatedAt: string;
 
     constructor(
         id = 0,
-        userId = 0,
+        user = new User(),
         community_id = 0,
         description = '',
         enabled = false,
-        locationId = 0,
+        location = new Location(),
+        postCategory = new PostCategory(),
         createdAt = '',
         UpdatedAt = ''
     ) {
         this.id = id;
-        this.userId = userId;
+        this.user = user;
         this.community_id = community_id;
         this.description = description;
         this.enabled = enabled;
-        this.locationId = locationId;
+        this.location = location;
+        this.postCategory = postCategory
         this.createdAt = createdAt;
-        this.UpdatedAt = UpdatedAt;
+        this.updatedAt = UpdatedAt;
     }
 
 }

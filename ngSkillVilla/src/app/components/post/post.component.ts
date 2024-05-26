@@ -31,16 +31,14 @@ export class PostComponent {
     this.activatedRoute.paramMap.subscribe(
       {
         next: (params) => {
-          console.log(params.get("postId"))
-          let postIdStr = params.get("postId");
+          console.log(params.get("communityId"))
+          let postIdStr = params.get("communityId");
           if (postIdStr) {
             let postId = parseInt(postIdStr);
             if (isNaN(postId)) {
               this.router.navigateByUrl("invalid");
             } else (
-              console.log(this.selected)
-              
-              
+              this.reload(postIdStr)
             )
           }
         }
@@ -56,65 +54,64 @@ export class PostComponent {
     this.router.navigateByUrl(url);
   }
 
-  displayAllPosts() {
-    this.postService.index().subscribe({
-      next: (dbSkillVilla: Post[]) => {
-        console.log(dbSkillVilla)
-        this.posts = dbSkillVilla
+  // displayAllPosts(communityId:string) {
+  //   this.postService.index(communityId).subscribe({
+  //     next: (posts: Post[]) => {
+  //       console.log(posts)
+  //       this.posts = posts
+  //     },
+  //     error: (err) => {
+  //       console.log("something went wrong loading posts")
+  //     }
+  //   })
+  // }
+
+  reload(communityId: string) {
+    this.postService.index(communityId).subscribe({
+      next: (posts: Post[]) => {
+        if(posts != null){this.posts = posts}
       },
       error: (err) => {
-        console.log("something went wrong loading posts")
+        console.log("something went wrong with Post.Component reload()")
       }
     })
   }
 
-  reload() {
-    this.postService.index().subscribe({
-      next: (dbSkillVilla: Post[]) => {
-        console.log(dbSkillVilla)
-        this.posts = dbSkillVilla
-      },
-      error: (err) => {
-        console.log("something went wrong with reload()")
-      }
-    })
-  }
-
-  addPost(post : Post){
-    this.postService.create(post).subscribe({
-      next: (post) => {
-        this.reload();
-        this.newPost = new Post();
-      },
-      error: (err) => {
-        console.log("something went wrong adding post")
-      }
-    })
-  }
+  // addPost(post : Post){
+  //   this.postService.create(post).subscribe({
+  //     next: (post) => {
+  //       this.reload();
+  //       this.newPost = new Post();
+  //     },
+  //     error: (err) => {
+  //       console.log("something went wrong adding post")
+  //     }
+  //   })
+  // }
   
-  updatePost(post : Post){
-    this.postService.update(post, post.id).subscribe({
-      next: (post) => {
-        this.reload();
-        this.selected = null;
-        this.editPost = null;
-      },
-      error: (err) => {
-        console.log("something went wrong updating post")}
-    });
-  }
+  // updatePost(post : Post){
+  //   this.postService.update(post, post.id).subscribe({
+  //     next: (post) => {
+  //       this.reload();
+  //       this.selected = null;
+  //       this.editPost = null;
+  //     },
+  //     error: (err) => {
+  //       console.log("something went wrong updating post")}
+  //   });
+  // }
 
-  setUpdatedPost() {
-    this.editPost = Object.assign({}, this.selected);
-  }
+  // setUpdatedPost() {
+  //   this.editPost = Object.assign({}, this.selected);
+  // }
 
-  deleteCommunity(id: number) {
-    this.postService.destroy(id).subscribe({
-      next: () => {
-      this.reload();
-      },
-      error: () => {}
-    });
-  }
+  // deleteCommunity(id: number) {
+  //   this.postService.destroy(id).subscribe({
+  //     next: () => {
+  //     this.reload();
+  //     },
+  //     error: () => {}
+  //   });
+  // }
 
 }
