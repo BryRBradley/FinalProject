@@ -4,6 +4,7 @@ import { Post } from '../models/post';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from './auth.service';
 import { Observable, catchError, throwError } from 'rxjs';
+import { PostCategory } from '../models/post-category';
 
 @Injectable({
   providedIn: 'root'
@@ -32,13 +33,18 @@ export class PostService {
 
 
 
-  create(posts: Post, CommunityId: number): Observable<Post> {
+  create(post: Post, communityId: number): Observable<Post> {
+   
+    let postCategory:PostCategory = new PostCategory;
+    postCategory.id = 1;
+    post.postCategory = postCategory;
+  
 
-    return this.http.post<Post>(this.url + CommunityId, posts, this.getHttpOptions()).pipe(
+    return this.http.post<Post>(this.url + communityId + "/posts", post, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(
-          () => new Error('userService.create(): error retrieving todo: ' + err)
+          () => new Error('userService.create(): error retrieving posts -- post.Service: ' + err)
         );
       })
     );

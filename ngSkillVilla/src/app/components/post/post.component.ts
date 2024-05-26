@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { PostService } from "../../services/post.service";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
+import { PostCategory } from "../../models/post-category";
 
 
 @Component({
@@ -15,11 +16,13 @@ import { FormsModule } from "@angular/forms";
 })
 export class PostComponent implements OnInit{
 @Input () communityId!: number
+
   posts: Post[] = [];
   newPost: Post = new Post();
   selected: Post | null = null;
   editPost: Post | null = null;
   currentCommunityId: number=0;
+
   //---------------------------------------------------------------------
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private postService : PostService) {
@@ -94,13 +97,10 @@ export class PostComponent implements OnInit{
   }
 
   addPost(post: Post, communityId: number): void {
-    post.communityId = this.communityId;
-    console.log('*******************' + post)
     this.postService.create(post, communityId).subscribe({
       next: () => {
-        this.reload(this.communityId);
+        this.reload(communityId);
         this.newPost = new Post();
-
       },
       error: (err) => {
         console.log("Error adding post", err);

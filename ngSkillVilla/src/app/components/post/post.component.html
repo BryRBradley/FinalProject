@@ -12,11 +12,11 @@
   <div class="post-container" *ngFor="let post of posts">
     <div class="post-header">
       <div class="post-user"><span>{{post.user.username}}</span></div>
-      <div class="post-timestamp">Created at: <span>{{post.createdAt}}</span></div>
+      <!-- <div class="post-timestamp">Created at: <span>{{post.createdAt}}</span></div> -->
     </div>
     <div class="post-description">{{post.description}}</div>
     <div class="post-footer">
-      <div class="post-updated">Updated at: <span>{{post.updatedAt}}</span></div>
+      <!-- <div class="post-updated">Updated at: <span>{{post.updatedAt}}</span></div> -->
       <button (click)="setEditPost(post)" class="btn btn-secondary">Edit</button>
       <button (click)="deletePost(post.id)" class="btn btn-danger">Delete</button>
     </div>
