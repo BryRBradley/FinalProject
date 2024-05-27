@@ -80,4 +80,15 @@ export class PostService {
     };
     return options;
   }
+
+  getComments(postId:number){
+    return this.http.get<void>("/posts/" + postId + "comments", this.getHttpOptions()).pipe(
+      catchError((error: any) => {
+        console.log(error);
+        return throwError(
+          () => new Error('userService.delete(): error deleting community' + error)
+        );
+      })
+    );
+  }
 }

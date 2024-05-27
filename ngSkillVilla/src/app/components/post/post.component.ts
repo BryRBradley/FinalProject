@@ -131,9 +131,22 @@ export class PostComponent implements OnInit {
     console.log(anything)
   }
   
+  postComments(postId:number):Comment[]{
+    let commentsArr: Comment[] = []
+    this.postService.getComments(postId).subscribe({
+      next: (comments) => {
+        console.log(comments)
+        return []
+      },
+      error: (err) => {
+        console.log("PostComp cant get PostComments", err);
+      }
+    })
+    return commentsArr;
+  }
 
   commentOnPost(){
-
+  
   }
 }
 

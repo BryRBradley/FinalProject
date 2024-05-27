@@ -47,7 +47,7 @@
                 <button (click)="deletePost(currentCommunityId, post.id)" class="btn btn-danger">Delete</button>
 
             </div>
-            <div *ngFor="let comment of post.comments">
+            <div *ngFor="let comment of postComments(post.id)">
                 <p>{{comment}}</p>
             </div>
 
