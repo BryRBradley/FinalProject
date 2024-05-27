@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.skillvilla.entities.Comment;
-import com.skilldistillery.skillvilla.entities.Post;
 import com.skilldistillery.skillvilla.services.CommentService;
 import com.skilldistillery.skillvilla.services.PostService;
 
