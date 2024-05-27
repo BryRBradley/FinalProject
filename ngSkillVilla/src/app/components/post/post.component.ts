@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from "@angular/core";
-import { Post } from "../../models/post";
+import { Post } from './../../models/post';
+import { Comment } from './../../models/comment';
+import { Component, EventEmitter, Input, OnInit, Output, output } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { PostService } from "../../services/post.service";
 import { CommonModule } from "@angular/common";
@@ -14,18 +15,24 @@ import { PostCategory } from "../../models/post-category";
   templateUrl: './post.component.html',
   styleUrl: './post.component.css'
 })
-export class PostComponent implements OnInit{
-@Input () communityId!: number
+export class PostComponent implements OnInit {
+
+  @Output() selectedPost = new EventEmitter<Post|null>();
+  @Input() communityId!: number
 
   posts: Post[] = [];
-  newPost: Post = new Post();
+  newPost: Post | null = null;
   selected: Post | null = null;
+  
   editPost: Post | null = null;
-  currentCommunityId: number=0;
+  currentCommunityId: number = 0;
+
+  commentedPost: Post | null = null;
+  newComment: Comment | null = null;
 
   //---------------------------------------------------------------------
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute, private postService : PostService) {
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, private postService: PostService) {
 
   }
   // ngOnInit(): void {
@@ -54,36 +61,16 @@ export class PostComponent implements OnInit{
 
   //---------------------------------------------------------------------
 
+  sendSelectedPost(post: Post | null) {
+    this.selected = post
+    this.selectedPost.emit(this.selected);
+  }
 
   displaySinglePost(postPage: Post) {
     this.selected = postPage;
     let url: string = '[post]/' + postPage.id
     this.router.navigateByUrl(url);
   }
-
-  // displayAllPosts(communityId:string) {
-  //   this.postService.index(communityId).subscribe({
-  //     next: (posts: Post[]) => {
-  //       console.log(posts)
-  //       this.posts = posts
-  //     },
-  //     error: (err) => {
-  //       console.log("something went wrong loading posts")
-  //     }
-  //   })
-  // }
-
-  // reload(communityId: string) {
-  //   this.postService.index(communityId).subscribe({
-  //     next: (posts: Post[]) => {
-  //       if(posts != null){this.posts = posts}
-  //     },
-  //     error: (err) => {
-  //       console.log("something went wrong with Post.Component reload()")
-  //     }
-  //   })
-  // }
-
 
   reload(communityId: number): void {
     this.postService.index(communityId.toString()).subscribe({
@@ -96,11 +83,15 @@ export class PostComponent implements OnInit{
     });
   }
 
+  createNewPost(){
+    this.newPost = new Post();
+  }
+
   addPost(post: Post, communityId: number): void {
     this.postService.create(post, communityId).subscribe({
       next: () => {
         this.reload(communityId);
-        this.newPost = new Post();
+        this.newPost = null;
       },
       error: (err) => {
         console.log("Error adding post", err);
@@ -110,7 +101,7 @@ export class PostComponent implements OnInit{
 
 
   updatePost(post: Post, communityId: number): void {
-    this.postService.update(post,communityId).subscribe({
+    this.postService.update(post, communityId).subscribe({
       next: () => {
         this.reload(this.currentCommunityId);
         this.editPost = null;
@@ -121,10 +112,10 @@ export class PostComponent implements OnInit{
     });
   }
 
-  deletePost(id: number): void {
-    this.postService.destroy(id).subscribe({
+  deletePost(communityId: number, postId: number): void {
+    this.postService.destroy(communityId, postId).subscribe({
       next: () => {
-        this.reload(this.communityId);
+        this.reload(this.currentCommunityId);
       },
       error: (err) => {
         console.log("Error deleting post", err);
@@ -134,6 +125,15 @@ export class PostComponent implements OnInit{
 
   setEditPost(post: Post): void {
     this.editPost = Object.assign({}, post);
+  }
+
+  log(anything: any){
+    console.log(anything)
+  }
+  
+
+  commentOnPost(){
+
   }
 }
 

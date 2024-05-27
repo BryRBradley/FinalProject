@@ -10,8 +10,10 @@ export class Post {
     enabled: boolean;
     location: Location | null;
     postCategory: PostCategory;
+    imageUrl: string;
     createdAt: string;
     updatedAt: string;
+    comments: Comment[];
     
     constructor(
         id = 0,
@@ -20,9 +22,11 @@ export class Post {
         description = '',
         enabled = false,
         location = null,
+        imageUrl = '',
         postCategory = new PostCategory(),
         createdAt = '',
-        UpdatedAt = ''
+        UpdatedAt = '',
+        comments = []
     ) {
         this.id = id;
         this.user = user;
@@ -33,6 +37,8 @@ export class Post {
         this.postCategory = postCategory;
         this.createdAt = createdAt;
         this.updatedAt = UpdatedAt;
+        this.imageUrl = imageUrl;
+        this.comments = comments;
     }
 
 }

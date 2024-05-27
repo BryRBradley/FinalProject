@@ -60,8 +60,8 @@ export class PostService {
     );
   }
 
-  destroy(id: number): Observable<void> {
-    return this.http.delete<void>(this.url + "/" + id, this.getHttpOptions()).pipe(
+  destroy(communityId:number, postId: number): Observable<void> {
+    return this.http.delete<void>(this.url + communityId + "/posts/" + postId, this.getHttpOptions()).pipe(
       catchError((error: any) => {
         console.log(error);
         return throwError(

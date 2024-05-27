@@ -3,6 +3,7 @@
 </div>
 
 <div class="communities-container" *ngIf="!selected && !creatingNew">
+
     <div class="community-card" *ngFor="let community of communities" (click)="displayCommunity(community)">
         <div class="img-container">
             <img [src]="community.imageUrl">
@@ -13,8 +14,7 @@
     </div>
 </div>
 
-<div *ngIf="editCommunity"> 
-
+<div *ngIf="editCommunity">
     <form name="editForm">
         <div class="form-floating">
             <input class="form-control" type="text" name="name" [(ngModel)]="editCommunity.name">
@@ -38,12 +38,11 @@
         <br>
         <button class="btn bg-danger" (click)="editCommunity = null">Cancel</button>
     </form>
-    
-    </div>
+</div>
 
 <div id="communityPage" *ngIf="selected">
     <button (click)="displayCommunities()">Back</button>
-    <div class="head">
+    <div class="head" *ngIf="!selectedPost">
         <div class="img-container">
             <img [src]="selected.imageUrl" alt="">
         </div>
@@ -54,9 +53,9 @@
             <button class="btn btn-secondary" (click)="setEditCommunity()">Edit Community</button>
         </div>
     </div>
-    <div>
-        <app-post></app-post>
-    </div>
+
+    <app-post (selectedPost)="receiveSelectedPost($event)"></app-post>
+
 </div>
 
 <div *ngIf="creatingNew || editing">

@@ -1,3 +1,4 @@
+import { Post } from './../../models/post';
 import { Community } from './../../models/community';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
@@ -20,9 +21,12 @@ import { PostService } from '../../services/post.service';
   styleUrl: './community.component.css'
 })
 export class CommunityComponent implements OnInit {
+  selectedPost: Post | null = null
+
 
   communities: Community[] = [];
   selected: Community | null = null;
+  
   creatingNew = false;
   editing = false;
   newCommunity = new Community();
@@ -144,4 +148,8 @@ export class CommunityComponent implements OnInit {
     })
   }
 
+  receiveSelectedPost(post: Post | null) {
+    this.selectedPost = post;
+    console.log('Received post:', post);
+  }
 }
