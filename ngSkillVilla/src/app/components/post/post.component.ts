@@ -17,15 +17,17 @@ import { PostCategory } from "../../models/post-category";
 })
 export class PostComponent implements OnInit {
 
-  @Output() selectedPost = new EventEmitter<Post|null>();
+  @Output() selectedPost = new EventEmitter<Post | null>();
   @Input() communityId!: number
 
   posts: Post[] = [];
   newPost: Post | null = null;
   selected: Post | null = null;
-  
+  selectedPostComments: Comment[] = [];
+
   editPost: Post | null = null;
   currentCommunityId: number = 0;
+
 
   commentedPost: Post | null = null;
   newComment: Comment | null = null;
@@ -83,7 +85,7 @@ export class PostComponent implements OnInit {
     });
   }
 
-  createNewPost(){
+  createNewPost() {
     this.newPost = new Post();
   }
 
@@ -127,26 +129,21 @@ export class PostComponent implements OnInit {
     this.editPost = Object.assign({}, post);
   }
 
-  log(anything: any){
+  log(anything: any) {
     console.log(anything)
   }
+
   
-  postComments(postId:number):Comment[]{
-    let commentsArr: Comment[] = []
-    this.postService.getComments(postId).subscribe({
-      next: (comments) => {
-        console.log(comments)
-        return []
-      },
-      error: (err) => {
-        console.log("PostComp cant get PostComments", err);
-      }
-    })
-    return commentsArr;
+  generateNewComment(){
+    this.newComment = new Comment();
   }
 
-  commentOnPost(){
-  
+  addComment(post: Post, comment:Comment){
+    console.log(post)
+    this.postService.createComment(post, comment).subscribe({
+      next: ()=>{},
+      error:(err)=>{"Unable to add comment : postService addcomment()"}
+    })
   }
 }
 

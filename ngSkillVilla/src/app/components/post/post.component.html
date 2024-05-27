@@ -43,13 +43,13 @@
             <div class="post-footer" (click)="log(post)">
                 <!-- <div class="post-updated">Updated at: <span>{{post.updatedAt}}</span></div> -->
                 <button (click)="setEditPost(post)" class="btn btn-secondary">Edit</button>
-                
+                <p>{{post.comments.length}}</p>
                 <button (click)="deletePost(currentCommunityId, post.id)" class="btn btn-danger">Delete</button>
 
             </div>
-            <div *ngFor="let comment of postComments(post.id)">
-                <p>{{comment}}</p>
-            </div>
+
+
+
 
         </div>
     </div>
@@ -58,6 +58,15 @@
         <button class="btn btn-success" (click)="sendSelectedPost(null)">Back</button>
         <h1>{{selected.imageUrl}}</h1>
         <h1>{{selected.description}}</h1>
+        <div>
+            <button (click)="generateNewComment()">Comment</button>
+            <div *ngIf="newComment">
+                <textarea name="message" [(ngModel)]="newComment.message" placeholder="Comment"></textarea>
+                <button (click)="addComment(selected,newComment)">Create</button>
+                <button (click)="newComment=null">Cancel</button>
+            </div>
+
+        </div>
     </div>
 
 </div>
