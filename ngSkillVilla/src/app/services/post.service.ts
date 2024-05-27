@@ -48,13 +48,13 @@ export class PostService {
     );
   }
 
-  update(posts: Post, communityId: number): Observable<Post> {
-    console.log(posts);
-    return this.http.put<Post>(this.url + communityId + "/posts" +"/" + posts.id, posts, this.getHttpOptions()).pipe(
+  update(post: Post, communityId: number): Observable<Post> {
+    console.log(post);
+    return this.http.put<Post>(this.url + communityId + "/posts/" + post.id, post, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(
-          () => new Error('users.create(): error retrieving community: ' + err)
+          () => new Error('post.service update() error: ' + err)
         );
       })
     );

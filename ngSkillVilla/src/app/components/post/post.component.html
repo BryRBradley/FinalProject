@@ -10,7 +10,7 @@
   </div>
   
   <div class="post-container" *ngFor="let post of posts">
-    <div class="post-header">
+    <div class="post-header" *ngIf="post.user">
       <div class="post-user"><span>{{post.user.username}}</span></div>
       <!-- <div class="post-timestamp">Created at: <span>{{post.createdAt}}</span></div> -->
     </div>
