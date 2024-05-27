@@ -41,8 +41,8 @@ public class CommentServiceImpl implements CommentService {
 	@Override
 	public boolean destroy(String username, int communityId, int postId, int commentId) {
 
-		if (postRepo.existsByIdAndUserUsernameAndCommunityId(postId, username, communityId)) {
-			if (commentRepo.existsByIdAndPostId(commentId, postId)) {
+		if (postRepo.existsByIdAndCommunityId(postId, communityId)) {
+			if (commentRepo.existsByIdAndPostIdAndUserUsername(commentId, postId, username)) {
 				commentRepo.deleteById(commentId);
 				return true;
 			}
