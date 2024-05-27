@@ -108,11 +108,9 @@ export class PostComponent implements OnInit{
     });
   }
 
- 
 
-
-  updatePost(post: Post): void {
-    this.postService.update(post, post.id).subscribe({
+  updatePost(post: Post, postId : number): void {
+    this.postService.update(post,this.communityId, postId).subscribe({
       next: () => {
         this.reload(this.communityId);
         this.editPost = null;
@@ -135,7 +133,7 @@ export class PostComponent implements OnInit{
   }
 
   setEditPost(post: Post): void {
-    this.editPost = { ...post };
+    this.editPost = Object.assign({}, post);
   }
 }
 

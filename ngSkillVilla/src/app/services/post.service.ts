@@ -16,8 +16,6 @@ export class PostService {
   private baseUrl = 'http://localhost:8085/'; // adjust port to match server
   private url = this.baseUrl + 'api/communities/';
 
-
-
   constructor(private http: HttpClient, private authService: AuthService) { }
 
   index(communityId: string): Observable<Post[]> {
@@ -50,8 +48,9 @@ export class PostService {
     );
   }
 
-  update(posts: Post, id:number): Observable<Post> {
-    return this.http.put<Post>(this.url + "/" + id, posts, this.getHttpOptions()).pipe(
+  update(posts: Post, id:number, communityId: number): Observable<Post> {
+    console.log(posts);
+    return this.http.put<Post>(this.url + communityId + "/posts" +"/" + id, posts, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(

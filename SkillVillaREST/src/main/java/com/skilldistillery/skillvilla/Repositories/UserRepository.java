@@ -10,9 +10,9 @@ public interface UserRepository extends JpaRepository<User, Integer>{
 	
 	User findByUsername(String username);
 	
+	@Override
 	List <User> findAll();
-	
-	User findById(int id);
-	
+
+	boolean existsByIdAndUsername(int userId, String username);
 	
 }
