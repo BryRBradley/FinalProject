@@ -8,12 +8,13 @@ import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { PostComponent } from '../post/post.component';
 import { PostService } from '../../services/post.service';
+import { User } from '../../models/user';
 
 @Component({
   selector: 'app-community',
   standalone: true,
   imports: [
-    CommonModule, 
+    CommonModule,
     FormsModule,
     PostComponent
   ],
@@ -21,27 +22,22 @@ import { PostService } from '../../services/post.service';
   styleUrl: './community.component.css'
 })
 export class CommunityComponent implements OnInit {
-  selectedPost: Post | null = null
+  userId:number = 1;
+ 
 
+  selectedPost: Post | null = null
 
   communities: Community[] = [];
   selected: Community | null = null;
-  
-  creatingNew = false;
-  editing = false;
-  newCommunity = new Community();
+
+  newCommunity: Community | null = null;
   editCommunity: Community | null = null;
-  formData = {
-    name: '',
-    description: '',
-    discordUrl: '',
-    imageUrl: '',
-    enabled: true
-  };
+
+
 
   //--------------------------------------------------------------------------------------------
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute, private commService: CommunityService,private authService: AuthService, private postService: PostService) { }
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, private commService: CommunityService, private authService: AuthService, private postService: PostService) { }
 
   //--------------------------------------------------------------------------------------------
 
@@ -59,28 +55,26 @@ export class CommunityComponent implements OnInit {
         }
       }
     });
+    if(this.checkLogin()){
+      this.validUser();
+    }
   }
 
   //--------------------------------------------------------------------------------------------
+
 
   displayCommunity(community: Community): void {
     let url: string = 'community/' + community.id
     this.router.navigateByUrl(url)
   }
 
+
   showCreateForm(): void {
-    this.creatingNew = true;
-    this.editing = false;
-    this.formData = {
-      name: '',
-      description: '',
-      discordUrl: '',
-      imageUrl: '',
-      enabled: true
-    };
+    
   }
 
   updateCommunity(community: Community) {
+    console.log(community)
     this.commService.update(community, community.id).subscribe({
       next: (community) => {
         this.reload();
@@ -93,16 +87,10 @@ export class CommunityComponent implements OnInit {
     });
   }
 
-  setEditCommunity(){
+  setEditCommunity() {
     this.editCommunity = Object.assign({}, this.selected);
   }
 
-  cancel(): void {
-    this.creatingNew = false;
-    this.editing = false;
-    this.selected = null;
-  }
-  
   //------------------------------------------------------------------
 
   reload() {
@@ -124,25 +112,23 @@ export class CommunityComponent implements OnInit {
       },
       error: () => { }
     })
-
-
   }
 
   displayCommunities(): void {
-      this.selected = null;
-      this.router.navigateByUrl("community")
+    this.selected = null;
+    this.router.navigateByUrl("community")
   }
 
-  checkLogin():boolean{
-    return this.authService.checkLogin();
-  }
+  checkLogin(): boolean { return this.authService.checkLogin(); }
 
-  createCommmunity(community:Community){
+  createNewCommunity() { this.newCommunity = new Community() }
+
+  createCommmunity(community: Community) {
     console.log(community)
     this.commService.create(community).subscribe({
-      next: (todo) => {
+      next: () => {
         this.reload();
-        this.newCommunity = new Community();
+        this.newCommunity = null;
       },
       error: () => { }
     })
@@ -151,5 +137,12 @@ export class CommunityComponent implements OnInit {
   receiveSelectedPost(post: Post | null) {
     this.selectedPost = post;
     console.log('Received post:', post);
+  }
+
+  validUser(){
+    this.authService.getLoggedInUser().subscribe({
+      next:(user:User)=>{this.userId = user.id},
+      error: ()=>{}
+    })
   }
 }

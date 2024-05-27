@@ -7,7 +7,7 @@ import { Buffer } from "buffer";
   providedIn: 'root',
 })
 export class AuthService {
-
+ 
   // Set port number to server's port
   
   private baseUrl = 'http://localhost:8085/';
@@ -72,9 +72,7 @@ export class AuthService {
         'X-Requested-with': 'XMLHttpRequest',
       },
     };
-    return this.http
-      .get<User>(this.url + 'authenticate', httpOptions)
-      .pipe(
+    return this.http.get<User>(this.url + 'authenticate', httpOptions).pipe(
         catchError((err: any) => {
           console.log(err);
           return throwError(
@@ -83,8 +81,6 @@ export class AuthService {
         })
       );
   }
-
-  
 
   checkLogin(): boolean {
     if (localStorage.getItem('credentials')) {
