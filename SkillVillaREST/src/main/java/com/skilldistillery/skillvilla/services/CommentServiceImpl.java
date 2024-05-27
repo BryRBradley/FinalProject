@@ -1,5 +1,7 @@
 package com.skilldistillery.skillvilla.services;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.skillvilla.Repositories.CommentRepository;
@@ -48,6 +50,11 @@ public class CommentServiceImpl implements CommentService {
 			}
 		}
 		return false;
+	}
+
+	@Override
+	public List<Comment> index(int postId) {
+		return commentRepo.findAllByPostId(postId);
 	}
 
 }

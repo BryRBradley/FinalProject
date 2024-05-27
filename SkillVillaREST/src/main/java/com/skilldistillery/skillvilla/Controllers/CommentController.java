@@ -1,13 +1,16 @@
 package com.skilldistillery.skillvilla.Controllers;
 
 import java.security.Principal;
+import java.util.List;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.skilldistillery.skillvilla.entities.Comment;
 import com.skilldistillery.skillvilla.services.CommentService;
 import com.skilldistillery.skillvilla.services.PostService;
 
@@ -47,6 +50,19 @@ public class CommentController {
 //		
 //		return updated;
 //	}
+	
+	@GetMapping("posts/{postId}/comments")
+	public List<Comment> index(HttpServletRequest req, HttpServletResponse res,
+			@PathVariable("postId") int postId) {
+
+		List<Comment> comments = commentService.index(postId);
+
+		if (comments.isEmpty()) {
+			res.setStatus(204);
+		}
+
+		return comments;
+	}
 
 	@DeleteMapping("communities/{communityId}/posts/{postId}/comments/{commentId}")
 	public void destroy(HttpServletRequest req, HttpServletResponse res, Principal principal,
