@@ -8,6 +8,7 @@ import { FormsModule } from "@angular/forms";
 import { PostCategory } from "../../models/post-category";
 
 
+
 @Component({
   selector: 'app-post',
   standalone: true,
@@ -139,9 +140,11 @@ export class PostComponent implements OnInit {
   }
 
   addComment(post: Post, comment:Comment){
-    console.log(post)
+    console.log("postcomp: " + post)
     this.postService.createComment(post, comment).subscribe({
-      next: ()=>{},
+      next: (resp)=>{
+        console.log("postComp - addComment(): " + resp);
+      },
       error:(err)=>{"Unable to add comment : postService addcomment()"}
     })
   }
