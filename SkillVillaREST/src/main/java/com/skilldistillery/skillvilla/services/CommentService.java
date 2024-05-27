@@ -6,4 +6,6 @@ public interface CommentService {
 
 	Comment createOnPost(String name, int communityId, int postId, Comment comment);
 
+	boolean destroy(String name, int communityId, int postId, int commentId);
+
 }

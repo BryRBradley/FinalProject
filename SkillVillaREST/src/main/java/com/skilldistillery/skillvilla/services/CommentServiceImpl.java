@@ -11,12 +11,12 @@ import com.skilldistillery.skillvilla.entities.User;
 
 @Service
 public class CommentServiceImpl implements CommentService {
-	
+
 	private PostRepository postRepo;
 	private UserRepository userRepo;
 	private CommentRepository commentRepo;
 
-	public CommentServiceImpl(PostRepository postRepo,UserRepository userRepo,CommentRepository commentRepo) {
+	public CommentServiceImpl(PostRepository postRepo, UserRepository userRepo, CommentRepository commentRepo) {
 		super();
 		this.postRepo = postRepo;
 		this.userRepo = userRepo;
@@ -25,9 +25,9 @@ public class CommentServiceImpl implements CommentService {
 
 	@Override
 	public Comment createOnPost(String username, int communityId, int postId, Comment comment) {
-		
+
 		User user = userRepo.findByUsername(username);
-		Post post = postRepo.findByIdAndCommunityId(postId,communityId);
+		Post post = postRepo.findByIdAndCommunityId(postId, communityId);
 		if (user != null & post != null) {
 			comment.setUser(user);
 			comment.setPost(post);
@@ -35,9 +35,19 @@ public class CommentServiceImpl implements CommentService {
 		}
 
 		return null;
-	
+
 	}
-	
-	
+
+	@Override
+	public boolean destroy(String username, int communityId, int postId, int commentId) {
+
+		if (postRepo.existsByIdAndCommunityId(postId, communityId)) {
+			if (commentRepo.existsByIdAndPostIdAndUserUsername(commentId, postId, username)) {
+				commentRepo.deleteById(commentId);
+				return true;
+			}
+		}
+		return false;
+	}
 
 }
