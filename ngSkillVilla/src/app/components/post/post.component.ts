@@ -109,10 +109,10 @@ export class PostComponent implements OnInit{
   }
 
 
-  updatePost(post: Post, postId : number): void {
-    this.postService.update(post,this.communityId, postId).subscribe({
+  updatePost(post: Post, communityId: number): void {
+    this.postService.update(post,communityId).subscribe({
       next: () => {
-        this.reload(this.communityId);
+        // this.reload(this.communityId);
         this.editPost = null;
       },
       error: (err) => {

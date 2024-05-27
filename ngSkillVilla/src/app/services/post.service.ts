@@ -48,9 +48,9 @@ export class PostService {
     );
   }
 
-  update(posts: Post, id:number, communityId: number): Observable<Post> {
+  update(posts: Post, communityId: number): Observable<Post> {
     console.log(posts);
-    return this.http.put<Post>(this.url + communityId + "/posts" +"/" + id, posts, this.getHttpOptions()).pipe(
+    return this.http.put<Post>(this.url + communityId + "/posts" +"/" + posts.id, posts, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(
