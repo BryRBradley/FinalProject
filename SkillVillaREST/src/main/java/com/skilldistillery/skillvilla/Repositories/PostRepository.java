@@ -22,5 +22,8 @@ public interface PostRepository extends JpaRepository<Post, Integer>{
 	char[] existsByIdAndCommunity_id(int postId, int communityId);
 
 	boolean existsByIdAndUserUsername(int postId, String username);
+
+	boolean existsByIdAndUserUsernameAndCommunityId(int postId, String username, int communityId);
+
 	
 }

@@ -18,5 +18,5 @@ public interface PostService {
 
 	List<Post> index(int communityId);
 
-	boolean destroy(String username, int postId);
+	boolean destroy(String name, int postId);
 }
