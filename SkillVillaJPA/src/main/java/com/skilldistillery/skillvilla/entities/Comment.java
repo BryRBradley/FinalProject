@@ -7,6 +7,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -38,7 +39,7 @@ public class Comment {
  	@JoinColumn (name = "post_id")
  	private Post post;
  	
-	@JsonIgnoreProperties({"password"})
+	@JsonIncludeProperties({"id","username", "firstName", "lastName", "imageUrl"})
  	@ManyToOne
  	@JoinColumn (name = "user_id")
  	private User user;

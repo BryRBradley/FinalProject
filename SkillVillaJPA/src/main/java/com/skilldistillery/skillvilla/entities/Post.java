@@ -7,8 +7,8 @@ import java.util.Objects;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -46,12 +46,12 @@ public class Post {
 	@JoinColumn(name="post_category_id")
 	private PostCategory postCategory;
 	
-	@JsonIgnore
+	@JsonIncludeProperties({"id","name","description"})
 	@ManyToOne
 	@JoinColumn(name="community_id")
 	private Community community;
 	
-	@JsonIgnoreProperties({"password"})
+	@JsonIncludeProperties({"id","username", "firstName", "lastName", "imageUrl"})
 	@ManyToOne
 	@JoinColumn(name="user_id")
 	private User user;
