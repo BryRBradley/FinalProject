@@ -63,13 +63,15 @@ public class PostServiceImpl implements PostService{
 			if (postOptional.isPresent()) {
 				managedPost = postOptional.get();
 				
-				if(!post.getDescription().isBlank()){ managedPost.setDescription(post.getDescription());};
+				if(post.getDescription() != null && !post.getDescription().isBlank()){ managedPost.setDescription(post.getDescription());};
 				if(post.getLocation() != null) {managedPost.setLocation(post.getLocation());};
-				if(!post.getImageUrl().isBlank() | post.getImageUrl().equals(" ")) {managedPost.setImageUrl(post.getImageUrl());}
+				if(post.getImageUrl() != null && !post.getImageUrl().isBlank() || post.getImageUrl() == " ") {managedPost.setImageUrl(post.getImageUrl());}
 				if(post.getPostCategory() != null) { managedPost.setPostCategory(post.getPostCategory());};
 				if(post.getLocation() != null) {managedPost.setLocation(post.getLocation());}
-				managedPost.setEnabled(post.isEnabled());
+				
+				//managedPost.setEnabled(post.isEnabled());
 				postRepo.saveAndFlush(managedPost);
+				
 			}
 		}
 		
