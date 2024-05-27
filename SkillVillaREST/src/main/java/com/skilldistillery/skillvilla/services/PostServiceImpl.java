@@ -86,6 +86,16 @@ public class PostServiceImpl implements PostService{
 		
 	}
 
+	@Override
+	public boolean destroy(String username, int postId) {
+		if (postRepo.existsByIdAndUserUsername(postId, username)) {
+			postRepo.deleteById(postId);
+			return true;
+		}
+
+		return false;
+	}
+
 	
 	
 	

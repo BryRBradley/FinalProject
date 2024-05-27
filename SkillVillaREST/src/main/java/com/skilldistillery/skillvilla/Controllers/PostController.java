@@ -4,6 +4,7 @@ import java.security.Principal;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -126,9 +127,17 @@ public class PostController {
 		return updated;
 	}
 
-//	@DeleteMapping("posts/{id}")
-//	public void delete(@PathVariable("id") int id) {
-//		postService.delete(id);
-//	}
+	@DeleteMapping("communities/{communityId}/posts/{postId}")
+	public void destroy(HttpServletRequest req, HttpServletResponse res, Principal principal,
+			@PathVariable("postId") int postId) {
+		boolean deleted = postService.destroy(principal.getName(), postId);
+
+		if (deleted) {
+			res.setStatus(HttpServletResponse.SC_NO_CONTENT);
+		} else {
+			res.setStatus(404);
+		}
+
+	}
 
 }
