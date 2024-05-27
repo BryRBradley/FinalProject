@@ -43,13 +43,11 @@
             <div class="post-footer" (click)="log(post)">
                 <!-- <div class="post-updated">Updated at: <span>{{post.updatedAt}}</span></div> -->
                 <button (click)="setEditPost(post)" class="btn btn-secondary">Edit</button>
-                <p>{{post.comments.length}}</p>
+                <button type="button" (click)="toggleComments(post)">{{post.comments.length}} Comments</button>
                 <button (click)="deletePost(currentCommunityId, post.id)" class="btn btn-danger">Delete</button>
-
             </div>
 
-
-
+            <app-comments  [parentPost]="selectedPostComments" *ngIf="isCommentsVisible(post)"></app-comments>
 
         </div>
     </div>

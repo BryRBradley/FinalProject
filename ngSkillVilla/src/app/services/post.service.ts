@@ -1,6 +1,5 @@
 import { Comment } from './../models/comment';
 import { Post } from './../models/post';
-import { Community } from './../models/community';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from './auth.service';
@@ -29,8 +28,6 @@ export class PostService {
       })
     );
   }
-
-
 
   create(post: Post, communityId: number): Observable<Post> {
 
@@ -83,7 +80,7 @@ export class PostService {
   }
 
   createComment(post: Post, comment: Comment): Observable<Comment> {
-    return this.http.post<Comment>(this.url + post.community?.id + "/posts/" + post.id, Comment, this.getHttpOptions()).pipe(
+    return this.http.post<Comment>(this.url + post.community?.id + "/posts/" + post.id, comment, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(
@@ -92,5 +89,4 @@ export class PostService {
       })
     );
   }
-
 }

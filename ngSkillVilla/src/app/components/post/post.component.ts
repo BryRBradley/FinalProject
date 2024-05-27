@@ -1,46 +1,42 @@
+import { CommentsComponent } from './../comments/comments.component';
 import { Post } from './../../models/post';
 import { Comment } from './../../models/comment';
-import { Component, EventEmitter, Input, OnInit, Output, output } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild, output } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { PostService } from "../../services/post.service";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
-import { PostCategory } from "../../models/post-category";
-
-
 
 @Component({
   selector: 'app-post',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    CommentsComponent
+  ],
   templateUrl: './post.component.html',
   styleUrl: './post.component.css'
 })
 export class PostComponent implements OnInit {
-
+  @ViewChild(CommentsComponent) childComponent!: CommentsComponent;
   @Output() selectedPost = new EventEmitter<Post | null>();
   @Input() communityId!: number
 
   posts: Post[] = [];
   newPost: Post | null = null;
   selected: Post | null = null;
-  selectedPostComments: Comment[] = [];
 
   editPost: Post | null = null;
   currentCommunityId: number = 0;
 
-
-  commentedPost: Post | null = null;
+  selectedPostComments: Post | null = null;
   newComment: Comment | null = null;
-
+  expandedPosts: number[] = [];
   //---------------------------------------------------------------------
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute, private postService: PostService) {
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, private postService: PostService) { }
 
-  }
-  // ngOnInit(): void {
-  //   this.reload(this.communityId);
-  // }
   //---------------------------------------------------------------------
 
   ngOnInit(): void {
@@ -134,19 +130,38 @@ export class PostComponent implements OnInit {
     console.log(anything)
   }
 
-  
-  generateNewComment(){
+
+  generateNewComment() {
     this.newComment = new Comment();
   }
 
-  addComment(post: Post, comment:Comment){
-    console.log("postcomp: " + post)
+  addComment(post: Post, comment: Comment) {
+    console.log(comment)
     this.postService.createComment(post, comment).subscribe({
-      next: (resp)=>{
+      next: (resp) => {
         console.log("postComp - addComment(): " + resp);
       },
-      error:(err)=>{"Unable to add comment : postService addcomment()"}
+      error: (err) => { "Unable to add comment : postService addcomment()" }
     })
+  }
+
+  showComments(post: Post) {
+    this.selectedPostComments = post
+    this.childComponent.getComments(post);
+  }
+
+  toggleComments(post: Post): void {
+    const index = this.expandedPosts.indexOf(post.id);
+    if (index !== -1) {
+      this.expandedPosts.splice(index, 1);
+    } else {
+      this.expandedPosts.push(post.id);
+      this.showComments(post)
+    }
+  }
+
+  isCommentsVisible(post: Post): boolean {
+    return this.expandedPosts.includes(post.id);
   }
 }
 
