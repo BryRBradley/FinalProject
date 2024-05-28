@@ -45,7 +45,7 @@
     <div id="communityPage" *ngIf="selected">
         <div class="col-12" *ngIf="!editCommunity">
             <button class="btn btn-primary " (click)="displayCommunities()">Back</button>
-            <button class="btn btn-primary ms-3" (click)="setEditCommunity()" *ngIf="checkLogin() && userId == 1">Edit Community</button>
+            <button class="btn btn-primary ms-3" (click)="setEditCommunity()" *ngIf="true === (userId == 1 && checkLogin())  ">Edit Community</button>
         </div>
 
         <div class="head" *ngIf="!selectedPost && !editCommunity">
