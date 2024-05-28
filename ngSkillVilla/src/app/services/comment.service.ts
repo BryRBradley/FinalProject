@@ -4,7 +4,7 @@ import { Comment } from './../models/comment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable, SimpleChanges } from '@angular/core';
 import { AuthService } from './auth.service';
-import { Observable, catchError, throwError } from 'rxjs';
+import { Observable, catchError, connect, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'

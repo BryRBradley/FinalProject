@@ -64,7 +64,10 @@ export class CommentsComponent implements OnInit {
 
   deleteComment(comment: Comment): void {
     if (comment.post) {
-      this.commentService.destroyComment(comment.post, comment)  
+      this.commentService.destroyComment(comment.post, comment).subscribe({
+        next:()=>{},
+        error:(err)=>{console.log("Commnets.component deleteComment()" + err)}
+      })
     }
   }
 }
