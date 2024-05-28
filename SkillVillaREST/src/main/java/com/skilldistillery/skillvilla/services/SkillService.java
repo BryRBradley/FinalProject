@@ -6,6 +6,5 @@ import com.skilldistillery.skillvilla.entities.Skill;
 
 public interface SkillService {
 
-	List<Skill> findUserSkills(String usernaname, int userId);
-
+	List<Skill> indexSkills();
 }

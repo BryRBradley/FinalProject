@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import com.skilldistillery.skillvilla.Repositories.SkillRepository;
 import com.skilldistillery.skillvilla.Repositories.UserRepository;
 import com.skilldistillery.skillvilla.entities.Skill;
-import com.skilldistillery.skillvilla.entities.User;
 
 @Service
 public class SkillServiceImpl implements SkillService {
@@ -21,35 +20,10 @@ public class SkillServiceImpl implements SkillService {
 		this.userRepo = userRepo;
 	}
 
-
-
-
-
 	@Override
-	public List<Skill> findUserSkills(String username, int userId) {
-		User user = userRepo.findByUsername(username);
-		List<Skill> skills = null;
-		
-		if(user != null) {
+	public List<Skill> indexSkills() {
+		return skillRepo.findAll();
 
-		}
-		
-		return skills;
-	
 	}
 
-		
-		
-	
-	
-
-
-
-
-
-	
-
-
-
-	
 }
