@@ -2,6 +2,8 @@ package com.skilldistillery.skillvilla.entities;
 
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIncludeProperties;
+
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -18,6 +20,7 @@ public class UserSkill {
 	
 	private String level;
 	
+	@JsonIncludeProperties({"id","username"})
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	@MapsId(value = "userId")

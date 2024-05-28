@@ -29,6 +29,7 @@ public class User {
 	
 	private String username;
 	
+	@JsonIgnore
 	private String password;
 	
 	@Column(name = "first_name")
@@ -83,7 +84,7 @@ public class User {
 	@OneToMany(mappedBy="user")
 	private List<CommunityEvent> postedEvent;
 	
-	@JsonIgnoreProperties({"user"})
+	
 	@OneToMany(mappedBy = "user")
 	private List<UserSkill> skills;
 	

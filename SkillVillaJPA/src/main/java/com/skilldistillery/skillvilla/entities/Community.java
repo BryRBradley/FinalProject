@@ -8,6 +8,8 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -46,7 +48,7 @@ public class Community {
 	@Column(name = "updated_at")
 	private LocalDateTime updatedAt;
 
-	@JsonIgnore
+	@JsonIncludeProperties({"id","username","imageUrl"})
 	@ManyToMany
 	@JoinTable(name = "user_has_community", joinColumns = @JoinColumn(name = "community_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
 	private List<User> communityMembers;
@@ -62,6 +64,7 @@ public class Community {
 	@ManyToMany(mappedBy = "communities")
 	private List<Skill> skills;
 
+	@JsonIgnoreProperties({"comments"})
 	@OneToMany(mappedBy = "community")
 	private List<Post> posts;
 
