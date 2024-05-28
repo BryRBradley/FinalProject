@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Comment } from '../../models/comment';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-comments',
@@ -69,5 +70,14 @@ export class CommentsComponent implements OnInit {
       this.getComments(this.parentPost);
     }
   }
-
+  deleteComment(comment: Comment): void {
+    this.deleteComment(comment).subscribe({
+      next: () => {
+        this.getComments(comment.post);
+      },
+      error: (error: any) => {
+        console.log("Error deleting comment", error);
+      }
+    });
+  }
 }

@@ -9,6 +9,7 @@ import { FormsModule } from "@angular/forms";
 import { AuthService } from '../../services/auth.service';
 import { User } from '../../models/user';
 
+
 @Component({
   selector: 'app-post',
   standalone: true,
@@ -21,6 +22,9 @@ import { User } from '../../models/user';
   styleUrl: './post.component.css'
 })
 export class PostComponent implements OnInit {
+deleteComment(arg0: Post,arg1: Comment) {
+throw new Error('Method not implemented.');
+}
   @ViewChild(CommentsComponent) childComponent!: CommentsComponent;
   @Output() selectedPost = new EventEmitter<Post | null>();
   @Input() communityId!: number
@@ -108,6 +112,7 @@ export class PostComponent implements OnInit {
       next: () => {
         this.reload(this.currentCommunityId);
         this.editPost = null;
+        this.router.navigate(['/community', communityId]);
       },
       error: (err) => {
         console.log("Error updating post", err);

@@ -129,6 +129,8 @@ export class CommunityComponent implements OnInit {
       next: () => {
         this.reload();
         this.newCommunity = null;
+        this.router.navigate(['/community', community.id]);
+        //Redirect to community page. 
       },
       error: () => { }
     })
@@ -145,4 +147,5 @@ export class CommunityComponent implements OnInit {
       error: ()=>{}
     })
   }
+  
 }

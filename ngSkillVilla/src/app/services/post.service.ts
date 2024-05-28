@@ -5,11 +5,13 @@ import { HttpClient } from '@angular/common/http';
 import { AuthService } from './auth.service';
 import { Observable, catchError, throwError } from 'rxjs';
 import { PostCategory } from '../models/post-category';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PostService {
+ 
 
   posts: Post[] = []
 
@@ -88,5 +90,51 @@ export class PostService {
         );
       })
     );
+  }
+  private createCommentObservable(post: Post, comment: Comment): Observable<Comment> {
+    return this.http.post<Comment>(this.url + post.community?.id + "/posts/" + post.id, comment, this.getHttpOptions()).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(
+          () => new Error('commentService.createComment(): error creating comment: ' + err)
+        );
+      })
+    );
+  }
+
+  addComment(post: Post, comment: Comment, onSuccess: (comment: Comment) => void, onError: (error: any) => void): void {
+    this.createCommentObservable(post, comment).subscribe({
+      next: (newComment) => {
+        console.log('Comment added successfully', newComment);
+        onSuccess(newComment);
+      },
+      error: (err) => {
+        console.error('Error adding comment', err);
+        onError(err);
+      }
+    });
+  }
+  private destroyCommentObservable(post: Post, comment: Comment): Observable<void> {
+    return this.http.delete<void>(this.url + post.community?.id + "/posts/" + post.id + "/comments/" + comment.id, this.getHttpOptions()).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(
+          () => new Error('commentService.destroyComment(): error deleting comment: ' + err)
+        );
+      })
+    );
+  }
+
+  deleteComment(post: Post, comment: Comment, onSuccess: () => void, onError: (error: any) => void): void {
+    this.destroyCommentObservable(post, comment).subscribe({
+      next: () => {
+        console.log('Comment deleted successfully');
+        onSuccess();
+      },
+      error: (err) => {
+        console.error('Error deleting comment', err);
+        onError(err);
+      }
+    });
   }
 }
