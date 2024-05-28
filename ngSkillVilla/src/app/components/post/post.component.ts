@@ -37,7 +37,7 @@ export class PostComponent implements OnInit {
   currentCommunityId: number = 0;
 
   selectedPostComments: Post | null = null;
-  newComment: Comment | null = null;
+  newComment: Comment = new Comment();
   expandedPosts: number[] = [];
 deleteComment: any;
 
@@ -168,6 +168,12 @@ deleteComment: any;
       next: (user: User) => { this.userId = user.id; console.log(user) },
       error: () => { }
     })
+  }
+
+  createComment(comment: Comment, post:Post) {
+    this.childComponent.addComment(post, comment);
+    this.childComponent.getComments(post);
+    this.newComment = new Comment();
   }
 }
  

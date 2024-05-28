@@ -70,4 +70,17 @@ export class CommentsComponent implements OnInit {
       })
     }
   }
+
+  updateComment = (comment: Comment): void => {
+    if (comment.post) {
+      this.commentService.updateComment( comment.post, comment).subscribe({
+        next: () => {
+      
+        },
+        error: (err: any) => {
+          console.log("Error updating comment", err);
+        }
+      });
+    }
+  }
 }
