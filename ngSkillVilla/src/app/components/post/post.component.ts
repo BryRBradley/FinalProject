@@ -6,6 +6,8 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { PostService } from "../../services/post.service";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
+import { AuthService } from '../../services/auth.service';
+import { User } from '../../models/user';
 
 @Component({
   selector: 'app-post',
@@ -23,6 +25,8 @@ export class PostComponent implements OnInit {
   @Output() selectedPost = new EventEmitter<Post | null>();
   @Input() communityId!: number
 
+  userId: number = 0;
+
   posts: Post[] = [];
   newPost: Post | null = null;
   selected: Post | null = null;
@@ -35,7 +39,7 @@ export class PostComponent implements OnInit {
   expandedPosts: number[] = [];
   //---------------------------------------------------------------------
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute, private postService: PostService) { }
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, private postService: PostService, private authService: AuthService) { }
 
   //---------------------------------------------------------------------
 
@@ -43,7 +47,6 @@ export class PostComponent implements OnInit {
     this.activatedRoute.paramMap.subscribe(
       {
         next: (params) => {
-          console.log(params.get("communityId"))
           let postIdStr = params.get("communityId");
           if (postIdStr) {
             let postId = parseInt(postIdStr);
@@ -56,6 +59,7 @@ export class PostComponent implements OnInit {
           }
         }
       });
+      this.validUser()
   }
 
   //---------------------------------------------------------------------
@@ -162,6 +166,13 @@ export class PostComponent implements OnInit {
 
   isCommentsVisible(post: Post): boolean {
     return this.expandedPosts.includes(post.id);
+  }
+
+  validUser() {
+    this.authService.getLoggedInUser().subscribe({
+      next: (user: User) => { this.userId = user.id; console.log(user) },
+      error: () => { }
+    })
   }
 }
 

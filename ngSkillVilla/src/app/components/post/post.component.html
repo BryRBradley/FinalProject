@@ -4,23 +4,7 @@
 </div>
 
 
-<div *ngIf="newPost">
-    <h3>Create New Post</h3>
-    <form (ngSubmit)="addPost(newPost, currentCommunityId)">
-        <div class="form-group">
-            <label for="postDescription">Post</label>
-            <textarea id="postDescription" [(ngModel)]="newPost.description" name="description" class="form-control"
-                required>
-            </textarea>
 
-            <label for="">Image Url</label>
-            <input type="text" name="imageUrl" [(ngModel)]="newPost.imageUrl">
-
-        </div>
-        <button type="submit" class="btn btn-primary">Create</button>
-        <button class="btn btn-primary ms-2" (click)="newPost=null">Cancel</button>
-    </form>
-</div>
 
 <button class="btn btn-primary" (click)="createNewPost()" *ngIf="!newPost">Create Post</button>
 
@@ -32,22 +16,22 @@
                 <div class="post-header" *ngIf="post.user">
                     <div class="post-user"><span>{{post.user.username}}</span></div>
                     <!-- <div class="post-timestamp">Created at: <span>{{post.createdAt}}</span></div> -->
-
+                    <button (click)="setEditPost(post)" class="btn btn-secondary" *ngIf="post.user.id == userId">
+                        Edit
+                    </button>
                 </div>
                 <img class="col-12" [src]="post.imageUrl" alt="">
 
             </div>
-
-
             <div class="post-description" (click)="sendSelectedPost(post)">{{post.description}}</div>
             <div class="post-footer" (click)="log(post)">
                 <!-- <div class="post-updated">Updated at: <span>{{post.updatedAt}}</span></div> -->
-                <button (click)="setEditPost(post)" class="btn btn-secondary">Edit</button>
+
                 <button type="button" (click)="toggleComments(post)">{{post.comments.length}} Comments</button>
-                <button (click)="deletePost(currentCommunityId, post.id)" class="btn btn-danger">Delete</button>
+
             </div>
 
-            <app-comments  [parentPost]="selectedPostComments" *ngIf="isCommentsVisible(post)"></app-comments>
+            <app-comments [parentPost]="selectedPostComments" *ngIf="isCommentsVisible(post)"></app-comments>
 
         </div>
     </div>
@@ -69,6 +53,23 @@
 
 </div>
 
+<div *ngIf="newPost">
+    <h3>Create New Post</h3>
+    <form (ngSubmit)="addPost(newPost, currentCommunityId)">
+        <div class="form-group">
+            <label for="postDescription">Post</label>
+            <textarea id="postDescription" [(ngModel)]="newPost.description" name="description" class="form-control"
+                required>
+            </textarea>
+
+            <label for="">Image Url</label>
+            <input type="text" name="imageUrl" [(ngModel)]="newPost.imageUrl">
+
+        </div>
+        <button type="submit" class="btn btn-primary">Create</button>
+        <button class="btn btn-primary ms-2" (click)="newPost=null">Cancel</button>
+    </form>
+</div>
 
 <div *ngIf="editPost">
     <h3>Edit Post</h3>
@@ -76,9 +77,14 @@
         <div class="form-group">
             <label for="editPostDescription">Description</label>
             <textarea id="editPostDescription" [(ngModel)]="editPost.description" name="description"
-                class="form-control" required></textarea>
+                class="form-control" required>
+            </textarea>
+
+            <label for="">Image Url</label>
+            <input type="text" name="imageUrl" [(ngModel)]="editPost.imageUrl">
         </div>
         <button type="button" (click)="editPost = null" class="btn btn-secondary">Cancel</button>
         <button type="submit" class="btn btn-primary">Save Changes</button>
+        <button (click)="deletePost(currentCommunityId, editPost.id)" class="btn btn-danger">Delete</button>
     </form>
 </div>
