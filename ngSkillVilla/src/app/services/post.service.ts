@@ -14,7 +14,7 @@ export class PostService {
  
 
   posts: Post[] = []
-
+//private baseUrl = environment.baseUrl;
   private baseUrl = 'http://localhost:8085/'; // adjust port to match server
   private url = this.baseUrl + 'api/communities/';
 

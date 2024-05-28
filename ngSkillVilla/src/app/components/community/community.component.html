@@ -1,5 +1,7 @@
-<div class="wrapper">
 
+<div class="bg-image" style="background-image: url('assets/images/cityscapeorange.png'); background-size: cover; background-attachment: fixed;">
+<div class="wrapper">
+ 
     <div class="create-community-row" *ngIf="!selected && !newCommunity && checkLogin()">
         <button class="btn btn-primary create-community-button ms-auto" (click)="createNewCommunity()">Create
             Community</button>

@@ -4,6 +4,10 @@ body {
     padding: 0;
     color: #333;
 }
+.community-card
+{
+    background-color: #ffffff;
+}
 
 .create-community-row {
     display: flex;

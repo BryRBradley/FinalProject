@@ -10,7 +10,7 @@ import { Observable, catchError, throwError } from 'rxjs';
   providedIn: 'root'
 })
 export class CommentService {
-
+  //private baseUrl = environment.baseUrl;
   private baseUrl = 'http://localhost:8085/'; // adjust port to match server
   private url = this.baseUrl + 'api/posts/';
 

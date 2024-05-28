@@ -39,6 +39,7 @@
         <div>
             <button (click)="generateNewComment()">Comment</button>
             <div *ngIf="newComment">
+            
                 <textarea name="message" [(ngModel)]="newComment.message" placeholder="Comment"></textarea>
                 <button (click)="generateNewComment">Create</button>
                 <button (click)="deleteComment">Delete</button>

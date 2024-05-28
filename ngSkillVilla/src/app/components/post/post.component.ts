@@ -40,6 +40,7 @@ export class PostComponent implements OnInit {
   newComment: Comment | null = null;
   expandedPosts: number[] = [];
 deleteComment: any;
+
   //---------------------------------------------------------------------
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private postService: PostService, private authService: AuthService) { }
