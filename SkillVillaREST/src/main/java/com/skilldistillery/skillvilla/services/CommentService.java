@@ -8,8 +8,10 @@ public interface CommentService {
 
 	Comment createOnPost(String name, int communityId, int postId, Comment comment);
 
-	boolean destroy(String name, int communityId, int postId, int commentId);
+	boolean destroy(String name, int communityId, int postId);
 
 	List<Comment> index(int postId);
+
+	Comment update(String name, int postId, Comment comment);
 
 }

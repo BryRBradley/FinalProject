@@ -83,7 +83,7 @@ public class User {
 	@OneToMany(mappedBy="user")
 	private List<CommunityEvent> postedEvent;
 	
-	@JsonIgnoreProperties({"user","id"})
+	@JsonIgnoreProperties({"user"})
 	@OneToMany(mappedBy = "user")
 	private List<UserSkill> skills;
 	

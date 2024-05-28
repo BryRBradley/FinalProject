@@ -1,6 +1,7 @@
 package com.skilldistillery.skillvilla.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -41,9 +42,9 @@ public class CommentServiceImpl implements CommentService {
 	}
 
 	@Override
-	public boolean destroy(String username, int communityId, int postId, int commentId) {
+	public boolean destroy(String username,int postId, int commentId) {
 
-		if (postRepo.existsByIdAndCommunityId(postId, communityId)) {
+		if (postRepo.existsById(postId)) {
 			if (commentRepo.existsByIdAndPostIdAndUserUsername(commentId, postId, username)) {
 				commentRepo.deleteById(commentId);
 				return true;
@@ -56,5 +57,27 @@ public class CommentServiceImpl implements CommentService {
 	public List<Comment> index(int postId) {
 		return commentRepo.findAllByPostId(postId);
 	}
+
+	@Override
+	public Comment update(String username, int commentId, Comment comment) {
+		Optional<Comment> postOptional = commentRepo.findById(commentId);
+		Comment managedComment = null;
+		
+		if (commentRepo.existsByIdAndUserUsername(commentId,username)) {
+			if (postOptional.isPresent()) {
+				managedComment = postOptional.get();
+				
+				if(comment.getMessage() != null && !comment.getMessage().isBlank()){ managedComment.setMessage(comment.getMessage());};
+			
+				
+				
+				commentRepo.saveAndFlush(managedComment);
+				
+			}
+		}
+		
+		return managedComment;
+	}
+
 
 }
