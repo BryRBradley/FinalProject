@@ -5,14 +5,16 @@ import { HttpClient } from '@angular/common/http';
 import { AuthService } from './auth.service';
 import { Observable, catchError, throwError } from 'rxjs';
 import { PostCategory } from '../models/post-category';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PostService {
+ 
 
   posts: Post[] = []
-
+//private baseUrl = environment.baseUrl;
   private baseUrl = 'http://localhost:8085/'; // adjust port to match server
   private url = this.baseUrl + 'api/communities/';
 
@@ -79,14 +81,4 @@ export class PostService {
     return options;
   }
 
-  createComment(post: Post, comment: Comment): Observable<Comment> {
-    return this.http.post<Comment>(this.url + post.community?.id + "/posts/" + post.id, comment, this.getHttpOptions()).pipe(
-      catchError((err: any) => {
-        console.log(err);
-        return throwError(
-          () => new Error('userService.create(): error retrieving posts -- post.Service: ' + err)
-        );
-      })
-    );
-  }
 }

@@ -9,6 +9,7 @@ import { FormsModule } from "@angular/forms";
 import { AuthService } from '../../services/auth.service';
 import { User } from '../../models/user';
 
+
 @Component({
   selector: 'app-post',
   standalone: true,
@@ -21,6 +22,7 @@ import { User } from '../../models/user';
   styleUrl: './post.component.css'
 })
 export class PostComponent implements OnInit {
+
   @ViewChild(CommentsComponent) childComponent!: CommentsComponent;
   @Output() selectedPost = new EventEmitter<Post | null>();
   @Input() communityId!: number
@@ -37,6 +39,8 @@ export class PostComponent implements OnInit {
   selectedPostComments: Post | null = null;
   newComment: Comment | null = null;
   expandedPosts: number[] = [];
+deleteComment: any;
+
   //---------------------------------------------------------------------
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private postService: PostService, private authService: AuthService) { }
@@ -108,6 +112,7 @@ export class PostComponent implements OnInit {
       next: () => {
         this.reload(this.currentCommunityId);
         this.editPost = null;
+        this.router.navigate(['/community', communityId]);
       },
       error: (err) => {
         console.log("Error updating post", err);
@@ -137,16 +142,6 @@ export class PostComponent implements OnInit {
 
   generateNewComment() {
     this.newComment = new Comment();
-  }
-
-  addComment(post: Post, comment: Comment) {
-    console.log(comment)
-    this.postService.createComment(post, comment).subscribe({
-      next: (resp) => {
-        console.log("postComp - addComment(): " + resp);
-      },
-      error: (err) => { "Unable to add comment : postService addcomment()" }
-    })
   }
 
   showComments(post: Post) {
