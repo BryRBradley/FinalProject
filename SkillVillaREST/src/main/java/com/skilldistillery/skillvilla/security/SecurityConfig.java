@@ -40,6 +40,7 @@ public class SecurityConfig {
             .requestMatchers(HttpMethod.GET, "/api/communities/{id}").permitAll()
             .requestMatchers(HttpMethod.GET, "/api/communities/{communityId}/posts").permitAll()
             .requestMatchers(HttpMethod.GET, "/api/communities/{communityId}/posts/{postId}").permitAll()
+            .requestMatchers(HttpMethod.GET, "/api/communities/{communityId}/posts/{postId}/comments").permitAll()
             .requestMatchers("/api/**").authenticated() // Requests for our REST API must be authorized.
             .anyRequest().permitAll());                 // All other requests are allowed without authentication.
 
