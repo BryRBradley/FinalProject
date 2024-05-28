@@ -43,6 +43,7 @@ public class CommunityServiceImpl implements CommunityService {
 			
 			if (communityOptional.isPresent()) {
 				
+				
 				managedCommunity = communityOptional.get();
 				
 				if (community.getName() != null && !community.getName().isBlank()) {
@@ -53,8 +54,9 @@ public class CommunityServiceImpl implements CommunityService {
 				
 				if(community.getLocation() != null) {managedCommunity.setLocation(community.getLocation());}
 				
-				if(community.getImageUrl() != null) {managedCommunity.setDiscordUrl(community.getDiscordUrl());}
+				if(community.getImageUrl() != null) {managedCommunity.setImageUrl(community.getImageUrl());}
 				
+				if(community.getDiscordUrl() != null) {managedCommunity.setDiscordUrl(community.getDiscordUrl());}
 				commRepo.saveAndFlush(managedCommunity);
 			}
 		}
