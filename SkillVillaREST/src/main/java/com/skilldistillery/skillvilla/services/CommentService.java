@@ -12,4 +12,6 @@ public interface CommentService {
 
 	List<Comment> index(int postId);
 
+	Comment update(String name, int postId, Comment comment);
+
 }

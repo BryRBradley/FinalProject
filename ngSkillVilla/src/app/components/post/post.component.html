@@ -2,10 +2,6 @@
 
 
 </div>
-
-
-
-
 <button class="btn btn-primary" (click)="createNewPost()" *ngIf="!newPost">Create Post</button>
 
 <div>
@@ -44,8 +40,8 @@
             <button (click)="generateNewComment()">Comment</button>
             <div *ngIf="newComment">
                 <textarea name="message" [(ngModel)]="newComment.message" placeholder="Comment"></textarea>
-                <button (click)="addComment(selected, newComment)">Create</button>
-                <button (click)="deleteComment(selected, newComment)">Delete</button>
+                <button (click)="generateNewComment">Create</button>
+                <button (click)="deleteComment">Delete</button>
                 <button (click)="newComment=null">Cancel</button>
             </div>
 

@@ -3,9 +3,11 @@ package com.skilldistillery.skillvilla.services;
 import java.util.List;
 
 import com.skilldistillery.skillvilla.entities.Skill;
+import com.skilldistillery.skillvilla.entities.SkillCategory;
 
 public interface SkillService {
 
-	List<Skill> findUserSkills(String usernaname, int userId);
+	List<Skill> indexSkills();
 
+	List<SkillCategory> indexSkillCategories();
 }

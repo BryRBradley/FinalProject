@@ -22,9 +22,7 @@ import { User } from '../../models/user';
   styleUrl: './post.component.css'
 })
 export class PostComponent implements OnInit {
-deleteComment(arg0: Post,arg1: Comment) {
-throw new Error('Method not implemented.');
-}
+
   @ViewChild(CommentsComponent) childComponent!: CommentsComponent;
   @Output() selectedPost = new EventEmitter<Post | null>();
   @Input() communityId!: number
@@ -41,6 +39,7 @@ throw new Error('Method not implemented.');
   selectedPostComments: Post | null = null;
   newComment: Comment | null = null;
   expandedPosts: number[] = [];
+deleteComment: any;
   //---------------------------------------------------------------------
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private postService: PostService, private authService: AuthService) { }
@@ -142,16 +141,6 @@ throw new Error('Method not implemented.');
 
   generateNewComment() {
     this.newComment = new Comment();
-  }
-
-  addComment(post: Post, comment: Comment) {
-    console.log(comment)
-    this.postService.createComment(post, comment).subscribe({
-      next: (resp) => {
-        console.log("postComp - addComment(): " + resp);
-      },
-      error: (err) => { "Unable to add comment : postService addcomment()" }
-    })
   }
 
   showComments(post: Post) {

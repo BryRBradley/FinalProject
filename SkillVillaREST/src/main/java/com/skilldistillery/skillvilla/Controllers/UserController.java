@@ -1,17 +1,14 @@
 package com.skilldistillery.skillvilla.Controllers;
 
 import java.security.Principal;
-import java.util.List;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.skilldistillery.skillvilla.entities.Skill;
 import com.skilldistillery.skillvilla.entities.User;
 import com.skilldistillery.skillvilla.services.SkillService;
 import com.skilldistillery.skillvilla.services.UserService;
@@ -66,19 +63,6 @@ public class UserController {
 
 	}
 	
-	@GetMapping("users/{userId}")
-	public List<Skill> indexSkills(HttpServletRequest req, HttpServletResponse res, Principal principal,
-			@PathVariable("userId") int userId) {
-		List<Skill> Skills = skillService.findUserSkills(principal.getName(), userId);
-
-		if (Skills.isEmpty()) {
-			res.setStatus(204);
-		}
-
-		return Skills;
-
-	}
-
 //	@DeleteMapping("users/{id}")
 //	public void delete(@PathVariable("id") int id) {
 //		userService.delete(id);
