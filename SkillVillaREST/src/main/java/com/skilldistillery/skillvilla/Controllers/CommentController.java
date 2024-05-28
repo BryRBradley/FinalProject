@@ -64,11 +64,10 @@ public class CommentController {
 		return comments;
 	}
 
-	@DeleteMapping("communities/{communityId}/posts/{postId}/comments/{commentId}")
+	@DeleteMapping("posts/{postId}/comments/{commentId}")
 	public void destroy(HttpServletRequest req, HttpServletResponse res, Principal principal,
-			@PathVariable("communityId") int communityId,
 			@PathVariable("postId") int postId,@PathVariable("commentId") int commentId) {
-		boolean deleted = commentService.destroy(principal.getName(),communityId, postId, commentId);
+		boolean deleted = commentService.destroy(principal.getName(), postId, commentId);
 
 		if (deleted) {
 			res.setStatus(HttpServletResponse.SC_NO_CONTENT);
