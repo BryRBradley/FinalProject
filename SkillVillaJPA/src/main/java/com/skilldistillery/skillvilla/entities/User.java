@@ -8,6 +8,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -61,7 +62,7 @@ public class User {
 	@OneToMany(mappedBy="user")
 	private List <Comment> comments;
 	
-	@JsonIgnore
+	@JsonIgnoreProperties({"posts"})
 	@ManyToMany(mappedBy="communityMembers")
 	private List <Community> communities;
 	
@@ -82,7 +83,7 @@ public class User {
 	@OneToMany(mappedBy="user")
 	private List<CommunityEvent> postedEvent;
 	
-	@JsonIgnore
+	@JsonIgnoreProperties({"user","id"})
 	@OneToMany(mappedBy = "user")
 	private List<UserSkill> skills;
 	
