@@ -30,5 +30,6 @@ export const routes: Routes = [
     { path: 'profile/:profileId', component: ProfileComponent },
     { path: 'editProfile', component: EditProfileComponent },
     { path: 'editProfile/:editProfileId', component: EditProfileComponent },
+    { path: 'community/:id', component: CommunityComponent },
     { path: '**', component: NotFoundComponent }
 ];

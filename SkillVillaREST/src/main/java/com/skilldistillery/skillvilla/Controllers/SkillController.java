@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.skillvilla.entities.Skill;
+import com.skilldistillery.skillvilla.entities.SkillCategory;
 import com.skilldistillery.skillvilla.services.SkillService;
 import com.skilldistillery.skillvilla.services.UserService;
 
@@ -22,6 +23,7 @@ public class SkillController {
 	private UserService userService;
 	private SkillService skillService;
 
+
 	public SkillController(UserService userService, SkillService skillService) {
 		super();
 		this.userService = userService;
@@ -29,7 +31,7 @@ public class SkillController {
 	}
 	
 	@GetMapping("skills")
-	public List<Skill> Index(HttpServletRequest req, HttpServletResponse res){
+	public List<Skill> indexSkill(HttpServletRequest req, HttpServletResponse res){
 		List<Skill> Skills = skillService.indexSkills();
 
 		if (Skills.isEmpty()){
@@ -39,6 +41,15 @@ public class SkillController {
 		return Skills;
 	}
 	
+	@GetMapping("skillCategories")
+	public List<SkillCategory> indexSkillCategory(HttpServletRequest req, HttpServletResponse res){
+		List<SkillCategory> Skills = skillService.indexSkillCategories();
 
+		if (Skills.isEmpty()){
+			res.setStatus(204);
+		}
+
+		return Skills;
+	}
 
 }

@@ -1,7 +1,14 @@
-<p>comments works!</p>
+
 
 
 <div *ngFor="let comment of comments">
-    <p>{{comment.user?.username}}</p>
+    <div>
+        <p>{{comment.user?.username}}</p>
     <p>{{comment.message}}</p>
+    
+    </div>
+    <div>
+        <span class="btn btn-primary"> <a (click)="deleteComment(comment)">Updated</a></span>
+        <span class="btn btn-primary"> <a (click)="deleteComment(comment)">Delete</a></span>
+    </div>
 </div>
