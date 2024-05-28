@@ -38,7 +38,13 @@ export class CommentService {
   }
 
   createComment(post: Post, comment: Comment): Observable<Comment> {
-    return this.http.post<Comment>(this.url + post.community?.id + "/posts/" + post.id, comment, this.getHttpOptions()).pipe(
+    let communityId ;
+    if(post.community != null){
+      communityId = post.community.id;
+    }else{
+    communityId= 0;      
+    }
+    return this.http.post<Comment>(this.url + communityId + "/posts/" + post.id, comment, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(
@@ -49,7 +55,13 @@ export class CommentService {
   }
 
   updateComment(post: Post, comment: Comment): Observable<Comment> {
-    return this.http.put<Comment>(this.url + post.community?.id + "/posts/" + post.id + "/comments/" + comment.id, comment, this.getHttpOptions()).pipe(
+    let communityId ;
+    if(post.community != null){
+      communityId = post.community.id;
+    }else{
+    communityId= 0;      
+    }
+    return this.http.put<Comment>(this.url + communityId + "/posts/" + post.id + "/comments/" + comment.id, comment, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(
