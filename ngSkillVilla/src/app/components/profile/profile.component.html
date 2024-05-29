@@ -1,50 +1,74 @@
-<div class="container mt-5">
-  <div class="row d-flex justify-content-center">
-    <div class="col-md-7">
-      <div class="card p-3 py-4">
-        <div class="text-center">
-          <img
-            src="https://i.imgur.com/bDLhJiP.jpg"
-            width="100"
-            class="rounded-circle"
-          />
-        </div>
+<div class="background">
+  <div class="container mt-5">
+    <div class="row d-flex justify-content-center">
+      <div class="col-md-7">
+        <div class="background-card">
+          <div class="card p-3 py-4">
+            <div class="background-image">
+              <div class="text-center">
+                <br />
+                <br />
+                   <img class="img-account-profile rounded-circle mb-2" [src]="loggedInUser?.imageUrl" />
+              </div>
 
-        <div class="text-center mt-3">
-          <span class="bg-secondary p-1 px-4 rounded text-white">{{loggedInUser?.role}}</span>
-          <h5 class="mt-2 mb-0">{{ loggedInUser?.username }}</h5>
-          <br>
-          <span><strong>About Me</strong></span>
+              <div class="text-center mt-5">
+                <span class="bg-secondary p-1 px-4 rounded text-white">{{
+                  loggedInUser?.role
+                }}</span>
+                <br />
+                <br />
+                <h5 class="mt-2 mb-0">{{ loggedInUser?.username }}</h5>
+                <br />
 
-          <div class="px-4 mt-1">
-            <p class="fonts">
-              Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-              labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-              nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-              consequat.
-            </p>
-          </div>
+                <div class="aboutMe">
+                  <span><strong>About Me</strong></span>
+                  <div class="px-4 mt-1">
+                    <p class="fonts">
+                      
 
-          <!-- <ul class="skill-list">
-            <li><i class="fa fa-facebook"></i></li>
-            <li><i class="fa fa-dribbble"></i></li>
-            <li><i class="fa fa-instagram"></i></li>
-            <li><i class="fa fa-linkedin"></i></li>
-            <li><i class="fa fa-google"></i></li>
-          </ul> -->
 
-          <div class="buttons">
-            <button class="btn btn-outline-primary px-4">Message</button>
-            <button class="btn btn-primary px-4 ms-3">Contact</button>
-          </div>
-          <br>
-            <div *ngIf="loggedInUser">
-            <button class="btn bg-success" (click)="getEditProfile(loggedInUser)">Edit Profile</button>
+<p>Hey there! I'm {{loggedInUser?.firstName}}, and I'm all about the sweeter things in life... and the cozier things, too!<br>
+  As an avid baker, I find joy in whisking, kneading, and baking up delightful treats that not only satisfy the taste buds but also warm the heart.<br>
+  From fluffy cakes to artisan bread, you name it, I bake it with love.
+                    </p>
+                  </div>
+                </div>
+                <div class="skills">
+                  <span><strong>My Skills</strong></span>
+                  <ul
+                    *ngIf="loggedInUser"
+                    class="skill-list skill-list list-unstyled"
+                  >
+                    <li class="list-group-item">
+                      {{ loggedInUser.skills[0].skill?.name }}
+                    </li>
+                  </ul>
+                </div>
+
+                <!-- <button class="btn btn-primary px-4 ms-3">Contact</button> -->
+             <div *ngIf="loggedInUser">
+                <button name="emailButton" class="btn success" (click)="showEmail = !showEmail">
+                  <strong>Contact Me!</strong>
+                </button>
+                <h1 *ngIf="showEmail">{{loggedInUser.email}}</h1>
+
+             </div>
+             <br>
+                <div *ngIf="loggedInUser">
+                  <button
+                    class="btn bg-success"
+                    (click)="getEditProfile(loggedInUser)"
+                  ><strong>Edit Profile</strong>
+
+                  </button>
+                  <br>
+                  <br>
+                </div>
+              </div>
             </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-
-
