@@ -1,31 +1,50 @@
+import { Comment } from './comment';
+import { Community } from './community';
+import { Location } from './location';
+import { PostCategory} from './post-category';
+import { User } from './user';
+
 export class Post {
     id: number;
-    userId: number;
-    community_id: number;
+    user: User;
+    community: Community | null;
     description: string;
     enabled: boolean;
-    locationId: number;
+    location: Location | null;
+    postCategory: PostCategory;
+    imageUrl: string;
     createdAt: string;
-    UpdatedAt: string;
-
+    updatedAt: string;
+    comments: Comment[];
+    newComment: Comment;
+    
     constructor(
-        id = 0,
-        userId = 0,
-        community_id = 0,
-        description = '',
-        enabled = false,
-        locationId = 0,
-        createdAt = '',
-        UpdatedAt = ''
+        id:number = 0,
+        user:User = new User(),
+        community: Community | null = null,
+        description: string = '',
+        enabled: boolean = false,
+        location: Location | null = null,
+        imageUrl: string = '',
+        postCategory: PostCategory = new PostCategory(),
+        createdAt: string = '',
+        UpdatedAt: string = '',
+        comments: Comment[] = [],
+        newComment:Comment = new Comment()
     ) {
         this.id = id;
-        this.userId = userId;
-        this.community_id = community_id;
+        this.user = user;
+        this.community = community;
         this.description = description;
         this.enabled = enabled;
-        this.locationId = locationId;
+        this.location = location;
+        this.postCategory = postCategory;
         this.createdAt = createdAt;
-        this.UpdatedAt = UpdatedAt;
+        this.updatedAt = UpdatedAt;
+        this.imageUrl = imageUrl;
+        this.comments = comments;
+        this.newComment = newComment;
+
     }
 
 }

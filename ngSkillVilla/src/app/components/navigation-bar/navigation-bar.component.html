@@ -20,18 +20,19 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" [routerLink]="['/community']">Community</a>
           </li>
-          <li class="nav-item dropdown">
+          <li  class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Account
             </a>
             <ul class="dropdown-menu dropdown-menu-end">
-              <li><a class="dropdown-item" [routerLink]="['/login']">Login</a></li>
-              <li><a class="dropdown-item" [routerLink]="['/register']">Register</a></li>
-              <li><button class="btn btn-primary">Logout</button></li>
+              <li><a *ngIf="!checkLogin()" class="dropdown-item" [routerLink]="['/login']">Login</a></li>
+              <li><a *ngIf="!checkLogin()" class="dropdown-item" [routerLink]="['/register']">Register</a></li>
+              <li><a *ngIf="checkLogin()" class="dropdown-item" [routerLink]="['/profile']">Profile</a></li>
+              <li><button *ngIf="checkLogin()" class="btn btn-primary" (click)="logout()">Logout</button></li>
             </ul>
           </li>
-
         </ul>
+
       </div>
     </div>
   </nav>

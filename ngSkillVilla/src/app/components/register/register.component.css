@@ -1,4 +1,17 @@
-div{
+div.background {
+    background-image: url("https://img.freepik.com/premium-vector/chocalate-abstract-background_688032-324.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100svh;
+}
+img {
+    width: 100%;
+    max-width: 200px;
+  }
+
+form{
+    padding-top: 100px;
     margin: 0 auto;;
     max-width: 250px;
 }

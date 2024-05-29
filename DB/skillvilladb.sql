@@ -46,7 +46,8 @@ CREATE TABLE IF NOT EXISTS `user` (
   `first_name` VARCHAR(245) NULL,
   `last_name` VARCHAR(245) NULL,
   `location_id` INT NULL,
-  `image_url` VARCHAR(2000) NULL,
+  `image_url` TEXT NULL,
+  `bio` TEXT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `username_UNIQUE` (`username` ASC),
   INDEX `fk_user_location1_idx` (`location_id` ASC),
@@ -359,9 +360,9 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `skillvilladb`;
-INSERT INTO `user` (`id`, `username`, `password`, `role`, `created_at`, `updated_at`, `enabled`, `email`, `first_name`, `last_name`, `location_id`, `image_url`) VALUES (1, 'test', '$2a$10$3dRffI/xMcwUnKkgA.s5T.AlBB3lgwBJleReRBPSE0ihTpgiKzC5q', 'standard', NULL, NULL, 1, NULL, NULL, NULL, 1, NULL);
-INSERT INTO `user` (`id`, `username`, `password`, `role`, `created_at`, `updated_at`, `enabled`, `email`, `first_name`, `last_name`, `location_id`, `image_url`) VALUES (2, 'PixelPulse', '$2a$10$3dRffI/xMcwUnKkgA.s5T.AlBB3lgwBJleReRBPSE0ihTpgiKzC5q', 'standard', NULL, NULL, 1, 'pixelprincess@email.com', 'Angie', 'Park', 1, NULL);
-INSERT INTO `user` (`id`, `username`, `password`, `role`, `created_at`, `updated_at`, `enabled`, `email`, `first_name`, `last_name`, `location_id`, `image_url`) VALUES (3, 'NovaNinja', '$2a$10$3dRffI/xMcwUnKkgA.s5T.AlBB3lgwBJleReRBPSE0ihTpgiKzC5q', 'standard', NULL, NULL, 1, 'ninja1234@mail.com', 'Josh', 'Keller', 1, NULL);
+INSERT INTO `user` (`id`, `username`, `password`, `role`, `created_at`, `updated_at`, `enabled`, `email`, `first_name`, `last_name`, `location_id`, `image_url`, `bio`) VALUES (1, 'test', '$2a$10$3dRffI/xMcwUnKkgA.s5T.AlBB3lgwBJleReRBPSE0ihTpgiKzC5q', 'standard', NULL, NULL, 1, 'tester@me.com', 'Alexander', 'Price', 1, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStqe-2uM_Z2VQbUXqtoFjGnY53CT9ZBQv5-WDTz_lLpXrDEvWz_EJ_AZto5XeZcWKGB5A&usqp=CAU', NULL);
+INSERT INTO `user` (`id`, `username`, `password`, `role`, `created_at`, `updated_at`, `enabled`, `email`, `first_name`, `last_name`, `location_id`, `image_url`, `bio`) VALUES (2, 'PixelPulse', '$2a$10$3dRffI/xMcwUnKkgA.s5T.AlBB3lgwBJleReRBPSE0ihTpgiKzC5q', 'standard', NULL, NULL, 1, 'pixelprincess@email.com', 'Angie', 'Park', 1, 'https://wallpapers.com/images/hd/aesthetic-profile-picture-bz0zswmqkcfm45ik.jpg', NULL);
+INSERT INTO `user` (`id`, `username`, `password`, `role`, `created_at`, `updated_at`, `enabled`, `email`, `first_name`, `last_name`, `location_id`, `image_url`, `bio`) VALUES (3, 'NovaNinja', '$2a$10$3dRffI/xMcwUnKkgA.s5T.AlBB3lgwBJleReRBPSE0ihTpgiKzC5q', 'standard', NULL, NULL, 1, 'ninja1234@mail.com', 'Josh', 'Keller', 1, 'https://i.pinimg.com/originals/0b/1e/82/0b1e82b05b5ff03293f1149b5769ae85.png', NULL);
 
 COMMIT;
 
@@ -416,6 +417,19 @@ COMMIT;
 START TRANSACTION;
 USE `skillvilladb`;
 INSERT INTO `skill` (`id`, `name`, `category_id`, `description`) VALUES (1, 'Baking', 2, NULL);
+INSERT INTO `skill` (`id`, `name`, `category_id`, `description`) VALUES (2, 'Painting', 4, NULL);
+INSERT INTO `skill` (`id`, `name`, `category_id`, `description`) VALUES (3, 'Creative Writing', 14, NULL);
+INSERT INTO `skill` (`id`, `name`, `category_id`, `description`) VALUES (4, 'Dressage', 22, NULL);
+INSERT INTO `skill` (`id`, `name`, `category_id`, `description`) VALUES (5, 'Archery', 16, NULL);
+INSERT INTO `skill` (`id`, `name`, `category_id`, `description`) VALUES (6, 'Swimming', 18, NULL);
+INSERT INTO `skill` (`id`, `name`, `category_id`, `description`) VALUES (7, 'Boxing', 6, NULL);
+INSERT INTO `skill` (`id`, `name`, `category_id`, `description`) VALUES (8, 'Growing Vegetables', 11, NULL);
+INSERT INTO `skill` (`id`, `name`, `category_id`, `description`) VALUES (9, 'Knitting', 4, NULL);
+INSERT INTO `skill` (`id`, `name`, `category_id`, `description`) VALUES (10, 'Hip Hop Dancing', 9, NULL);
+INSERT INTO `skill` (`id`, `name`, `category_id`, `description`) VALUES (11, 'Small Business', 3, NULL);
+INSERT INTO `skill` (`id`, `name`, `category_id`, `description`) VALUES (12, 'Dog Training', 23, NULL);
+INSERT INTO `skill` (`id`, `name`, `category_id`, `description`) VALUES (13, 'Water Skiing', 18, NULL);
+INSERT INTO `skill` (`id`, `name`, `category_id`, `description`) VALUES (14, 'Snowboarding', 19, NULL);
 
 COMMIT;
 
@@ -466,6 +480,15 @@ COMMIT;
 START TRANSACTION;
 USE `skillvilladb`;
 INSERT INTO `user_has_skill` (`user_id`, `skill_id`, `level`) VALUES (1, 1, 'Expert');
+INSERT INTO `user_has_skill` (`user_id`, `skill_id`, `level`) VALUES (1, 3, 'Intermediate ');
+INSERT INTO `user_has_skill` (`user_id`, `skill_id`, `level`) VALUES (1, 9, 'Beginner');
+INSERT INTO `user_has_skill` (`user_id`, `skill_id`, `level`) VALUES (1, 7, 'Expert');
+INSERT INTO `user_has_skill` (`user_id`, `skill_id`, `level`) VALUES (2, 3, 'Expert');
+INSERT INTO `user_has_skill` (`user_id`, `skill_id`, `level`) VALUES (2, 10, 'Beginner');
+INSERT INTO `user_has_skill` (`user_id`, `skill_id`, `level`) VALUES (2, 1, 'Expert');
+INSERT INTO `user_has_skill` (`user_id`, `skill_id`, `level`) VALUES (2, 5, 'Intermediate');
+INSERT INTO `user_has_skill` (`user_id`, `skill_id`, `level`) VALUES (3, 2, 'Expert');
+INSERT INTO `user_has_skill` (`user_id`, `skill_id`, `level`) VALUES (3, 7, 'Beginner');
 
 COMMIT;
 

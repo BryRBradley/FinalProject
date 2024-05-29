@@ -3,17 +3,21 @@ import { Injectable } from '@angular/core';
 import { tap, catchError, throwError, Observable } from 'rxjs';
 import { User } from '../models/user';
 import { Buffer } from "buffer";
-import { environment } from '../../environments/environment.development';
-
+import { environment } from '../../environments/environment';
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
+ 
   // Set port number to server's port
   private baseUrl = environment.baseUrl;
+  // private baseUrl = 'http://localhost:8085/';
   private url = this.baseUrl;
 
+  loggedInUser: User | null = null;
   constructor(private http: HttpClient) { }
+
+
 
   register(user: User): Observable<User> {
     // Create POST request to register a new account
@@ -26,9 +30,10 @@ export class AuthService {
       })
     );
   }
-
+  
   login(username: string, password: string): Observable<User> {
     // Make credentials
+    console.log(username, password);
     const credentials = this.generateBasicAuthCredentials(username, password);
     // Send credentials as Authorization header specifying Basic HTTP authentication
     const httpOptions = {
@@ -37,7 +42,6 @@ export class AuthService {
         'X-Requested-With': 'XMLHttpRequest',
       }),
     };
-
     // Create GET request to authenticate credentials
     return this.http.get<User>(this.url + 'authenticate', httpOptions).pipe(
       tap((newUser) => {
@@ -54,11 +58,9 @@ export class AuthService {
       })
     );
   }
-
   logout(): void {
     localStorage.removeItem('credentials');
   }
-
   getLoggedInUser(): Observable<User> {
     if (!this.checkLogin()) {
       return throwError(() => {
@@ -71,9 +73,7 @@ export class AuthService {
         'X-Requested-with': 'XMLHttpRequest',
       },
     };
-    return this.http
-      .get<User>(this.url + 'authenticate', httpOptions)
-      .pipe(
+    return this.http.get<User>(this.url + 'authenticate', httpOptions).pipe(
         catchError((err: any) => {
           console.log(err);
           return throwError(
@@ -89,15 +89,12 @@ export class AuthService {
     }
     return false;
   }
-
   generateBasicAuthCredentials(username: string, password: string): string {
     return Buffer.from(`${username}:${password}`).toString('base64');
   }
-
   getCredentials(): string | null {
     return localStorage.getItem('credentials');
   }
 
-  
 
 }

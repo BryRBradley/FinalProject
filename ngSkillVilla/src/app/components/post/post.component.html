@@ -1,25 +1,83 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Social Media Post</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <div class="post-container">
-        <div class="post-header">
-            <div class="post-user">User ID: <span id="userId">12345</span></div>
-            <div class="post-timestamp">Created at: <span id="createdAt">2024-05-24</span></div>
-        </div>
-        <div class="post-category">Category: <span id="postCategory">Travel</span></div>
-        <div class="post-description" id="description">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in venenatis enim.
-        </div>
-        <div class="post-location">Location: <span id="location">New York, USA</span></div>
-        <div class="post-footer">
-            <div class="post-updated">Updated at: <span id="updatedAt">2024-05-25</span></div>
+<div>
+
+
+</div>
+<button class="btn btn-primary" (click)="createNewPost()" *ngIf="!newPost">Create Post</button>
+
+<div>
+    <div *ngIf="!selected">
+        <!-- class="post-container" -->
+        <div class="post-container container-fluid" *ngFor="let post of posts">
+            {{updateNewComment(post)}}
+            <div class="col-12" >
+                <div class="post-header" *ngIf="post.user">
+                    <div class="post-user"><span>{{post.user.username}}</span></div>
+                    <!-- <div class="post-timestamp">Created at: <span>{{post.createdAt}}</span></div> -->
+                    <button (click)="setEditPost(post)" class="btn btn-secondary" *ngIf="post.user.id == userId">
+                        Edit
+                    </button>
+                </div>
+                <img class="col-12" [src]="post.imageUrl" alt="">
+
+            </div>
+            <div class="post-description" >{{post.description}}</div>
+            <div class="post-footer" (click)="log(post)">
+                <!-- <div class="post-updated">Updated at: <span>{{post.updatedAt}}</span></div> -->
+
+
+                <button type="button" (click)="toggleComments(post)">Comments</button>
+            </div>
+            <div>
+                <textarea name="message" [(ngModel)]="post.newComment.message" placeholder="Comment"></textarea>
+                <button (click)="addComment(post)" >Create</button> 
+            </div>
+            
+            <app-comments [parentPost]="selectedPostComments" *ngIf="selectedPostComments == post"></app-comments>
+
+
         </div>
     </div>
-</body>
-</html>
+
+    <!-- <div class="postPage" *ngIf="selected">
+        <button class="btn btn-success" (click)="sendSelectedPost(null)">Back</button>
+        <h1>{{selected.imageUrl}}</h1>
+        <h1>{{selected.description}}</h1>
+
+    </div> -->
+
+
+<div *ngIf="newPost">
+    <h3>Create New Post</h3>
+    <form (ngSubmit)="addPost(newPost, currentCommunityId)">
+        <div class="form-group">
+            <label for="postDescription">Post</label>
+            <textarea id="postDescription" [(ngModel)]="newPost.description" name="description" class="form-control"
+                required>
+            </textarea>
+
+            <label for="">Image Url</label>
+            <input type="text" name="imageUrl" [(ngModel)]="newPost.imageUrl">
+
+        </div>
+        <button type="submit" class="btn btn-primary">Create</button>
+        <button class="btn btn-primary ms-2" (click)="newPost=null">Cancel</button>
+    </form>
+</div>
+
+<div *ngIf="editPost">
+    <h3>Edit Post</h3>
+    <form (ngSubmit)="updatePost(editPost, currentCommunityId)">
+        <div class="form-group">
+            <label for="editPostDescription">Description</label>
+            <textarea id="editPostDescription" [(ngModel)]="editPost.description" name="description"
+                class="form-control" required>
+            </textarea>
+
+            <label for="">Image Url</label>
+            <input type="text" name="imageUrl" [(ngModel)]="editPost.imageUrl">
+        </div>
+        <button type="button" (click)="editPost = null" class="btn btn-secondary">Cancel</button>
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+        <button (click)="deletePost(currentCommunityId, editPost.id)" class="btn btn-danger">Delete</button>
+    </form>
+</div>
