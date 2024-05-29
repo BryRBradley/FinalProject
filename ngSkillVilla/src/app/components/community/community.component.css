@@ -7,6 +7,21 @@ body {
 .community-card
 {
     background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.text-container {
+    padding: 30px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 350px;
+    margin-left: 20px;
 }
 
 .create-community-row {
@@ -38,14 +53,10 @@ body {
     height: 100%;
     max-width: 350px;
     /* width: 300px; */
-    border: 1px solid #ccc;
     border-radius: 8px;
     padding: 15px;
-    margin: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
+    margin: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 1.5);
     align-items: center;
     text-align: center;
 }
@@ -55,10 +66,14 @@ body {
     aspect-ratio: 16 / 9;
     border-radius: 8px;
     margin-bottom: 10px;
+    box-shadow: #333 0 0 5px;
 }
 
 #communityPage {
     padding: 20px;
+    margin: 20px auto;
+    max-width: 800px;
+   
 }
 
 .head {
@@ -76,6 +91,7 @@ body {
 .img-container img {
     max-width: 100%;
     border-radius: 8px;
+    box-shadow: #333 0 0 5px;
 }
 
 .head div {

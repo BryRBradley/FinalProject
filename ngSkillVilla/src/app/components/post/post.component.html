@@ -23,11 +23,11 @@
             <div class="post-footer" (click)="log(post)">
                 <!-- <div class="post-updated">Updated at: <span>{{post.updatedAt}}</span></div> -->
 
-                <button type="button" (click)="toggleComments(post)">{{post.comments.length}} Comments</button>
+                <button class="btn btn-secondary btn-sm"type="button" (click)="toggleComments(post)">{{post.comments.length}} Comments</button>
             </div>
-            <div>
+            <div class="post-comments">
                 <textarea name="message" [(ngModel)]="newComment.message" placeholder="Comment"></textarea>
-                <button (click)="createComment(newComment, post)" >Create</button> </div>
+                <button class="btn btn-secondary btn-sm"(click)="createComment(newComment, post)" >Create</button> </div>
             <app-comments [parentPost]="selectedPostComments" *ngIf="isCommentsVisible(post)"></app-comments>
 
         </div>
