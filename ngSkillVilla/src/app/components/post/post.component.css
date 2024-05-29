@@ -1,12 +1,12 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: #ebc3ef;
     margin: 0;
     padding: 0;
 }
 
 .post-container {
-    background-color: #fff;
+    background-color: #8bb39c;
     margin: 20px auto;
     padding: 20px;
     border-radius: 4px;
@@ -52,19 +52,20 @@ body {
 }
 
 .post-updated {
-    color: #888;
+    color: #5977c3;
     font-size: 0.8em;
 }
 
 .post-comments {
     margin-top: 5px;
     font-size: 0.9em;
-    color: #555;
+    color: #555555;
+    background-color: aqua;
 
 }
 
 .btn-secondary {
-    background-color: #979494;
+    background-color: #2a93a8;
     color: #000000;
     font-size: smaller;
     font-weight: bold;

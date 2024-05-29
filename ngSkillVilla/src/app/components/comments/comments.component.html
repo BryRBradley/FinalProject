@@ -2,14 +2,14 @@
     <div *ngIf="editComment?.id == comment.id">
         <p>{{comment.user?.username}}</p>
         <textarea name="message" *ngIf="editComment" [(ngModel)]="editComment.message"></textarea>
-        <button *ngIf="editComment" (click)="updateComment(editComment)">Save</button>
-        <button *ngIf="editComment" (click)="deleteComment(comment)">Delete</button>
-        <button *ngIf="editComment" (click)="editComment = null">Cancel</button>
+        <button *ngIf="editComment" class="btn btn-warning"(click)="updateComment(editComment)">Save</button>
+        <button *ngIf="editComment" class="btn btn-warning"(click)="deleteComment(comment)">Delete</button>
+        <button *ngIf="editComment" class="btn btn-warning"(click)="editComment = null">Cancel</button>
     </div>
     <div class="comment-card" *ngIf="editComment?.id !== comment.id">
         <div class="comment-header">
             <p>{{comment.user?.username}}</p>
-            <button class="btn btn-primary" *ngIf="comment.user?.id === userId && comment.id !== editComment?.id"
+            <button class="btn btn-success" *ngIf="comment.user?.id === userId && comment.id !== editComment?.id"
                 (click)="setEditComment(comment)">Edit</button>
         </div>
         <div class="comment-body">
