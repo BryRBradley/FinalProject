@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Skill } from './../../models/skill';
+import { Component, numberAttribute } from '@angular/core';
 import { User } from '../../models/user';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
@@ -8,7 +9,6 @@ import { UserService } from '../../services/user.service';
 import { EditProfileComponent } from '../edit-profile/edit-profile.component';
 import { SkillService } from '../../services/skill.service';
 import { SkillComponent } from '../skill/skill.component';
-import { Skill } from '../../models/skill';
 
 @Component({
   selector: 'app-profile',
@@ -27,6 +27,12 @@ export class ProfileComponent {
   userSkill: Skill | null = null;
   showEmail: boolean = false;
   uploadImg: User | null = null;
+
+  selectedSkill: string = '';
+  slectedSkillId: number = 0;
+  skillList: Skill[] = [];
+  level:string = "";
+  addingSkill: boolean = false;
 
   constructor(
     private authService: AuthService,
@@ -85,5 +91,39 @@ export class ProfileComponent {
 
   setUpdatedUserProfile() {
     this.editUser = Object.assign({}, this.selected);
+  }
+
+  onOptionSelected(event: Event) {
+    const inputElement = event.target as HTMLInputElement;
+    this.selectedSkill = inputElement.value;
+  }
+
+  populateSkills(){
+    if(!this.addingSkill){
+      this.skillService.index().subscribe({
+      next: (skills: Skill[])=>{console.log(skills)
+        this.skillList = skills;
+      },
+      error:(err)=>{console.log("Caanot Populate skills profile.component populateSkills()" + err)}
+    })
+    }
+    this.addingSkill = !this.addingSkill;
+  }
+
+  addSkill(skillName:String, level:String){
+    this.skillList.forEach((skill)=>{
+      if(skill.name === skillName){
+        console.log(skill.id + " : " + level)
+    
+        this.userService.addSkill(skill.id,level).subscribe({
+          next: (user:User)=>{
+            this.loggedInUser = user;
+
+
+          },
+          error: ()=>{}
+        })
+      }
+    })
   }
 }

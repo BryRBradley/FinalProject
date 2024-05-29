@@ -76,4 +76,15 @@ export class UserService {
     };
     return options;
   }
+
+  addSkill(skillId: number, level:String){
+    return this.http.put<User>(this.url + "/id/skills/" + skillId,level, this.getHttpOptions()).pipe(
+      catchError((error: any) => {
+        console.log(error);
+        return throwError(
+          () => new Error('userService.delete(): error deleting user' + error)
+        );
+      })
+    );
+  }
 }
