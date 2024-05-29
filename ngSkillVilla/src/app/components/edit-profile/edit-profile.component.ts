@@ -1,5 +1,6 @@
+import { Skill } from './../../models/skill';
 import { AuthService } from './../../services/auth.service';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { User } from '../../models/user';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
@@ -7,23 +8,28 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ProfileComponent } from '../profile/profile.component';
 import { Observable } from 'rxjs';
+import { SkillService } from '../../services/skill.service';
+import { SkillComponent } from '../skill/skill.component';
 
 @Component({
   selector: 'app-edit-profile',
   standalone: true,
-  imports: [CommonModule, FormsModule, ProfileComponent],
+  imports: [CommonModule, FormsModule, ProfileComponent, SkillComponent],
   templateUrl: './edit-profile.component.html',
   styleUrl: './edit-profile.component.css'
 })
-export class EditProfileComponent {
+export class EditProfileComponent implements OnInit{
   users: User[] = [];
   newUser: User = new User();
   selected: User | null = null;
   editUser: User | null = null;
   loggedInUser: User | null = null;
+  skills: Skill[] | null = null;
+
+  uploadImg : User | null = null;
   //---------------------------------------------------------------------
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute, private userService : UserService, private authService: AuthService) {
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, private userService : UserService, private authService: AuthService, private skillService: SkillService) {
 
   }
 
@@ -31,6 +37,7 @@ export class EditProfileComponent {
 
   ngOnInit(): void {
     this.getLoggedInUser();
+    
   }
 
   //---------------------------------------------------------------------
@@ -42,23 +49,22 @@ export class EditProfileComponent {
     this.router.navigateByUrl(url);
   }
 
-  reload() {
-    this.userService.index().subscribe({
-      next: (dbSkillVilla: User[]) => {
-        console.log(dbSkillVilla)
-        this.users = dbSkillVilla
-      },
-      error: () => {
-        console.log("something went wrong with reload()");
-      }
-    })
+  getSkills(): void {
+    this.skillService.index()
+      .subscribe(skills => this.skills = skills);
   }
+
+  reload() {
+   this.getLoggedInUser();
+      }
+    
   
   getLoggedInUser(): void{
    this.authService.getLoggedInUser().subscribe({
     next: (user : User) => {
       this.editUser = user;
       console.log(user);
+
     },
     error: (err) => {
       console.log("something went wrong updating user")}
@@ -73,6 +79,8 @@ export class EditProfileComponent {
         this.reload();
         this.selected = null;
         this.editUser = null;
+        this.router.navigateByUrl('profile');
+        
       },
       error: (err) => {
         console.log("something went wrong updating user")}

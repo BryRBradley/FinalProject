@@ -6,27 +6,38 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { EditProfileComponent } from '../edit-profile/edit-profile.component';
+import { SkillService } from '../../services/skill.service';
+import { SkillComponent } from '../skill/skill.component';
+import { Skill } from '../../models/skill';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [CommonModule, FormsModule, EditProfileComponent],
   templateUrl: './profile.component.html',
-  styleUrl: './profile.component.css'
+  styleUrl: './profile.component.css',
+  imports: [CommonModule, FormsModule, EditProfileComponent, SkillComponent],
 })
 export class ProfileComponent {
-
   loggedInUser: User | null = null;
   users: User[] = [];
   newUser: User = new User();
   selected: User | null = null;
   editUser: User | null = null;
   reload: any;
+  userSkill: Skill | null = null;
+  showEmail: boolean = false;
+  uploadImg: User | null = null;
 
-  constructor(private authService: AuthService, private router: Router, private userService: UserService) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private userService: UserService,
+    private skillService: SkillService
+  ) {}
 
   ngOnInit(): void {
     this.getuserProfile();
+    console.log("It works!");
   }
 
   getuserProfile(): void {
@@ -38,12 +49,12 @@ export class ProfileComponent {
         console.log(
           'Error requesting user profile data. ProfileComponent.getUserProfile()'
         );
-        this.router.navigateByUrl('editProfile');
+        this.router.navigateByUrl('profile');
       },
     });
   }
 
-  getEditProfile(loggedInUser: User){
+  getEditProfile(loggedInUser: User) {
     this.authService.getLoggedInUser().subscribe({
       next: (loggedInUser) => {
         this.loggedInUser = loggedInUser;
@@ -58,22 +69,21 @@ export class ProfileComponent {
     });
   }
 
-  updateUserProfile(user : User){
+  updateUserProfile(user: User) {
     this.userService.update(user, user.id).subscribe({
       next: (user) => {
         this.reload();
         this.selected = null;
         this.editUser = null;
+        this.router.navigateByUrl('profile');
       },
       error: (err) => {
-        console.log("something went wrong updating user");
-      }
+        console.log('something went wrong updating user');
+      },
     });
   }
 
   setUpdatedUserProfile() {
     this.editUser = Object.assign({}, this.selected);
   }
-
-
 }
