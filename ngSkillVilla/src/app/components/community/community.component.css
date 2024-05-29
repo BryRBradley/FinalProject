@@ -4,11 +4,40 @@ body {
     padding: 0;
     color: #333;
 }
+
+.bg-image{
+    background-image: url('/assets/images/cityscapeorange.png'); 
+    background-size: cover; 
+    background-attachment: fixed;
+    background-position: center;
+    min-height: 100svh;
+}
 .community-card
 {
     background-color: #ffffff;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+div:has(.new-community-container){
+    display: grid;
+    place-items: center;
+    height: 100svh;
+    width: 100%;
+}
+
+.new-community-container{
+    margin: auto;
+    padding: 1rem;
+    max-width: 500px;
+    background-color: rgba(0, 0, 0, 0.255);
+    display: grid;
+    place-items: center;
+
+    .btn-container{
+        display: flex;
+    }
+    button{flex: 1 1;}
 }
 
 .text-container {
@@ -46,6 +75,7 @@ body {
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Adjust minmax as needed */
     gap: 2rem;
     place-items: center;
+    padding: 2rem;
 }
 
 .community-card {
@@ -156,4 +186,11 @@ button.btn-success {
 
 button:disabled {
     background-color: #aaa;
+}
+
+/* ---------------------------------------------------------------------------------------- */
+
+.edit-community{
+
+    
 }
