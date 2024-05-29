@@ -1,4 +1,17 @@
-div{
+div.background {
+    background-image: url("https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTEyL3Jhd3BpeGVsX29mZmljZV80MF9hX21pbmltYWxzbV9pbGx1c3RyYXRpb25fb2Zfc2FnZV9ncmVlbl9sb2ZpX18zMDk0YTgwYi04ZDVhLTQxZGYtYWUxZi1jY2MwMmExZjgyMWYuanBn.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100svh;
+}
+img {
+    width: 100%;
+    max-width: 200px;
+  }
+
+form{
+    padding-top: 100px;
     margin: 0 auto;;
     max-width: 250px;
 }
