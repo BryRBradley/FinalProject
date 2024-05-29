@@ -11,6 +11,7 @@ export class User {
     firstName: string;
     lastName: string;
     imageUrl: string;
+    bio: string;
     skills: UserSkill [];
 
     constructor(
@@ -23,6 +24,7 @@ export class User {
         firstName: string = "",
         lastName: string = "",
         imageUrl: string = "",
+        bio: string = "",
         skills: UserSkill [] = []
     ) {
         this.id = id;
@@ -34,6 +36,7 @@ export class User {
         this.firstName = firstName;
         this.lastName = lastName;
         this.imageUrl = imageUrl;
+        this.bio = bio;
         this.skills = skills;
     }
 
