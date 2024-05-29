@@ -1,90 +1,65 @@
-<div class="intro">
-<div class="container-xl px-4 mt-4">
-    <!-- Account page navigation-->
-    <nav class="nav nav-borders">
-        <a class="nav-link active ms-0" href="https://www.bootdey.com/snippets/view/bs5-edit-profile-account-details" target="__blank">Profile</a>
-    </nav>
-    <hr class="mt-0 mb-4">
-    <div class="row">
-        <div class="col-xl-4">
-            <!-- Profile picture card-->
-            <div class="card mb-4 mb-xl-2">
-                
-                <div class="card-header">Profile Picture</div>
-                <div class="profile">
-                <div class="card-body text-center">
-                    <!-- Profile picture image-->
-                    <img class="img-account-profile rounded-circle mb-2" src="https://lh6.googleusercontent.com/proxy/phSB7j0SignDw4bYr_wKP4JvEa7HJC2HPB1Ek9a-MkNPzcSJv_TE4tPV_WoEGfaBTNkk3WSPOvo04XUYMU5L1m-UxJL2uNppP_mgSC67zIfMmcRd85nQrXYbSawN_TaCuDUmpnA" alt="">
-                    <!-- Profile picture help block-->
-                    <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
-                    <!-- Profile picture upload button-->
-                    <button class="btn btn-primary" type="button" (click)="fileInput.click()">Upload new image</button>
-                    <input type="file" #fileInput style="display: none;">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-8">
-            <!-- Account details card-->
-            <div *ngIf="editUser" class="card mb-4">
-                <div class="card-header">Account Details</div>
-                <div class="card-body">
-                    <form>
-                        <!-- Form Group (username)-->
-                        <div class="mb-3">
-                            <label class="small mb-1" for="inputUsername">Username</label>
-                            <input class="form-control" name="username" id="inputUsername" type="text" [(ngModel)]="editUser.username" placeholder="Enter your username">
-                        </div>
-                        <!-- Form Row-->
-                        <div class="row gx-3 mb-3">
-                            <!-- Form Group (first name)-->
-                            <div class="col-md-6">
-                                <label class="small mb-1" for="inputFirstName">First name</label>
-                                <input class="form-control" name="firstName" id="inputFirstName" type="text" [(ngModel)]="editUser.firstName" placeholder="Enter your first name" >
-                            </div>
-                            <!-- Form Group (last name)-->
-                            <div class="col-md-6">
-                                <label class="small mb-1" for="inputLastName">Last name</label>
-                                <input class="form-control" name="lastName" id="inputLastName" type="text" [(ngModel)]="editUser.lastName" placeholder="Enter your last name" >
-                            </div>
-                        </div>
-                        <!-- Form Row        -->
-                        <div class="row gx-3 mb-3">
-
-                            <!-- Form Group (email address)-->
-                            <div class="mb-3">
-                                <label class="small mb-1" for="inputEmailAddress">Email address</label>
-                                <input class="form-control" name="email" id="inputEmailAddress" type="email"  placeholder="Enter your email address">
-                            </div>
-                           
-                            <!-- Form Group (location)-->
-                            <!-- <div class="col-md-6">
-                                <label class="small mb-1" for="inputLocation">Location</label>
-                                <input class="form-control" id="inputLocation" type="text" placeholder="Enter your location" value="San Francisco, CA">
-                            </div> -->
-                        </div>
-                       
-
-                        <!-- <div class="form-group">
-                            <label class="col-md-4 control-label" for="textarea">About Me</label>
-                            <div class="col-md-4">                     
-                              <textarea class="form-control" id="textarea" name="textarea" rows="2" cols="2">default text</textarea>
-                            </div>
-                          </div> -->
-                          <br>
+<div class="background">
+  <hr class="mb-4">
+  <div class="row">
+      <div class="col-xl-3">
+          <!-- Profile picture card-->
+          <div class="card mb-4 mb-xl-2">
+              <div class="card-header">Profile Picture</div>
+              <div class="profile">
+                  <div class="card-body text-center">
+                      <!-- Profile picture image-->
+                      <img class="img-account-profile rounded-circle mb-2" [src]="editUser?.imageUrl" />
                         
 
-                        <!-- Save changes button-->
-                        <button class="btn bg-info" (click)="updateUserProfile(editUser)">Save</button>
-        <br>
-        <br>
-      <!--  <button class="btn bg-danger" (click)="editCommunity = null">Cancel</button> -->
-                        <!-- <button class="btn btn-primary" type="button">Save changes</button> -->
-                    </form>
-                   
+                  </div>
+                  <h3 *ngIf="editUser">{{editUser.username}}</h3>
                 </div>
-            </div>
-        </div>
-    </div>
-    </div>
+          </div>
+      </div>
+      <div class="col-xl-9">
+          <!-- Account details card-->
+          <div *ngIf="editUser" class="card mb-4">
+              <div class="card-header">Account Details</div>
+              <div class="card-body">
+                  <form>
+                      <!-- Form Group (username)-->
+                      <div class="mb-3">
+                          <label class="small mb-1" for="inputUsername">Username</label>
+                          <input class="form-control" name="username" id="inputUsername" type="text" [(ngModel)]="editUser.username" placeholder="Enter your username" />
+                      </div>
+                      <div class="mb-3">
+                        <label class="small mb-1" for="inputpassword">Password</label>
+                        <input class="form-control" name="password" id="inputPassword" type="text" [(ngModel)]="editUser.password" placeholder="Enter your pass" />
+                    </div>
+                      <!-- Form Row-->
+                      <div class="row gx-3 mb-3">
+                          <!-- Form Group (first name)-->
+                          <div class="col-md-6">
+                              <label class="small mb-1" for="inputFirstName">First name</label>
+                              <input class="form-control" name="firstName" id="inputFirstName" type="text" [(ngModel)]="editUser.firstName" placeholder="Enter your first name" />
+                          </div>
+                          <!-- Form Group (last name)-->
+                          <div class="col-md-6">
+                              <label class="small mb-1" for="inputLastName">Last name</label>
+                              <input class="form-control" name="lastName" id="inputLastName" type="text" [(ngModel)]="editUser.lastName" placeholder="Enter your last name" />
+                          </div>
+                      </div>
+                      <!-- Form Row -->
+                      <div class="row gx-3 mb-3">
+                          <!-- Form Group (email address)-->
+                          <div class="mb-3">
+                              <label class="small mb-1" for="inputEmailAddress">Email address</label>
+                              <input class="form-control" name="email" id="inputEmailAddress" type="email" [(ngModel)]="editUser.email" placeholder="Enter your email address" />
+                          </div>
+                          <!-- Continue with other form fields as needed -->
+                      </div>
+                      <!-- Save changes button-->
+                      <button class="btn info" (click)="updateUserProfile(editUser)">
+                          Save
+                      </button>
+                  </form>
+              </div>
+          </div>
+      </div>
+  </div>
 </div>

@@ -1,14 +1,17 @@
+import { Skill } from './../../models/skill';
+import { SkillService } from './../../services/skill.service';
 import { Component } from '@angular/core';
 import { Category } from '../../models/category';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CategoryService } from '../../services/category.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { SkillComponent } from '../skill/skill.component';
 
 @Component({
   selector: 'app-category',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, SkillComponent],
   templateUrl: './category.component.html',
   styleUrl: './category.component.css'
 })
@@ -18,9 +21,12 @@ export class CategoryComponent {
   newCategory: Category = new Category();
   selected: Category | null = null;
   editCategory: Category | null = null;
+  skills: Skill[] = [];
   //---------------------------------------------------------------------
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute, private categoryService : CategoryService) {
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, private categoryService : CategoryService,
+    private skillService : SkillService
+  ) {
 
   }
 
@@ -55,7 +61,7 @@ export class CategoryComponent {
     this.router.navigateByUrl(url);
   }
 
-  displayAllPosts() {
+  displayAllCategories() {
     this.categoryService.index().subscribe({
       next: (dbSkillVilla: Category[]) => {
         console.log(dbSkillVilla)

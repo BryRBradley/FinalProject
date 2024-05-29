@@ -1,7 +1,8 @@
+import { CommentService } from './../../services/comment.service';
 import { CommentsComponent } from './../comments/comments.component';
 import { Post } from './../../models/post';
 import { Comment } from './../../models/comment';
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild, output } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild, output, AfterViewInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { PostService } from "../../services/post.service";
 import { CommonModule } from "@angular/common";
@@ -23,15 +24,17 @@ import { User } from '../../models/user';
 })
 export class PostComponent implements OnInit {
 
-  @ViewChild(CommentsComponent) childComponent!: CommentsComponent;
+
+  @ViewChild(CommentsComponent) commentsComponent!: CommentsComponent;
   @Output() selectedPost = new EventEmitter<Post | null>();
   @Input() communityId!: number
 
   userId: number = 0;
-
+  
   posts: Post[] = [];
   newPost: Post | null = null;
   selected: Post | null = null;
+  
 
   editPost: Post | null = null;
   currentCommunityId: number = 0;
@@ -39,11 +42,11 @@ export class PostComponent implements OnInit {
   selectedPostComments: Post | null = null;
   newComment: Comment = new Comment();
   expandedPosts: number[] = [];
-deleteComment: any;
+  deleteComment: any;
 
   //---------------------------------------------------------------------
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute, private postService: PostService, private authService: AuthService) { }
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, private postService: PostService, private authService: AuthService, private commentService: CommentService) { }
 
   //---------------------------------------------------------------------
 
@@ -63,15 +66,19 @@ deleteComment: any;
           }
         }
       });
-      this.validUser()
+    this.validUser()
   }
 
   //---------------------------------------------------------------------
+  
+
 
   sendSelectedPost(post: Post | null) {
     this.selected = post
     this.selectedPost.emit(this.selected);
   }
+
+  change(){}
 
   displaySinglePost(postPage: Post) {
     this.selected = postPage;
@@ -145,18 +152,21 @@ deleteComment: any;
   }
 
   showComments(post: Post) {
-    this.selectedPostComments = post
-    this.childComponent.getComments(post);
+      this.selectedPostComments = post
+      this.commentsComponent.getComments(post);
   }
 
   toggleComments(post: Post): void {
+    this.selectedPostComments = post
     const index = this.expandedPosts.indexOf(post.id);
     if (index !== -1) {
       this.expandedPosts.splice(index, 1);
     } else {
       this.expandedPosts.push(post.id);
-      this.showComments(post)
+      this.commentsComponent.getComments(post);
+      //this. showComments(post)
     }
+    
   }
 
   isCommentsVisible(post: Post): boolean {
@@ -170,10 +180,20 @@ deleteComment: any;
     })
   }
 
-  createComment(comment: Comment, post:Post) {
-    this.childComponent.addComment(post, comment);
-    this.childComponent.getComments(post);
-    this.newComment = new Comment();
+  addComment(post: Post): void {
+    this.commentService.createComment(post, post.newComment).subscribe({
+      next: () => {
+        this.showComments(post);
+        post.newComment = new Comment();
+      },
+      error: () => { }
+    })
   }
+
+  updateNewComment(post: Post) {
+    if (!post.newComment) {
+      post.newComment = new Comment();
+      post.newComment.message = "";
+    }
+  };
 }
- 

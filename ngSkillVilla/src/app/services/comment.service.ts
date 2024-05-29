@@ -44,7 +44,7 @@ export class CommentService {
     }else{
     communityId= 0;      
     }
-    return this.http.post<Comment>(this.url + communityId + "/posts/" + post.id, comment, this.getHttpOptions()).pipe(
+    return this.http.post<Comment>(this.baseUrl + "api/communities/" + communityId + "/posts/" + post.id, comment, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(

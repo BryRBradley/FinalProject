@@ -1,3 +1,6 @@
+import { Skill } from "./skill";
+import { UserSkill } from "./user-skill";
+
 export class User {
     id: number;
     email: string;
@@ -8,6 +11,7 @@ export class User {
     firstName: string;
     lastName: string;
     imageUrl: string;
+    skills: UserSkill [];
 
     constructor(
         id: number = 0,
@@ -18,7 +22,8 @@ export class User {
         role: string = "",
         firstName: string = "",
         lastName: string = "",
-        imageUrl: string = ""
+        imageUrl: string = "",
+        skills: UserSkill [] = []
     ) {
         this.id = id;
         this.email = email;
@@ -29,7 +34,7 @@ export class User {
         this.firstName = firstName;
         this.lastName = lastName;
         this.imageUrl = imageUrl;
-
+        this.skills = skills;
     }
 
 
