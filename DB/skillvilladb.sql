@@ -351,6 +351,9 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 START TRANSACTION;
 USE `skillvilladb`;
 INSERT INTO `location` (`id`, `address`, `city`, `state`, `zipcode`) VALUES (1, '123 Right Lane', 'Vienna', 'Virginia', '22181');
+INSERT INTO `location` (`id`, `address`, `city`, `state`, `zipcode`) VALUES (2, '435 Mountain Way', 'Denver', 'Colorado', '80203');
+INSERT INTO `location` (`id`, `address`, `city`, `state`, `zipcode`) VALUES (3, '237 Cowboy Lane', 'Dallas', 'Texas', '77093');
+INSERT INTO `location` (`id`, `address`, `city`, `state`, `zipcode`) VALUES (4, '289 Helicoptor Avenure', 'Moab', 'Utah', '84532');
 
 COMMIT;
 
@@ -372,7 +375,9 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `skillvilladb`;
-INSERT INTO `community` (`id`, `name`, `updated_at`, `enabled`, `description`, `location_id`, `discord_url`, `image_url`, `created_at`) VALUES (1, 'Denver Women Over 30 Snowboarders', '1000-01-01', 1, '', 1, '', '', '2020-10-01');
+INSERT INTO `community` (`id`, `name`, `updated_at`, `enabled`, `description`, `location_id`, `discord_url`, `image_url`, `created_at`) VALUES (1, 'Denver Women Over 30 Snowboarders', '1000-01-01', 1, '', 1, '', 'https://images.squarespace-cdn.com/content/v1/59a219fb914e6bc2a73bd7db/1591380870287-JFHDFYKUQH5HA89OD7QP/BTBounds-Boreal-Melissa-Riitano-Nirvana-Ortanez.jpg', '2020-10-01');
+INSERT INTO `community` (`id`, `name`, `updated_at`, `enabled`, `description`, `location_id`, `discord_url`, `image_url`, `created_at`) VALUES (2, 'Dallas Tech Enthusiasts', '1000-01-01', 1, NULL, 1, NULL, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkAkO2moEA5NifgZbbzV87ASCGm1YPoSU0VA&s', '1000-01-01');
+INSERT INTO `community` (`id`, `name`, `updated_at`, `enabled`, `description`, `location_id`, `discord_url`, `image_url`, `created_at`) VALUES (3, 'Moab Mechanics', '1000-01-01', 1, NULL, 1, NULL, 'https://images.pexels.com/photos/2244746/pexels-photo-2244746.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500', '1000-01-01');
 
 COMMIT;
 
