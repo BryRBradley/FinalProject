@@ -1,14 +1,15 @@
+import { User } from './../../models/user';
 import { Component, OnInit } from '@angular/core';
-import { User } from '../../models/user';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
@@ -18,23 +19,34 @@ export class RegisterComponent implements OnInit{
 
   //--------------------------------------------
   constructor(private authService: AuthService, private router: Router) { 
-  };
+  }
+  
+  ngOnInit(): void {
+  }
+;
 
   //--------------------------------------------
 
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
-  }
-  register(newUser: User): void {
-    //console.log(newUser)
-    this.authService.register(newUser).subscribe({
-      next:(user)=>{
-        this.login(user)
+  register(user: User): void {
+    console.log('Registering user:');
+    console.log(user);
+    this.authService.register(user).subscribe({
+      next: (registeredUser) => {
+        this.authService.login(user.username, user.password).subscribe({
+          next: (loggedInUser) => {
+            this.router.navigateByUrl('/profile');
+          },
+          error: (problem) => {
+            console.error('RegisterComponent.register(): Error logging in user:');
+            console.error(problem);
+          }
+        });
       },
-      error:(error)=>{
-        console.log("Registration Failed -- registerComp register()")
+      error: (fail) => {
+        console.error('RegisterComponent.register(): Error registering account');
+        console.error(fail);
       }
-    })
+    });
   }
   
   login(userLoggingin:User){

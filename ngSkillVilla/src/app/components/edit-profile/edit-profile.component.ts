@@ -67,7 +67,7 @@ export class EditProfileComponent implements OnInit{
 
     },
     error: (err) => {
-      console.log("something went wrong updating user")}
+      console.log("something went wrong finding user")}
    });
   }
 
