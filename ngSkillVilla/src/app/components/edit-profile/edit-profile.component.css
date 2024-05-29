@@ -11,7 +11,7 @@
 }
 
 .background{
-    background-image: url("https://cdn.pixabay.com/photo/2022/01/11/17/04/city-6931092_1280.jpg");
+    background-image: url("https://img.freepik.com/premium-photo/professional-slide-template-design-powerpoint-presentation_732449-3192.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -27,10 +27,6 @@
     cursor: pointer;
   }
 
-  .success {
-    border-color: #04aa6d;
-    color: rgb(3, 4, 3);
-  }
 
   img{
     width: 100%;

@@ -8,11 +8,13 @@
               <div class="text-center">
                 <br />
                 <br />
-                   <img class="img-account-profile rounded-circle mb-2" [src]="loggedInUser?.imageUrl" />
+                <img
+                  class="img-account-profile rounded-circle mb-2"
+                  [src]="loggedInUser?.imageUrl"
+                />
               </div>
-
               <div class="text-center mt-5">
-                <span class="bg-secondary p-1 px-4 rounded text-white">{{
+                <span class="btn bg-success p-1 px-4 rounded text-white">{{
                   loggedInUser?.role
                 }}</span>
                 <br />
@@ -23,13 +25,17 @@
                 <div class="aboutMe">
                   <span><strong>About Me</strong></span>
                   <div class="px-4 mt-1">
-                    <p class="fonts">
-                      
+                    <p class="fonts"></p>
 
-
-<p>Hey there! I'm {{loggedInUser?.firstName}}, and I'm all about the sweeter things in life... and the cozier things, too!<br>
-  As an avid baker, I find joy in whisking, kneading, and baking up delightful treats that not only satisfy the taste buds but also warm the heart.<br>
-  From fluffy cakes to artisan bread, you name it, I bake it with love.
+                    <p>
+                      Hey there! I'm {{ loggedInUser?.firstName }}, and I'm all
+                      about the sweeter things in life... and the cozier things,
+                      too!<br />
+                      As an avid baker, I find joy in whisking, kneading, and
+                      baking up delightful treats that not only satisfy the
+                      taste buds but also warm the heart.<br />
+                      From fluffy cakes to artisan bread, you name it, I bake it
+                      with love.
                     </p>
                   </div>
                 </div>
@@ -39,30 +45,33 @@
                     *ngIf="loggedInUser"
                     class="skill-list skill-list list-unstyled"
                   >
-                    <li class="list-group-item">
-                      {{ loggedInUser.skills[0].skill?.name }}
+                    <li *ngFor=" let skill of loggedInUser.skills" class="list-group-item">
+                      {{ skill.skill?.name }} - {{skill.level}}
                     </li>
                   </ul>
                 </div>
 
                 <!-- <button class="btn btn-primary px-4 ms-3">Contact</button> -->
-             <div *ngIf="loggedInUser">
-                <button name="emailButton" class="btn success" (click)="showEmail = !showEmail">
-                  <strong>Contact Me!</strong>
-                </button>
-                <h1 *ngIf="showEmail">{{loggedInUser.email}}</h1>
-
-             </div>
-             <br>
+                <div *ngIf="loggedInUser">
+                  <button
+                    name="emailButton"
+                    class="btn success"
+                    (click)="showEmail = !showEmail"
+                  >
+                    <strong>Contact Me!</strong>
+                  </button>
+                  <h1 *ngIf="showEmail">{{ loggedInUser.email }}</h1>
+                </div>
+                <br />
                 <div *ngIf="loggedInUser">
                   <button
                     class="btn bg-success"
                     (click)="getEditProfile(loggedInUser)"
-                  ><strong>Edit Profile</strong>
-
+                  >
+                    <strong>Edit Profile</strong>
                   </button>
-                  <br>
-                  <br>
+                  <br />
+                  <br />
                 </div>
               </div>
             </div>
