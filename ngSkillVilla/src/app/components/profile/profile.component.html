@@ -46,21 +46,25 @@
                     </li>
                   </ul>
                   <!-- Add skill to user -->
-                  <button class="btn btn-primary p-1" (click)="populateSkills()">+</button>
+                  <button class="btn btn-primary p-1" (click)="populateSkills()" *ngIf="!addingSkill">Add New Skill</button>
+                  <button class="btn btn-primary p-1" (click)="populateSkills()" *ngIf="addingSkill">Back</button>
+                  <br>
+                  <br>
                   <div ngClass="addUserSkill" class="mb-2" *ngIf="addingSkill">
-                    <label for="skillOption">Skill</label>
+                    <label for="skillOption"><strong>Skill</strong></label>
                     <input list="optionsList" id="skillOption" name="options" (input)="onOptionSelected($event)">
 
                     <datalist id="optionsList">
                       <option *ngFor="let skill of skillList" [value]="skill.name"></option>
                     </datalist>
-                    <label for="skillLevel">Skill Level</label>
+                    <label for="skillLevel"><strong>Skill Level</strong></label>
                     <select class="form-select" name="level" id="skillLevel" [(ngModel)]="level">
-                      <option value="Begginer">Beginner</option>
-                      <option value="Begginer">Intermediate</option>
-                      <option value="Begginer">Expert</option>
+                      <option value="Beginner">Beginner</option>
+                      <option value="Intermediate">Intermediate</option>
+                      <option value="Expert">Expert</option>
                     </select>
-                    <button (click)="addSkill(selectedSkill,level)">Add</button>
+                    <br>
+                    <button class="btn btn-primary p-1 px-2" (click)="addSkill(selectedSkill,level)">Add</button>
 
 
 
@@ -68,14 +72,14 @@
                 </div>
 
                 <!-- <button class="btn btn-primary px-4 ms-3">Contact</button> -->
-                <div *ngIf="loggedInUser">
+                <div *ngIf="loggedInUser && !addingSkill">
                   <button name="emailButton" class="btn success" (click)="showEmail = !showEmail">
                     <strong>Contact Me!</strong>
                   </button>
                   <h1 *ngIf="showEmail">{{ loggedInUser.email }}</h1>
                 </div>
                 <br />
-                <div *ngIf="loggedInUser">
+                <div *ngIf="loggedInUser && !addingSkill">
                   <button class="btn bg-success" (click)="getEditProfile(loggedInUser)">
                     <strong>Edit Profile</strong>
                   </button>
