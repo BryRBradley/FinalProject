@@ -10,4 +10,6 @@ public interface SkillService {
 	List<Skill> indexSkills();
 
 	List<SkillCategory> indexSkillCategories();
+
+	boolean addUserSkill(String username, int skillId, String level);
 }

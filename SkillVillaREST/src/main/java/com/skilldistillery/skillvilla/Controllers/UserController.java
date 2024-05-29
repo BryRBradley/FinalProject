@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.skillvilla.entities.User;
+import com.skilldistillery.skillvilla.services.AuthService;
 import com.skilldistillery.skillvilla.services.SkillService;
 import com.skilldistillery.skillvilla.services.UserService;
 
@@ -23,11 +24,13 @@ public class UserController {
 
 	private UserService userService;
 	private SkillService skillService;
+	private AuthService	authService;
 
-	public UserController(UserService userService, SkillService skillService) {
+	public UserController(UserService userService, SkillService skillService, AuthService	authService) {
 		super();
 		this.userService = userService;
 		this.skillService = skillService;
+		this.authService = authService;
 	}
 
 //	@GetMapping("users")
@@ -62,10 +65,23 @@ public class UserController {
 		return updated;
 
 	}
-	
+
 //	@DeleteMapping("users/{id}")
 //	public void delete(@PathVariable("id") int id) {
 //		userService.delete(id);
 //	}
+
+	@PutMapping("users/{userId}/skills/{skillId}")
+	public User postMethodName(HttpServletRequest req, HttpServletResponse res, Principal principal,
+			@PathVariable("skillId") int skillID, @RequestBody String level) {
+		
+		
+		boolean skillAdded = skillService.addUserSkill(principal.getName(), skillID, level);
+
+		if(skillAdded) {
+			return authService.getUserByUsername(principal.getName());
+		}
+		return null;
+	}
 
 }
