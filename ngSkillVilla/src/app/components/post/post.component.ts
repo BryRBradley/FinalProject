@@ -2,7 +2,7 @@ import { CommentService } from './../../services/comment.service';
 import { CommentsComponent } from './../comments/comments.component';
 import { Post } from './../../models/post';
 import { Comment } from './../../models/comment';
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild, output } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild, output, AfterViewInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { PostService } from "../../services/post.service";
 import { CommonModule } from "@angular/common";
@@ -30,10 +30,11 @@ export class PostComponent implements OnInit {
   @Input() communityId!: number
 
   userId: number = 0;
-
+  
   posts: Post[] = [];
   newPost: Post | null = null;
   selected: Post | null = null;
+  
 
   editPost: Post | null = null;
   currentCommunityId: number = 0;
@@ -69,11 +70,15 @@ export class PostComponent implements OnInit {
   }
 
   //---------------------------------------------------------------------
+  
+
 
   sendSelectedPost(post: Post | null) {
     this.selected = post
     this.selectedPost.emit(this.selected);
   }
+
+  change(){}
 
   displaySinglePost(postPage: Post) {
     this.selected = postPage;
@@ -159,6 +164,7 @@ export class PostComponent implements OnInit {
     } else {
       this.expandedPosts.push(post.id);
       this.commentsComponent.getComments(post);
+      //this. showComments(post)
     }
     
   }
@@ -177,7 +183,7 @@ export class PostComponent implements OnInit {
   addComment(post: Post): void {
     this.commentService.createComment(post, post.newComment).subscribe({
       next: () => {
-        this.showComments(post)
+        this.showComments(post);
         post.newComment = new Comment();
       },
       error: () => { }

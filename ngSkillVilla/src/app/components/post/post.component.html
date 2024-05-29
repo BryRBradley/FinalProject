@@ -24,7 +24,7 @@
             <div class="post-footer" (click)="log(post)">
                 <!-- <div class="post-updated">Updated at: <span>{{post.updatedAt}}</span></div> -->
 
-                <button type="button" (click)="toggleComments(post)"><span>{{post.comments.length}}</span> Comments</button>
+                <button type="button" (click)="toggleComments(post)">Comments</button>
             </div>
             <div>
                 <textarea name="message" [(ngModel)]="post.newComment.message" placeholder="Comment"></textarea>
