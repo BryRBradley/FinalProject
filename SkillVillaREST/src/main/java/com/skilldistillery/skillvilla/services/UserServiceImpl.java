@@ -49,6 +49,7 @@ public class UserServiceImpl implements UserService {
 				if(user.getLastName() != null && !user.getLastName().isBlank()) {managedUser.setLastName(user.getLastName());}
 				if(user.getLocation() != null) 									{managedUser.setLocation(user.getLocation());}
 				if(user.getImageUrl() != null && !user.getImageUrl().isBlank()) {managedUser.setImageUrl(user.getImageUrl());}
+				if(user.getBio() != null && !user.getBio().isBlank()) {managedUser.setBio(user.getBio());}
 				managedUser.setEnabled(user.isEnabled());
 				userRepo.saveAndFlush(managedUser);
 			}

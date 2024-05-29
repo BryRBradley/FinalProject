@@ -15,6 +15,7 @@ import com.skilldistillery.skillvilla.services.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+
 @RestController
 @RequestMapping("api")
 @CrossOrigin({ "*", "http://localhost/" })
@@ -52,4 +53,7 @@ public class SkillController {
 		return Skills;
 	}
 
+	
+
+	
 }
