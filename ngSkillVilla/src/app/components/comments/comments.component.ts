@@ -49,23 +49,30 @@ export class CommentsComponent implements OnInit {
     this.newComment = new Comment();
   }
 
-  addComment(post: Post, comment: Comment): void {
-    this.commentService.addComment(post, comment, 
-      (newComment) => {
-        console.log("Comment added successfully", newComment);
-        this.getComments(post); // Reload comments
-        this.newComment = null;
-      },
-      (error) => {
-        console.error("Error adding comment", error);
-      }
-    );
-  }
+  // addComment(post: Post, comment: Comment): void {
+  //   console.log(makes it here")
+  //   this.commentService.addComment(post, comment, 
+  //     (newComment) => {
+  //       console.log("Comment added successfully", newComment);
+  //       this.getComments(post); // Reload comments
+  //       this.newComment = null;
+  //     },
+  //     (error) => {
+  //       console.error("Error adding comment", error);
+  //     }
+  //   );
+  // }
 
   deleteComment(comment: Comment): void {
+
     if (comment.post) {
       this.commentService.destroyComment(comment.post, comment).subscribe({
-        next:()=>{},
+        next:()=>{
+          if(this.parentPost){
+            this.getComments(this.parentPost)
+          }
+          
+        },
         error:(err)=>{console.log("Commnets.component deleteComment()" + err)}
       })
     }

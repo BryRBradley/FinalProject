@@ -1,3 +1,4 @@
+import { CommentService } from './../../services/comment.service';
 import { CommentsComponent } from './../comments/comments.component';
 import { Post } from './../../models/post';
 import { Comment } from './../../models/comment';
@@ -23,7 +24,8 @@ import { User } from '../../models/user';
 })
 export class PostComponent implements OnInit {
 
-  @ViewChild(CommentsComponent) childComponent!: CommentsComponent;
+
+  @ViewChild(CommentsComponent) commentsComponent!: CommentsComponent;
   @Output() selectedPost = new EventEmitter<Post | null>();
   @Input() communityId!: number
 
@@ -39,11 +41,11 @@ export class PostComponent implements OnInit {
   selectedPostComments: Post | null = null;
   newComment: Comment = new Comment();
   expandedPosts: number[] = [];
-deleteComment: any;
+  deleteComment: any;
 
   //---------------------------------------------------------------------
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute, private postService: PostService, private authService: AuthService) { }
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, private postService: PostService, private authService: AuthService, private commentService: CommentService) { }
 
   //---------------------------------------------------------------------
 
@@ -63,7 +65,7 @@ deleteComment: any;
           }
         }
       });
-      this.validUser()
+    this.validUser()
   }
 
   //---------------------------------------------------------------------
@@ -145,18 +147,20 @@ deleteComment: any;
   }
 
   showComments(post: Post) {
-    this.selectedPostComments = post
-    this.childComponent.getComments(post);
+      this.selectedPostComments = post
+      this.commentsComponent.getComments(post);
   }
 
   toggleComments(post: Post): void {
+    this.selectedPostComments = post
     const index = this.expandedPosts.indexOf(post.id);
     if (index !== -1) {
       this.expandedPosts.splice(index, 1);
     } else {
       this.expandedPosts.push(post.id);
-      this.showComments(post)
+      this.commentsComponent.getComments(post);
     }
+    
   }
 
   isCommentsVisible(post: Post): boolean {
@@ -170,10 +174,20 @@ deleteComment: any;
     })
   }
 
-  createComment(comment: Comment, post:Post) {
-    this.childComponent.addComment(post, comment);
-    this.childComponent.getComments(post);
-    this.newComment = new Comment();
+  addComment(post: Post): void {
+    this.commentService.createComment(post, post.newComment).subscribe({
+      next: () => {
+        this.showComments(post)
+        post.newComment = new Comment();
+      },
+      error: () => { }
+    })
   }
+
+  updateNewComment(post: Post) {
+    if (!post.newComment) {
+      post.newComment = new Comment();
+      post.newComment.message = "";
+    }
+  };
 }
- 
