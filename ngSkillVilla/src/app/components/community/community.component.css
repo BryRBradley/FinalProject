@@ -31,7 +31,8 @@ div:has(.new-community-container){
     margin: auto;
     padding: 1rem;
     max-width: 500px;
-    background-color: rgba(0, 0, 0, 0.255);
+    color: aliceblue;
+    background-color: rgba(147, 33, 5, 0.622);
     display: grid;
     place-items: center;
 
@@ -47,7 +48,7 @@ div:has(.new-community-container){
     font-size: 18px;
     font-weight: bold;
     color: #333;
-    background-color: #ffffff;
+    background-color: #eeeae6;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     max-width: 350px;
@@ -160,6 +161,7 @@ div:has(.new-community-container){
 
 .form-group textarea {
     resize: vertical;
+    background-color: #f4f2f0;
 }
 
 button {
@@ -195,9 +197,6 @@ button:disabled {
     background-color: #aaa;
 }
 
-<<<<<<< HEAD
-=======
 /* ---------------------------------------------------------------------------------------- */
 
 
->>>>>>> 588e25246f5a0b7479d0f44a94db85dd42e2f53a

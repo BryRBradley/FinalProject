@@ -1,14 +1,14 @@
 .comments-container{
     display: flex;
     flex-flow: column;
-
+    
 }
 
 .comment-card{
     display: flex;
     flex-flow: column;
     
-    background-color: rgba(0, 0, 0, 0.392);
+    background-color: rgba(155, 210, 184, 0.392);
     margin-block: .5rem;
 }
 
@@ -19,7 +19,7 @@
     flex-flow: row nowrap;
     align-items: stretch;
     
-    background-color: rgba(0, 0, 0, 0.392);
+    background-color: rgba(169, 226, 210, 0.392);
 
     p{
         height: 100%;
@@ -32,7 +32,11 @@
     display: flex;
     flex-flow: row nowrap;
 
-    p{flex: 5 1;}
+   margin: 50px;
+    background-color: rgba(155, 210, 184, 0.392);
+}
 
-    button{flex:1 1}
+.Button
+{
+    margin:50px;
 }
