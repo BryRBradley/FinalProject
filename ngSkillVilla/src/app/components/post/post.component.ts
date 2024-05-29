@@ -30,11 +30,11 @@ export class PostComponent implements OnInit {
   @Input() communityId!: number
 
   userId: number = 0;
-  
+
   posts: Post[] = [];
   newPost: Post | null = null;
   selected: Post | null = null;
-  
+
 
   editPost: Post | null = null;
   currentCommunityId: number = 0;
@@ -70,15 +70,19 @@ export class PostComponent implements OnInit {
   }
 
   //---------------------------------------------------------------------
-  
 
+  createNewPost() {
+    this.newPost = new Post();
+  }
+
+ setEditPost(post: Post): void {
+    this.editPost = Object.assign({}, post);
+  }
 
   sendSelectedPost(post: Post | null) {
     this.selected = post
     this.selectedPost.emit(this.selected);
   }
-
-  change(){}
 
   displaySinglePost(postPage: Post) {
     this.selected = postPage;
@@ -97,9 +101,7 @@ export class PostComponent implements OnInit {
     });
   }
 
-  createNewPost() {
-    this.newPost = new Post();
-  }
+
 
   addPost(post: Post, communityId: number): void {
     this.postService.create(post, communityId).subscribe({
@@ -138,22 +140,8 @@ export class PostComponent implements OnInit {
     });
   }
 
-  setEditPost(post: Post): void {
-    this.editPost = Object.assign({}, post);
-  }
-
   log(anything: any) {
     console.log(anything)
-  }
-
-
-  generateNewComment() {
-    this.newComment = new Comment();
-  }
-
-  showComments(post: Post) {
-      this.selectedPostComments = post
-      this.commentsComponent.getComments(post);
   }
 
   toggleComments(post: Post): void {
@@ -166,7 +154,7 @@ export class PostComponent implements OnInit {
       this.commentsComponent.getComments(post);
       //this. showComments(post)
     }
-    
+
   }
 
   isCommentsVisible(post: Post): boolean {
@@ -179,6 +167,8 @@ export class PostComponent implements OnInit {
       error: () => { }
     })
   }
+
+  //---------------------------------------------------------------------
 
   addComment(post: Post): void {
     this.commentService.createComment(post, post.newComment).subscribe({
@@ -195,5 +185,10 @@ export class PostComponent implements OnInit {
       post.newComment = new Comment();
       post.newComment.message = "";
     }
-  };
+  };  
+  
+  showComments(post: Post) {
+    this.selectedPostComments = post
+    this.commentsComponent.getComments(post);
+  }
 }

@@ -1,11 +1,11 @@
+import { Post } from './../../models/post';
+import { Comment } from './../../models/comment';
 import { AuthService } from './../../services/auth.service';
 import { PostService } from './../../services/post.service';
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
-import { Post } from '../../models/post';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Comment } from '../../models/comment';
 import { CommentService } from './../../services/comment.service';
 import { User } from '../../models/user';
 
@@ -25,7 +25,7 @@ export class CommentsComponent implements OnInit {
   newComment: Comment | null = null;
   userId: number = 0;
 
-  selected: Comment | null = null;
+  editComment: Comment | null = null;
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private commentService: CommentService, private PostService: PostService, private authService: AuthService) { }
 
@@ -40,6 +40,13 @@ export class CommentsComponent implements OnInit {
       this.getComments(this.parentPost);
     }
   }
+
+  //---------------------------------------------------------------------------
+
+  setEditComment(comment: Comment): void {
+    this.editComment = Object.assign({}, comment);
+  }
+
 
   getComments(post: Post): void {
     if (post != null) {
@@ -73,14 +80,12 @@ export class CommentsComponent implements OnInit {
   // }
 
   deleteComment(comment: Comment): void {
-
     if (comment.post) {
       this.commentService.destroyComment(comment.post, comment).subscribe({
         next:()=>{
           if(this.parentPost){
             this.getComments(this.parentPost)
           }
-          
         },
         error:(err)=>{console.log("Commnets.component deleteComment()" + err)}
       })
@@ -91,7 +96,12 @@ export class CommentsComponent implements OnInit {
     if (comment.post) {
       this.commentService.updateComment( comment.post, comment).subscribe({
         next: () => {
-      
+          if(comment.post){
+            this.getComments(comment.post)
+          this.editComment = null;
+          }
+          
+          
         },
         error: (err: any) => {
           console.log("Error updating comment", err);
