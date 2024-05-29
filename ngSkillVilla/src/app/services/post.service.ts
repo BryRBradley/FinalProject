@@ -6,16 +6,17 @@ import { AuthService } from './auth.service';
 import { Observable, catchError, throwError } from 'rxjs';
 import { PostCategory } from '../models/post-category';
 import { Router } from '@angular/router';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PostService {
- 
+
 
   posts: Post[] = []
-//private baseUrl = environment.baseUrl;
-  private baseUrl = 'http://localhost:8085/'; // adjust port to match server
+  private baseUrl = environment.baseUrl;
+  //private baseUrl = 'http://localhost:8085/'; // adjust port to match server
   private url = this.baseUrl + 'api/communities/';
 
   constructor(private http: HttpClient, private authService: AuthService) { }

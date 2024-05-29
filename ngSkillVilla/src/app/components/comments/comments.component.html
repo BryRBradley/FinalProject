@@ -7,8 +7,8 @@
         
     </div>
     <div>
-        <span class="btn btn-primary"> <a (click)="updateComment(comment)">Update</a></span>
-        <span class="btn btn-warning"> <a (click)="deleteComment(comment)">Delete</a></span>
+        <span class="btn btn-primary" *ngIf="comment.user?.id === userId"> <a (click)="updateComment(comment)">Update</a></span>
+        <span class="btn btn-warning" *ngIf="comment.user?.id === userId"> <a (click)="deleteComment(comment)">Delete</a></span>
        
     </div>
 </div>

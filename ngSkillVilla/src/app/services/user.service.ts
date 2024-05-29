@@ -3,6 +3,7 @@ import { User } from './../models/user';
 import { Injectable } from '@angular/core';
 import { AuthService } from './auth.service';
 import { Observable, catchError, throwError } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,8 @@ export class UserService {
 
   users: User[] = []
   
-  private baseUrl = 'http://localhost:8085/'; // adjust port to match server
+  private baseUrl = environment.baseUrl;
+  // private baseUrl = 'http://localhost:8085/'; // adjust port to match server
   private url = this.baseUrl + 'api/users';
 
 

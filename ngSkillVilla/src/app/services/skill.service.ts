@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { AuthService } from './auth.service';
 import { Skill } from '../models/skill';
 import { Observable, catchError, throwError } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,8 @@ export class SkillService {
 
   skills: Skill[] = []
 
-  private baseUrl = 'http://localhost:8085/'; // adjust port to match server
+  private baseUrl = environment.baseUrl;
+  //private baseUrl = 'http://localhost:8085/'; // adjust port to match server
   private url = this.baseUrl + 'api/skills';
   
   constructor(private http: HttpClient, private authService: AuthService) { }

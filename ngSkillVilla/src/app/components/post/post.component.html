@@ -9,7 +9,7 @@
         <!-- class="post-container" -->
         <div class="post-container container-fluid" *ngFor="let post of posts">
             {{updateNewComment(post)}}
-            <div class="col-12" (click)="sendSelectedPost(post)">
+            <div class="col-12" >
                 <div class="post-header" *ngIf="post.user">
                     <div class="post-user"><span>{{post.user.username}}</span></div>
                     <!-- <div class="post-timestamp">Created at: <span>{{post.createdAt}}</span></div> -->
@@ -20,18 +20,11 @@
                 <img class="col-12" [src]="post.imageUrl" alt="">
 
             </div>
-            <div class="post-description" (click)="sendSelectedPost(post)">{{post.description}}</div>
+            <div class="post-description" >{{post.description}}</div>
             <div class="post-footer" (click)="log(post)">
                 <!-- <div class="post-updated">Updated at: <span>{{post.updatedAt}}</span></div> -->
 
-<<<<<<< HEAD
-                <button class="btn btn-secondary btn-sm"type="button" (click)="toggleComments(post)">{{post.comments.length}} Comments</button>
-            </div>
-            <div class="post-comments">
-                <textarea name="message" [(ngModel)]="newComment.message" placeholder="Comment"></textarea>
-                <button class="btn btn-secondary btn-sm"(click)="createComment(newComment, post)" >Create</button> </div>
-            <app-comments [parentPost]="selectedPostComments" *ngIf="isCommentsVisible(post)"></app-comments>
-=======
+
                 <button type="button" (click)="toggleComments(post)">Comments</button>
             </div>
             <div>
@@ -40,17 +33,17 @@
             </div>
             
             <app-comments [parentPost]="selectedPostComments" *ngIf="selectedPostComments == post"></app-comments>
->>>>>>> d88167dfae1530402b98642f6e873751fef271c3
+
 
         </div>
     </div>
 
-    <div class="postPage" *ngIf="selected">
+    <!-- <div class="postPage" *ngIf="selected">
         <button class="btn btn-success" (click)="sendSelectedPost(null)">Back</button>
         <h1>{{selected.imageUrl}}</h1>
         <h1>{{selected.description}}</h1>
 
-    </div>
+    </div> -->
 
 
 <div *ngIf="newPost">

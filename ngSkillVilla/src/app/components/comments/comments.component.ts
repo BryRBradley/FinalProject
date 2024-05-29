@@ -1,3 +1,4 @@
+import { AuthService } from './../../services/auth.service';
 import { PostService } from './../../services/post.service';
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { Post } from '../../models/post';
@@ -6,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Comment } from '../../models/comment';
 import { CommentService } from './../../services/comment.service';
+import { User } from '../../models/user';
 
 @Component({
   selector: 'app-comments',
@@ -21,10 +23,17 @@ export class CommentsComponent implements OnInit {
   @Input() parentPost: Post | null = null;
   comments: Comment[] = [];
   newComment: Comment | null = null;
+  userId: number = 0;
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute, private commentService: CommentService, private PostService: PostService) { }
+  selected: Comment | null = null;
 
-  ngOnInit(): void { }
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, private commentService: CommentService, private PostService: PostService, private authService: AuthService) { }
+
+  ngOnInit(): void { 
+    this.authService.getLoggedInUser().subscribe({
+      next:(user:User)=>{this.userId = user.id}
+    })
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['parentPost'] && this.parentPost) {

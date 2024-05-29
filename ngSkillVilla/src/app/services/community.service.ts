@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { Community } from '../models/community';
 import { Observable, catchError, throwError } from 'rxjs';
 import { Router } from '@angular/router';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,8 @@ export class CommunityService {
 
   communities: Community[] = [];
 
-  private baseUrl = 'http://localhost:8085/'; // adjust port to match server
+  private baseUrl = environment.baseUrl;
+  // private baseUrl = 'http://localhost:8085/';
   private url = this.baseUrl + 'api/communities';
 
   //---------------------------------------------------------------------

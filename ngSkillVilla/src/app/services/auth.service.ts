@@ -3,14 +3,15 @@ import { Injectable } from '@angular/core';
 import { tap, catchError, throwError, Observable } from 'rxjs';
 import { User } from '../models/user';
 import { Buffer } from "buffer";
+import { environment } from '../../environments/environment';
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
  
   // Set port number to server's port
-  
-  private baseUrl = 'http://localhost:8085/';
+  private baseUrl = environment.baseUrl;
+  // private baseUrl = 'http://localhost:8085/';
   private url = this.baseUrl;
 
   loggedInUser: User | null = null;

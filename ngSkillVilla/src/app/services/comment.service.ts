@@ -5,13 +5,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, SimpleChanges } from '@angular/core';
 import { AuthService } from './auth.service';
 import { Observable, catchError, connect, throwError } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CommentService {
-  //private baseUrl = environment.baseUrl;
-  private baseUrl = 'http://localhost:8085/'; // adjust port to match server
+  private baseUrl = environment.baseUrl;
+  //private baseUrl = 'http://localhost:8085/'; // adjust port to match server
   private url = this.baseUrl + 'api/posts/';
 
   constructor(private http: HttpClient, private authService: AuthService, private PostService: PostService) { }
@@ -25,7 +26,7 @@ export class CommentService {
     };
     return options;
   }
-  
+
   index(post: Post): Observable<Comment[]> {
     return this.http.get<Comment[]>(this.url + post.id + "/comments", this.getHttpOptions()).pipe(
       catchError((err: any) => {
@@ -38,11 +39,11 @@ export class CommentService {
   }
 
   createComment(post: Post, comment: Comment): Observable<Comment> {
-    let communityId ;
-    if(post.community != null){
+    let communityId;
+    if (post.community != null) {
       communityId = post.community.id;
-    }else{
-    communityId= 0;      
+    } else {
+      communityId = 0;
     }
     return this.http.post<Comment>(this.baseUrl + "api/communities/" + communityId + "/posts/" + post.id, comment, this.getHttpOptions()).pipe(
       catchError((err: any) => {
@@ -55,13 +56,13 @@ export class CommentService {
   }
 
   updateComment(post: Post, comment: Comment): Observable<Comment> {
-    let communityId ;
-    if(post.community != null){
+    let communityId;
+    if (post.community != null) {
       communityId = post.community.id;
-    }else{
-    communityId= 0;      
+    } else {
+      communityId = 0;
     }
-    return this.http.put<Comment>(this.url + communityId + "/posts/" + post.id + "/comments/" + comment.id, comment, this.getHttpOptions()).pipe(
+    return this.http.put<Comment>(this.url + post.id + "/comments/" + comment.id, comment, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(
