@@ -5,6 +5,18 @@
   background-size: cover;
 }
 
+.addUserSkill{
+  display: flex;
+  flex-flow: column;
+  width: 100%;
+  max-width: 200px;
+  margin: 0 auto;
+
+  imput, select{
+    width: 100%;
+  }
+}
+
 .background-image {
   background-color: rgb(211, 236, 207);
 }
