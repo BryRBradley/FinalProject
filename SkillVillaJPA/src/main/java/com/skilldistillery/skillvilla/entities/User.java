@@ -39,12 +39,22 @@ public class User {
 	
 	private String email;
 	
+	public String getBio() {
+		return bio;
+	}
+
+	public void setBio(String bio) {
+		this.bio = bio;
+	}
+
 	@Column(name="image_url")
 	private String imageUrl;
 
 	private boolean enabled;
 	
 	private String role;
+	
+	private String bio;
 	
 	@CreationTimestamp
 	@Column(name="created_at")
