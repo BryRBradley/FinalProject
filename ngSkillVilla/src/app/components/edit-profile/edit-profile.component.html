@@ -51,6 +51,10 @@
                               <input class="form-control" name="email" id="inputEmailAddress" type="email" [(ngModel)]="editUser.email" placeholder="Enter your email address" />
                           </div>
                           <!-- Continue with other form fields as needed -->
+                          <div class="mb-3">
+                            <label class="small mb-1" for="inputBio">Bio</label>
+                            <input class="form-control" name="bio" id="inputBio" type="text" [(ngModel)]="editUser.bio" placeholder="Tell us a little about yourself!" />
+                        </div>
                       </div>
                       <!-- Save changes button-->
                       <button class="btn info" (click)="updateUserProfile(editUser)">
